@@ -1,7 +1,7 @@
 package enumerations;
 
 public enum TypeApart {
-    DEFAULT,
+    STANDARD,
     COMPACT,
     LOFT,
     STUDIO,
