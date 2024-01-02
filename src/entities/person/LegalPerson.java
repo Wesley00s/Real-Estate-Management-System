@@ -17,6 +17,12 @@ public class LegalPerson extends Person {
 
     @Override
     public String toString() {
-        return null;
+        return STR."""
+                PERSON
+                Enpoyer Identification Number (EIN): \{getEin()}
+                Name: \{getPersonsName()}
+                Address: \{getPersonsAddress()}
+                Contact: \{getPersonsContact()}
+                """;
     }
 }
