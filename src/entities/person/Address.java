@@ -5,9 +5,9 @@ public class Address {
     private String zipCode;
     private String neighborhood;
     private String street;
-    private Integer number;
+    private int number;
 
-    public Address(String city, String zipCode, String neighborhood, String street, Integer number) {
+    public Address(String city, String zipCode, String neighborhood, String street, int number) {
         this.city = city;
         this.zipCode = zipCode;
         this.neighborhood = neighborhood;
@@ -37,7 +37,7 @@ public class Address {
         return street;
     }
 
-    public Integer getNumber() {
+    public int getNumber() {
         return number;
     }
 
@@ -57,7 +57,7 @@ public class Address {
         this.street = street;
     }
 
-    public void setNumber(Integer number) {
+    public void setNumber(int number) {
         this.number = number;
     }
 
@@ -68,7 +68,6 @@ public class Address {
                 Zip code: \{getZipCode()}
                 Neighborhoood: \{getNeighborhood()}
                 Street: \{getStreet()}
-                Number: \{getNumber()}
-                """;
+                Number: \{getNumber()}""";
     }
 }

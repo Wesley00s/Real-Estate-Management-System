@@ -2,7 +2,7 @@ package entities.person;
 
 public class LegalPerson extends Person {
     private long ein;
-    protected LegalPerson(String personsName, Address personsAddress, Contact personsContact, long ein) {
+    public LegalPerson(String personsName, Address personsAddress, Contact personsContact, long ein) {
         super(personsName, personsAddress, personsContact);
         this.ein = ein;
     }
@@ -18,11 +18,15 @@ public class LegalPerson extends Person {
     @Override
     public String toString() {
         return STR."""
-                PERSON
-                Enpoyer Identification Number (EIN): \{getEin()}
+                LEGAL PERSON
+                Social Security Number (SSN): \{getEin()}
                 Name: \{getPersonsName()}
-                Address: \{getPersonsAddress()}
-                Contact: \{getPersonsContact()}
+
+                ADDRESS
+                \{getPersonsAddress()}
+
+                CONTACT
+                \{getPersonsContact()}
                 """;
     }
 }

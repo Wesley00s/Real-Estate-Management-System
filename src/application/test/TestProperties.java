@@ -6,7 +6,7 @@ import static enumerations.Situation.*;
 import static enumerations.TypeOfApart.*;
 import static enumerations.TypeOfProperty.*;
 
-public class Test {
+public class TestProperties {
     public static void main() {
         String id = "H8f852L";
         AddressProperty address = new AddressProperty("Cityville", "123456", "Green Valley");
@@ -29,11 +29,13 @@ public class Test {
 
         Apartment sampleApartment = new Apartment(APARTMENT, id, address, description, totalArea, value, SOLD)
                 .setBuildingDetails(5, 78, "Rundeskogen", 3, 2010)
-                .setAdditionalDetails(190000.0, DUPLEX);
+                .setAdditionalDetails(190000.0, STUDIO);
         System.out.println(STR."\{sampleApartment}===========================================================\n");
 
         Farm sampleFarm = new Farm(FARM, id, address, description, totalArea, value, RENTED)
                 .setBuildingDetails(buildingArea, numbRooms, yearBuilt, 40);
         System.out.println(sampleFarm);
+
+
     }
 }

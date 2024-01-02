@@ -18,11 +18,15 @@ public class NaturalPerson extends Person {
     @Override
     public String toString() {
         return STR."""
-                PERSON
+                NATURAL PERSON
                 Social Security Number (SSN): \{getSsn()}
                 Name: \{getPersonsName()}
-                Address: \{getPersonsAddress()}
-                Contact: \{getPersonsContact()}
+
+                ADDRESS
+                \{getPersonsAddress()}
+
+                CONTACT
+                \{getPersonsContact()}
                 """;
     }
 }

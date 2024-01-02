@@ -29,7 +29,6 @@ public class Contact {
     public String toString() {
         return STR."""
                 E-mail: \{getEmail()}
-                Phone: \{getPhone()}
-                """;
+                Phone: \{getPhone()}""";
     }
 }
