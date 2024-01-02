@@ -1,4 +1,7 @@
-package entities.person;
+package entities;
+
+import entities.person.Address;
+import entities.person.Contact;
 
 import java.time.LocalTime;
 

@@ -1,6 +1,6 @@
 package enumerations;
 
-public enum TypeApart {
+public enum TypeOfApart {
     STANDARD,
     COMPACT,
     LOFT,

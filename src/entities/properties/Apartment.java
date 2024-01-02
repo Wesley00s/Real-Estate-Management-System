@@ -1,49 +1,42 @@
 package entities.properties;
 
 import enumerations.Situation;
-import enumerations.TypeApart;
+import enumerations.TypeOfApart;
+import enumerations.TypeOfProperty;
 
 public class Apartment extends Property {
-    private Integer floorApart;
-    private Integer number;
+    private int floorApart;
+    private int number;
     private String buildingName;
-    private Integer roomsNumber;
-    private Integer yearBuilt;
-    private Double condominiumValue;
-    private TypeApart typeApart;
+    private int roomsNumber;
+    private int yearBuilt;
+    private double condominiumValue;
+    private TypeOfApart typeOfApart;
 
-    public Apartment(String id, Address address, String desc, double totalArea, double value, Situation situation) {
-        super(id, address, desc, totalArea, value, situation);
+    public Apartment(TypeOfProperty typeOfProperty, String id, AddressProperty address, String desc, double totalArea, double value, Situation situation) {
+        super(typeOfProperty, id, address, desc, totalArea, value, situation);
     }
 
     public Apartment setBuildingDetails(int floorApart, int number, String buildingName, int roomsNumber, int yearBuilt) {
-        if(floorApart >= 0) {
-            this.floorApart = floorApart;
-        }
-        if(number >= 0) {
-            this.number = number;
-        }
+        this.floorApart = floorApart;
+        this.number = number;
         this.buildingName = buildingName;
-        if(roomsNumber >= 0) {
-            this.roomsNumber = roomsNumber;
-        }
+        this.roomsNumber = roomsNumber;
         this.yearBuilt = yearBuilt;
         return this;
     }
 
-    public Apartment setAdditionalDetails(double condominiumValue, TypeApart typeApart) {
-        if(condominiumValue >= 0) {
-            this.condominiumValue = condominiumValue;
-        }
-        this.typeApart = typeApart;
+    public Apartment setAdditionalDetails(double condominiumValue, TypeOfApart typeOfApart) {
+        this.condominiumValue = condominiumValue;
+        this.typeOfApart = typeOfApart;
         return this;
     }
 
-    public Integer getFloorApart() {
+    public int getFloorApart() {
         return floorApart;
     }
 
-    public Integer getNumber() {
+    public int getNumber() {
         return number;
     }
 
@@ -51,27 +44,27 @@ public class Apartment extends Property {
         return buildingName;
     }
 
-    public Integer getRoomsNumber() {
+    public int getRoomsNumber() {
         return roomsNumber;
     }
 
-    public Integer getYearBuilt() {
+    public int getYearBuilt() {
         return yearBuilt;
     }
 
-    public Double getCondominiumValue() {
+    public double getCondominiumValue() {
         return condominiumValue;
     }
 
-    public TypeApart getTypeApart() {
-        return typeApart;
+    public TypeOfApart getTypeOfApart() {
+        return typeOfApart;
     }
 
     public void setFloorApart(int floorApart) {
         this.floorApart = floorApart;
     }
 
-    public void setNumber(Integer number) {
+    public void setNumber(int number) {
         this.number = number;
     }
 
@@ -79,24 +72,25 @@ public class Apartment extends Property {
         this.buildingName = buildingName;
     }
 
-    public void setRoomsNumber(Integer roomsNumber) {
+    public void setRoomsNumber(int roomsNumber) {
         this.roomsNumber = roomsNumber;
     }
 
-    public void setYearBuilt(Integer yearBuilt) {
+    public void setYearBuilt(int yearBuilt) {
         this.yearBuilt = yearBuilt;
     }
 
-    public void setCondominiumValue(Double condominiumValue) {
+    public void setCondominiumValue(double condominiumValue) {
         this.condominiumValue = condominiumValue;
     }
 
-    public void setTypeApart(TypeApart typeApart) {
-        this.typeApart = typeApart;
+    public void setTypeOfApart(TypeOfApart typeOfApart) {
+        this.typeOfApart = typeOfApart;
     }
 
     public String toString() {
         return STR."""
+                Type of property: \{getTypeOfProperty()}
                 ID: \{getId()}
 
                 ADDRESS
@@ -115,7 +109,7 @@ public class Apartment extends Property {
 
                 ADDTIONAL DETAILS
                 Codominium value: \{getCondominiumValue()}
-                Type of apartment: \{getTypeApart()}
+                Type of apartment: \{getTypeOfApart()}
                 """;
     }
 }

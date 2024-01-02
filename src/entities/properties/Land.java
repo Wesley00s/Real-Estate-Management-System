@@ -1,56 +1,54 @@
 package entities.properties;
 
 import enumerations.Situation;
+import enumerations.TypeOfProperty;
 
 public class Land extends Property {
-    private Double frontDimension;
-    private Double sideDimension;
+    private double frontDimension;
+    private double sideDimension;
     
-    public Land(String id, Address address, String desc, double totalArea, double value, Situation situation) {
-        super(id, address, desc, totalArea, value, situation);
+    public Land(TypeOfProperty typeOfProperty, String id, AddressProperty address, String desc, double totalArea, double value, Situation situation) {
+        super(typeOfProperty, id, address, desc, totalArea, value, situation);
     }
 
-    public Land setPropertyDetails(Double frontDimension, Double sideDimension) {
-        if(frontDimension >= 0) {
-            this.frontDimension = frontDimension;
-        }
-        if(sideDimension >= 0) {
-            this.sideDimension = sideDimension;
-        }
+    public Land setPropertyDetails(double frontDimension, double sideDimension) {
+        this.frontDimension = frontDimension;
+        this.sideDimension = sideDimension;
         return this;
     }
 
-    public Double getFrontDimension() {
+    public double getFrontDimension() {
         return frontDimension;
     }
 
-    public Double getSideDimension() {
+    public double getSideDimension() {
         return sideDimension;
     }
 
-    public void setFrontDimension(Double frontDimension) {
+    public void setFrontDimension(double frontDimension) {
         this.frontDimension = frontDimension;
     }
 
-    public void setSideDimension(Double sideDimension) {
+    public void setSideDimension(double sideDimension) {
         this.sideDimension = sideDimension;
     }
 
     @Override
     public String toString() {
         return STR."""
-            ID: \{getId()}
+                Type of property: \{getTypeOfProperty()}
+                ID: \{getId()}
 
-            ADDRESS
-            \{getAddress()}
-            Description: \{getDesc()}
-            Total area: \{getTotalArea()} m²
-            Value: $USD \{getValue()}
-            Situation: \{getSituation()}
+                ADDRESS
+                \{getAddress()}
+                Description: \{getDesc()}
+                Total area: \{getTotalArea()} m²
+                Value: $USD \{getValue()}
+                Situation: \{getSituation()}
 
-            PROPERTY DETAILS
-            Front dimension: \{getFrontDimension()} m²
-            Side diemension: \{getSideDimension()} m²
-            """;
+                PROPERTY DETAILS
+                Front dimension: \{getFrontDimension()} m²
+                Side diemension: \{getSideDimension()} m²
+                """;
     }
 }

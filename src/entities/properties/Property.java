@@ -1,33 +1,36 @@
 package entities.properties;
 
 import enumerations.Situation;
+import enumerations.TypeOfProperty;
 
 public abstract class Property {
+    private TypeOfProperty typeOfProperty;
     private String id;
-    private Address address;
+    private AddressProperty address;
     private String desc;
-    private Double totalArea;
-    private Double value;
+    private double totalArea;
+    private double value;
     private Situation situation;
 
-    protected Property(String id, Address address, String desc, double totalArea, double value, Situation situation) {
+    protected Property(TypeOfProperty typeOfProperty, String id, AddressProperty address, String desc, double totalArea, double value, Situation situation) {
+        this.typeOfProperty = typeOfProperty;
         this.id = id;
         this.address = address;
         this.desc = desc;
-        if (totalArea >= 0) {
-            this.totalArea = totalArea;
-        }
-        if(value >= 0) {
-            this.value = value;
-        }
+        this.totalArea = totalArea;
+        this.value = value;
         this.situation = situation;
+    }
+
+    public TypeOfProperty getTypeOfProperty() {
+        return typeOfProperty;
     }
 
     public String getId() {
         return id;
     }
 
-    public Address getAddress() {
+    public AddressProperty getAddress() {
         return address;
     }
 
@@ -35,11 +38,11 @@ public abstract class Property {
         return desc;
     }
 
-    public Double getTotalArea() {
+    public double getTotalArea() {
         return totalArea;
     }
 
-    public Double getValue() {
+    public double getValue() {
         return value;
     }
 
@@ -47,11 +50,15 @@ public abstract class Property {
         return situation;
     }
 
+    public void setTypeOfProperty(TypeOfProperty typeOfProperty) {
+        this.typeOfProperty = typeOfProperty;
+    }
+
     public void setId(String id) {
         this.id = id;
     }
 
-    public void setAddress(Address address) {
+    public void setAddress(AddressProperty address) {
         this.address = address;
     }
 
@@ -59,11 +66,11 @@ public abstract class Property {
         this.desc = desc;
     }
 
-    public void setTotalArea(Double totalArea) {
+    public void setTotalArea(double totalArea) {
         this.totalArea = totalArea;
     }
 
-    public void setValue(Double value) {
+    public void setValue(double value) {
         this.value = value;
     }
 

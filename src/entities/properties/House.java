@@ -1,6 +1,7 @@
 package entities.properties;
 
 import enumerations.Situation;
+import enumerations.TypeOfProperty;
 
 public class House extends Property {
     private double buildingArea;
@@ -9,8 +10,8 @@ public class House extends Property {
     private int yearBuilt;
     private int numbFloors;
 
-    public House(String id, Address address, String desc, double totalArea, double value, Situation situation) {
-        super(id, address, desc, totalArea, value, situation);
+    public House(TypeOfProperty typeOfProperty, String id, AddressProperty address, String desc, double totalArea, double value, Situation situation) {
+        super(typeOfProperty, id, address, desc, totalArea, value, situation);
     }
 
     public House setBuildingDetails(double buildingArea, int numbRooms, int parkingSpaces, int yearBuilt, int numbFloors) {
@@ -50,7 +51,7 @@ public class House extends Property {
         this.numbRooms = numbRooms;
     }
 
-    public void setParkingSpaces(int parkingSpaces) {
+    public void setParkingSpaces(Integer parkingSpaces) {
         this.parkingSpaces = parkingSpaces;
     }
 
@@ -65,6 +66,7 @@ public class House extends Property {
     @Override
     public String toString() {
         return STR."""
+            Type of property: \{getTypeOfProperty()}
             ID: \{getId()}
 
             ADDRESS

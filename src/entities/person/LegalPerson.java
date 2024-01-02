@@ -1,2 +1,22 @@
-package entities.person;public class LegalEntity {
+package entities.person;
+
+public class LegalPerson extends Person {
+    private long ein;
+    protected LegalPerson(String personsName, Address personsAddress, Contact personsContact, long ein) {
+        super(personsName, personsAddress, personsContact);
+        this.ein = ein;
+    }
+
+    public long getEin() {
+        return ein;
+    }
+
+    public void setEin(long ein) {
+        this.ein = ein;
+    }
+
+    @Override
+    public String toString() {
+        return null;
+    }
 }

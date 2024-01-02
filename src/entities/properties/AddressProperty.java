@@ -1,40 +1,13 @@
 package entities.properties;
 
-public class Address {
-    private String city;
-    private String zipCode;
-    private String neighborhood;
+import entities.person.Address;
 
-    public Address(String city, String zipCode, String neighborhood) {
-        this.city = city;
-        this.zipCode = zipCode;
-        this.neighborhood = neighborhood;
+public class AddressProperty extends Address {
+    public AddressProperty(String city, String zipCode, String neighborhood) {
+        super(city, zipCode, neighborhood);
     }
 
-    public String getCity() {
-        return city;
-    }
-
-    public String getZipCode() {
-        return zipCode;
-    }
-
-    public String getNeighborhood() {
-        return neighborhood;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public void setZipCode(String zipCode) {
-        this.zipCode = zipCode;
-    }
-
-    public void setNeighborhood(String neighborhood) {
-        this.neighborhood = neighborhood;
-    }
-
+    @Override
     public String toString() {
         return STR."""
                 City: \{getCity()}

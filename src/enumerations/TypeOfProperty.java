@@ -1,2 +1,8 @@
-package enumerations;public enum TypeProperty {
+package enumerations;
+
+public enum TypeOfProperty {
+    HOUSE,
+    APARTMENT,
+    FARM,
+    LAND
 }

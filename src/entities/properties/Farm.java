@@ -1,68 +1,62 @@
 package entities.properties;
 
 import enumerations.Situation;
+import enumerations.TypeOfProperty;
 
 public class Farm extends Property {
-    private Double buildingArea;
-    private Integer numbRooms;
-    private Integer yearBuilt;
-    private Integer distanceOfCity;
+    private double buildingArea;
+    private int numbRooms;
+    private int yearBuilt;
+    private int distanceOfCity;
 
-    public Farm(String id, Address address, String desc, double totalArea, double value, Situation situation) {
-        super(id, address, desc, totalArea, value, situation);
+    public Farm(TypeOfProperty typeOfProperty, String id, AddressProperty address, String desc, double totalArea, double value, Situation situation) {
+        super(typeOfProperty, id, address, desc, totalArea, value, situation);
     }
 
-    public Farm setBuildingDetails(Double buildingArea, Integer numbRooms, Integer yearBuilt, Integer distanceOfCity) {
-        if(buildingArea >= 0) {
-            this.buildingArea = buildingArea;
-        }
-        if(numbRooms >= 0) {
-            this.numbRooms = numbRooms;
-        }
-        if(yearBuilt > 1900 && yearBuilt <= 2024) {
-            this.yearBuilt = yearBuilt;
-        }
-        if(distanceOfCity >= 0) {
-            this.distanceOfCity = distanceOfCity;
-        }
+    public Farm setBuildingDetails(double buildingArea, int numbRooms, int yearBuilt, int distanceOfCity) {
+        this.buildingArea = buildingArea;
+        this.numbRooms = numbRooms;
+        this.yearBuilt = yearBuilt;
+        this.distanceOfCity = distanceOfCity;
         return this;
     }
 
-    public Double getBuildingArea() {
+    public double getBuildingArea() {
         return buildingArea;
     }
 
-    public Integer getNumbRooms() {
+    public int getNumbRooms() {
         return numbRooms;
     }
 
-    public Integer getYearBuilt() {
+    public int getYearBuilt() {
         return yearBuilt;
     }
 
-    public Integer getDistanceOfCity() {
+    public int getDistanceOfCity() {
         return distanceOfCity;
     }
 
-    public void setBuildingArea(Double buildingArea) {
+    public void setBuildingArea(double buildingArea) {
         this.buildingArea = buildingArea;
     }
 
-    public void setNumbRooms(Integer numbRooms) {
+    public void setNumbRooms(int numbRooms) {
         this.numbRooms = numbRooms;
     }
 
-    public void setYearBuilt(Integer yearBuilt) {
+    public void setYearBuilt(int yearBuilt) {
         this.yearBuilt = yearBuilt;
     }
 
-    public void setDistanceOfCity(Integer distanceOfCity) {
+    public void setDistanceOfCity(int distanceOfCity) {
         this.distanceOfCity = distanceOfCity;
     }
 
     @Override
     public String toString() {
         return STR."""
+            Type of property: \{getTypeOfProperty()}
             ID: \{getId()}
 
             ADDRESS
