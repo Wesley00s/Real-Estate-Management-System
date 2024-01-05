@@ -14,9 +14,9 @@ public class PersonService {
         while (true) {
             printMenu(personsOptions, "PERSONS MENU - Dear user, please, choose an option.");
             switch (sc.nextLine().toUpperCase()) {
-                case "N" -> negotiate();
-                case "P" -> propertiesMenu();
-                case "E" -> {System.out.println("Exiting..."); System.exit(0);}
+                case "1" -> negotiate();
+                case "2" -> propertiesMenu();
+                case "3" -> {System.out.println("Exiting..."); System.exit(0);}
                 default -> System.out.println("\nInvalid option!\n");
             }
         }

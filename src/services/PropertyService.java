@@ -30,17 +30,16 @@ public class PropertyService {
             printMenu(propertiesOptions, "PROPERTIES MENU - Hello, dear owner, what do you want?");
 
             switch (sc.nextLine().toUpperCase()) {
-                case "R" -> {
+                case "1" -> {
                     registerPropertyMenu();
-
                 }
-                case "S" -> {
+                case "2" -> {
                     return;
                 }
-                case "D" -> {
+                case "3" -> {
                     displayProperties();
                 }
-                case "B" -> {
+                case "4" -> {
                     System.out.println("Returning...\n");
                     personsMenu();
                 }
@@ -54,23 +53,23 @@ public class PropertyService {
         while(true) {
             printMenu(typePropertyOptions, "REGISTER PROPERTY MENU - Choose the property type.");
             switch (sc.nextLine().toUpperCase()) {
-                case "A" -> {
+                case "1" -> {
                     apartmentList.add(addApartment());
                     System.out.println("Apartment successfully registered...");
                 }
-                case "F" -> {
+                case "2" -> {
                     farmList.add(addFarm());
                     System.out.println("Farm successfully registered...");
                 }
-                case "H" -> {
+                case "3" -> {
                     houseList.add(addHouse());
                     System.out.println("House successfully registered...");
                 }
-                case "L" -> {
+                case "4" -> {
                     landList.add(addLand());
                     System.out.println("Land successfully registered...");
                 }
-                case "B" -> {
+                case "5" -> {
                     propertiesMenu();
                 }
                 default -> System.out.println("Invalid option.");
@@ -115,7 +114,7 @@ public class PropertyService {
             System.out.println(house);
         }
 
-        System.out.println("\n* Lands");
+        System.out.println("\n* LANDS");
         for(Land land : landList) {
             System.out.println(land);
         }

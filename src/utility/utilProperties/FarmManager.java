@@ -13,18 +13,14 @@ import static enumerations.TypeOfApart.*;
 import static services.PropertyService.registerPropertyMenu;
 import static utility.MenuFormat.printMenu;
 
-public class PropertiesManager {
+public class FarmManager {
     private static final Scanner sc = new Scanner(System.in);
     private static final int TOTAL_ATTEMPTS = 4;
     private static int attempts;
     private static boolean invalidData;
 
     private static boolean chances(int chances) {
-        if(chances <= 0) {
-            System.out.println("Max attempts reached. Cancelling...");
-            return true;
-        }
-        return false;
+        return chances <= 0;
     }
 
     public static AddressProperty addAddressProperty() {
@@ -35,7 +31,7 @@ public class PropertiesManager {
 
         attempts = TOTAL_ATTEMPTS;
         do {
-            if(chances(attempts--)) registerPropertyMenu();
+            if(chances(attempts--)) return null;
 
             System.out.println(STR."(\{attempts + 1} Attempts) Enter the name of the city:");
             city = sc.nextLine();
@@ -45,7 +41,7 @@ public class PropertiesManager {
         attempts = TOTAL_ATTEMPTS;
         do {
             invalidData = false;
-            if (chances(attempts--)) registerPropertyMenu();
+            if (chances(attempts--)) return null;
 
             System.out.println(STR."(\{attempts + 1} Attempts) Provide the zip code (5 digits):");
             zipCode = sc.nextLine();
@@ -63,7 +59,7 @@ public class PropertiesManager {
 
         attempts = TOTAL_ATTEMPTS;
         do {
-            if(chances(attempts--)) registerPropertyMenu();
+            if(chances(attempts--)) return null;
 
             System.out.println(STR."(\{attempts + 1} Attempts) Provide the neighborhood name:");
             neighborhood = sc.nextLine();
@@ -78,7 +74,7 @@ public class PropertiesManager {
 
         attempts = TOTAL_ATTEMPTS;
         do {
-            if(chances(attempts--)) registerPropertyMenu();
+            if(chances(attempts--)) return null;
 
             System.out.println(STR."(\{attempts + 1} Attempts) Provide a description of the property:");
             desc = sc.nextLine();
@@ -94,7 +90,7 @@ public class PropertiesManager {
         attempts = TOTAL_ATTEMPTS;
         do {
             invalidData = false;
-            if (chances(attempts--)) registerPropertyMenu();
+            if (chances(attempts--)) return 0;
 
             System.out.println(STR."(\{attempts + 1} Attempts) Provide the total area (m²):");
             totalArea = sc.nextLine();
@@ -119,7 +115,7 @@ public class PropertiesManager {
         attempts = TOTAL_ATTEMPTS;
         do {
             invalidData = false;
-            if (chances(attempts--)) registerPropertyMenu();
+            if (chances(attempts--)) return 0;
 
             System.out.println(STR."(\{attempts + 1} Attempts) Provide the proposed value ($USD):");
             value = sc.nextLine();
@@ -144,10 +140,10 @@ public class PropertiesManager {
         while (true) {
             printMenu(situations, "SITUATION - Do you want?");
             switch (sc.nextLine().toUpperCase()) {
-                case "1" -> {return FOR_SALE;}
-                case "2" -> {return FOR_RENT;}
-                case "3" -> {return SALE_OR_RENT;}
-                case "4" -> {System.out.println("Cancelling..."); registerPropertyMenu();}
+                case "S" -> {return FOR_SALE;}
+                case "R" -> {return FOR_RENT;}
+                case "T" -> {return SALE_OR_RENT;}
+                case "B" -> {System.out.println("Canceling..."); registerPropertyMenu();}
                 default -> System.out.println("Invalid option.");
             }
         }
@@ -160,7 +156,7 @@ public class PropertiesManager {
         attempts = TOTAL_ATTEMPTS;
         do {
             invalidData = false;
-            if(chances(attempts--)) registerPropertyMenu();
+            if(chances(attempts--)) return 0;
 
             System.out.println(STR."(\{attempts + 1} Attempts) Provide the floor of the aparment");
             floorApart = sc.nextLine();
@@ -186,7 +182,7 @@ public class PropertiesManager {
         attempts = TOTAL_ATTEMPTS;
         do {
             invalidData = false;
-            if(chances(attempts--)) registerPropertyMenu();
+            if(chances(attempts--)) return 0;
 
             System.out.println(STR."(\{attempts + 1} Attempts) Provide the number of the aparment:");
             number = sc.nextLine();
@@ -210,7 +206,7 @@ public class PropertiesManager {
 
         attempts = TOTAL_ATTEMPTS;
         do {
-            if(chances(attempts--)) registerPropertyMenu();
+            if(chances(attempts--)) return null;
 
             System.out.println(STR."(\{attempts + 1} Attempts) Provide the building name:");
             buildingName = sc.nextLine();
@@ -226,7 +222,7 @@ public class PropertiesManager {
         attempts = TOTAL_ATTEMPTS;
         do {
             invalidData = false;
-            if(chances(attempts--)) registerPropertyMenu();
+            if(chances(attempts--)) return 0;
 
             System.out.println(STR."(\{attempts + 1} Attempts) Enter the number of rooms:");
             numberOfRooms = sc.nextLine();
@@ -245,38 +241,13 @@ public class PropertiesManager {
         return Integer.parseInt(numberOfRooms);
     }
 
-    public static int addParkingSpaces() {
-        String spaces;
-
-        attempts = TOTAL_ATTEMPTS;
-        do {
-            invalidData = false;
-            if (chances(attempts--)) registerPropertyMenu();
-
-            System.out.println(STR."(\{attempts + 1} Attempts) Provide the distance from the city (KM):");
-            spaces = sc.nextLine();
-
-            try {
-                if (Integer.parseInt(spaces) < 0) {
-                    System.out.println("Please, provide a valid number.");
-                    invalidData = true;
-                }
-            } catch (NumberFormatException e) {
-                System.out.println("ERROR: Invalid number format.");
-                invalidData = true;
-            }
-        } while (invalidData);
-
-        return Integer.parseInt(spaces);
-    }
-
     public static int addYearBuilt() {
         String yearWasBuilt;
 
         attempts = TOTAL_ATTEMPTS;
         do {
             invalidData = false;
-            if (chances(attempts--)) registerPropertyMenu();
+            if (chances(attempts--)) return 0;
 
             System.out.println(STR."(\{attempts + 1} Attempts) Enter the year it was built:");
             yearWasBuilt = sc.nextLine();
@@ -295,38 +266,13 @@ public class PropertiesManager {
         return Integer.parseInt(yearWasBuilt);
     }
 
-    public static int addNumbOfFloors() {
-        String numbOfFloors;
-
-        attempts = TOTAL_ATTEMPTS;
-        do {
-            invalidData = false;
-            if (chances(attempts--)) registerPropertyMenu();
-
-            System.out.println(STR."(\{attempts + 1} Attempts) Enter the number of floors:");
-            numbOfFloors = sc.nextLine();
-
-            try {
-                if (Integer.parseInt(numbOfFloors) < 0) {
-                    System.out.println("Please, provide a valid number.");
-                    invalidData = true;
-                }
-            } catch (NumberFormatException e) {
-                System.out.println("ERROR: Invalid number format.");
-                invalidData = true;
-            }
-        } while (invalidData);
-
-        return Integer.parseInt(numbOfFloors);
-    }
-
     public static double addCondominiumValue() {
         String condominiumValue;
 
         attempts = TOTAL_ATTEMPTS;
         do {
             invalidData = false;
-            if (chances(attempts--)) registerPropertyMenu();
+            if (chances(attempts--)) return 0;
 
             System.out.println(STR."(\{attempts + 1} Attempts) Provide the value of the condominium ($USD):");
             condominiumValue = sc.nextLine();
@@ -351,91 +297,16 @@ public class PropertiesManager {
         while (true) {
             printMenu(situations, "APARTMENT - What type?");
             switch (sc.nextLine().toUpperCase()) {
-                case "1" -> {return STANDARD;}
-                case "2" -> {return COMPACT;}
-                case "3" -> {return LOFT;}
-                case "4" -> {return STUDIO;}
-                case "5" -> {return DUPLEX;}
-                case "6" -> {return TRIPLEX;}
-                case "7" -> {return COVERAGE;}
-                case "8" -> {System.out.println("Cancelling..."); registerPropertyMenu();}
+                case "S" -> {return STANDARD;}
+                case "C" -> {return COMPACT;}
+                case "L" -> {return LOFT;}
+                case "T" -> {return STUDIO;}
+                case "D" -> {return DUPLEX;}
+                case "U" -> {return TRIPLEX;}
+                case "E" -> {return COVERAGE;}
+                case "B" -> {System.out.println("Canceling..."); registerPropertyMenu();}
                 default -> System.out.println("Invalid option.");
             }
         }
-    }
-
-    public static int addDistanceOfCity() {
-        String distance;
-
-        attempts = TOTAL_ATTEMPTS;
-        do {
-            invalidData = false;
-            if (chances(attempts--)) registerPropertyMenu();
-
-            System.out.println(STR."(\{attempts + 1} Attempts) Provide the distance from the city (KM):");
-            distance = sc.nextLine();
-
-            try {
-                if (Integer.parseInt(distance) < 0) {
-                    System.out.println("Please, provide a valid number.");
-                    invalidData = true;
-                }
-            } catch (NumberFormatException e) {
-                System.out.println("ERROR: Invalid number format.");
-                invalidData = true;
-            }
-        } while (invalidData);
-
-        return Integer.parseInt(distance);
-    }
-
-    public static double addFrontDimension() {
-        String frontDimension;
-
-        attempts = TOTAL_ATTEMPTS;
-        do {
-            invalidData = false;
-            if (chances(attempts--)) registerPropertyMenu();
-
-            System.out.println(STR."(\{attempts + 1} Attempts) Provide the front dimension (m)");
-            frontDimension = sc.nextLine();
-
-            try {
-                if (Double.parseDouble(frontDimension) <= 0) {
-                    System.out.println("Please, provide a valid number.");
-                    invalidData = true;
-                }
-            } catch (NumberFormatException e) {
-                System.out.println("ERROR: Invalid number format.");
-                invalidData = true;
-            }
-        } while (invalidData);
-
-        return Double.parseDouble(frontDimension);
-    }
-
-    public static double addSideDimension() {
-        String sideDimension;
-
-        attempts = TOTAL_ATTEMPTS;
-        do {
-            invalidData = false;
-            if (chances(attempts--)) registerPropertyMenu();
-
-            System.out.println(STR."(\{attempts + 1} Attempts) Provide the side dimension (m)");
-            sideDimension = sc.nextLine();
-
-            try {
-                if (Double.parseDouble(sideDimension) <= 0) {
-                    System.out.println("Please, provide a valid number.");
-                    invalidData = true;
-                }
-            } catch (NumberFormatException e) {
-                System.out.println("ERROR: Invalid number format.");
-                invalidData = true;
-            }
-        } while (invalidData);
-
-        return Double.parseDouble(sideDimension);
     }
 }
