@@ -47,8 +47,8 @@ public class Land extends Property {
                 Situation: \{getSituation()}
 
                 PROPERTY DETAILS
-                Front dimension: \{getFrontDimension()} m²
-                Side diemension: \{getSideDimension()} m²
+                Front dimension: \{getFrontDimension()} m
+                Side diemension: \{getSideDimension()} m
                 """;
     }
 }

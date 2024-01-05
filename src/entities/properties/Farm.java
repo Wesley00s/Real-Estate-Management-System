@@ -70,7 +70,7 @@ public class Farm extends Property {
             Building area: \{getBuildingArea()} m²
             Total rooms: \{getNumbRooms()}
             Year built: \{getYearBuilt()}
-            Distance od city: \{getDistanceOfCity()} km
+            Distance od city: \{getDistanceOfCity()} KM
             """;
     }
 }

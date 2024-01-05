@@ -14,7 +14,7 @@ public abstract class Property {
 
     protected Property(TypeOfProperty typeOfProperty, String id, AddressProperty address, String desc, double totalArea, double value, Situation situation) {
         this.typeOfProperty = typeOfProperty;
-        this.id = id;
+        this.id = STR."P-\{id}Y";
         this.address = address;
         this.desc = desc;
         this.totalArea = totalArea;

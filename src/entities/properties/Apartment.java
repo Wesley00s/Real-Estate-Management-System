@@ -105,10 +105,10 @@ public class Apartment extends Property {
                 Number: \{getNumber()}
                 Building name: \{getBuildingName()}
                 Rooms number: \{getRoomsNumber()}
-                Year construction: \{getYearBuilt()}
+                Year it was built: \{getYearBuilt()}
 
                 ADDTIONAL DETAILS
-                Codominium value: \{getCondominiumValue()}
+                Codominium value: $USD \{getCondominiumValue()}
                 Type of apartment: \{getTypeOfApart()}
                 """;
     }

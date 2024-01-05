@@ -7,5 +7,5 @@ public enum TypeOfApart {
     STUDIO,
     DUPLEX,
     TRIPLEX,
-    TOP_FLOOR
+    COVERAGE
 }

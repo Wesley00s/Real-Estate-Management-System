@@ -19,7 +19,7 @@ public class LegalPerson extends Person {
     public String toString() {
         return STR."""
                 LEGAL PERSON
-                Social Security Number (SSN): \{getEin()}
+                Employer Identification Number (EIN): \{getEin()}
                 Name: \{getPersonsName()}
 
                 ADDRESS
