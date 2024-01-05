@@ -2,8 +2,9 @@ package entities.person;
 
 public class LegalPerson extends Person {
     private long ein;
-    public LegalPerson(String personsName, Address personsAddress, Contact personsContact, long ein) {
-        super(personsName, personsAddress, personsContact);
+
+    public LegalPerson(String personsName, Address personsAddress, Contact personsContact, String password, long ein) {
+        super(personsName, personsAddress, personsContact, password);
         this.ein = ein;
     }
 

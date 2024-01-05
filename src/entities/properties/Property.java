@@ -1,5 +1,6 @@
 package entities.properties;
 
+import entities.person.Person;
 import enumerations.Situation;
 import enumerations.TypeOfProperty;
 

@@ -2,8 +2,9 @@ package entities.person;
 
 public class NaturalPerson extends Person {
     private long ssn;
-    public NaturalPerson(String personsName, Address personsAddress, Contact personsContact, long ssn) {
-        super(personsName, personsAddress, personsContact);
+
+    public NaturalPerson(String personsName, Address personsAddress, Contact personsContact, String password, long ssn) {
+        super(personsName, personsAddress, personsContact, password);
         this.ssn = ssn;
     }
 
@@ -29,4 +30,5 @@ public class NaturalPerson extends Person {
                 \{getPersonsContact()}
                 """;
     }
+
 }
