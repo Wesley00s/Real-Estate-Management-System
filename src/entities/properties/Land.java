@@ -49,6 +49,7 @@ public class Land extends Property {
                 PROPERTY DETAILS
                 Front dimension: \{getFrontDimension()} m
                 Side diemension: \{getSideDimension()} m
+                -----------------------------------------------
                 """;
     }
 }

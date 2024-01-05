@@ -71,6 +71,7 @@ public class Farm extends Property {
             Total rooms: \{getNumbRooms()}
             Year built: \{getYearBuilt()}
             Distance od city: \{getDistanceOfCity()} KM
+            -----------------------------------------------
             """;
     }
 }

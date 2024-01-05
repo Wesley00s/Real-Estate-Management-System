@@ -2,16 +2,10 @@ package utility.utilPersons;
 
 import entities.person.Address;
 import entities.person.Contact;
-import entities.person.LegalPerson;
-import entities.person.NaturalPerson;
-import entities.properties.AddressProperty;
-import services.PropertyService;
 
-import java.util.Locale;
 import java.util.Scanner;
 
 import static services.PersonService.naturalPersonsMenu;
-import static services.PropertyService.registerPropertyMenu;
 
 import static utility.Attempts.*;
 
@@ -19,6 +13,8 @@ public class PersonsManager {
     private static final Scanner sc = new Scanner(System.in);
     private static int attempts;
     private static boolean invalidData;
+
+
     public static String addPersonsName() {
         String personName;
 
@@ -148,6 +144,7 @@ public class PersonsManager {
     public static long addSsn() {
         String snn;
 
+        attempts = TOTAL_ATTEMPTS;
         do {
             invalidData = false;
             if (chances(attempts--)) naturalPersonsMenu();
@@ -172,6 +169,7 @@ public class PersonsManager {
     public static long addEin() {
         String ein;
 
+        attempts = TOTAL_ATTEMPTS;
         do {
             invalidData = false;
             if (chances(attempts--)) naturalPersonsMenu();

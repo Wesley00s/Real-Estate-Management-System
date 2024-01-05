@@ -82,6 +82,7 @@ public class House extends Property {
             Parking spaces: \{getParkingSpaces()}
             Year built: \{getYearBuilt()}
             Total floors: \{getNumbFloors()}
+            -----------------------------------------------
             """;
     }
 }

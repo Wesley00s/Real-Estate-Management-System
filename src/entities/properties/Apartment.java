@@ -110,6 +110,7 @@ public class Apartment extends Property {
                 ADDTIONAL DETAILS
                 Codominium value: $USD \{getCondominiumValue()}
                 Type of apartment: \{getTypeOfApart()}
+                -----------------------------------------------
                 """;
     }
 }
