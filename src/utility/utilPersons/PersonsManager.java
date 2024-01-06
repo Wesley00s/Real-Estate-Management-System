@@ -14,7 +14,6 @@ public class PersonsManager {
     private static int attempts;
     private static boolean invalidData;
 
-
     public static String addPersonsName() {
         String personName;
 

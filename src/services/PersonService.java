@@ -2,6 +2,7 @@ package services;
 
 import entities.person.*;
 
+import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -46,7 +47,7 @@ public class PersonService {
         legalPersonList.add(person5);
     }
 
-    public static void personsLogin() {
+    public static void personsLoginMenu() {
         List<String> personOptions = List.of("NATURAL PERSON", "LEGAL PERSON", "BACK");
 
         while (true) {
@@ -76,10 +77,10 @@ public class PersonService {
                     singInNaturalPersons();
                 }
                 case "2" -> {
-                    naturalPersonLogin();
+                    personLogin(NaturalPerson.class);
                 }
                 case "3" -> {
-                    System.out.println("Cancelling..."); personsLogin();
+                    System.out.println("Cancelling..."); personsLoginMenu();
                 }
                 default -> System.out.println("Invalid option.");
             }
@@ -96,10 +97,10 @@ public class PersonService {
                     singInLegalPersons();
                 }
                 case "2" -> {
-                    legalPersonLogin();
+                    personLogin(LegalPerson.class);
                 }
                 case "3" -> {
-                    System.out.println("Cancelling..."); personsLogin();
+                    System.out.println("Cancelling..."); personsLoginMenu();
                 }
                 default -> System.out.println("Invalid option.");
             }
@@ -174,23 +175,25 @@ public class PersonService {
         }
     }
 
-    private static void legalPersonLogin() {
-        LegalPerson legalPerson = addLegalPerson();
-        legalPersonList.add(legalPerson);
-        propertiesMenu(legalPerson);
+    private static <T extends Person> void personLogin(Class<T> type) {
+        if(type.equals(NaturalPerson.class)) {
+            NaturalPerson naturalPerson = addPerson(NaturalPerson.class);
+            naturalPersonList.add(naturalPerson);
+        } else if(type.equals(LegalPerson.class)){
+            LegalPerson legalPerson = addPerson(LegalPerson.class);
+            legalPersonList.add(legalPerson);
+            propertiesMenu(legalPerson);
+        } else {
+            System.out.println("Invalid type.");
+        }
     }
 
-    private static void naturalPersonLogin() {
-        NaturalPerson naturalPerson = addNaturalPerson();
-        naturalPersonList.add(naturalPerson);
-        propertiesMenu(naturalPerson);
-    }
-
-    public static NaturalPerson addNaturalPerson() {
-        return new NaturalPerson(addPersonsName(), addPersonsAddress(), addPersonsContact(), addPassword(), addSsn());
-    }
-
-    public static LegalPerson addLegalPerson() {
-        return new LegalPerson(addPersonsName(), addPersonsAddress(), addPersonsContact(), addPassword(), addEin());
+    public static <T extends Person> T addPerson(Class<T> type) {
+        try {
+            Constructor<T> constructor = type.getConstructor(String.class, Address.class, Contact.class, String.class, long.class);
+            return constructor.newInstance(addPersonsName(), addPersonsAddress(), addPersonsContact(), addPassword(), ((type.equals(NaturalPerson.class)) ? addSsn() : addEin()));
+        } catch (Exception e) {
+            return null;
+        }
     }
 }

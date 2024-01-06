@@ -10,7 +10,7 @@ import java.util.Scanner;
 import static enumerations.Situation.*;
 import static enumerations.TypeOfApart.*;
 import static enumerations.TypeOfProperty.*;
-import static services.PersonService.personsLogin;
+import static services.PersonService.personsLoginMenu;
 import static utility.GenerateID.ID;
 import static utility.MenuFormat.printMenu;
 import static utility.utilProperties.PropertiesManager.*;
@@ -85,7 +85,7 @@ public class PropertyService {
             switch (sc.nextLine().toUpperCase()) {
                 case "1" -> negotiate();
                 case "2" -> propertiesMenu(person);
-                case "3" -> {System.out.println("Returning..."); personsLogin();}
+                case "3" -> {System.out.println("Returning..."); personsLoginMenu();}
                 default -> System.out.println("\nInvalid option!\n");
             }
         }

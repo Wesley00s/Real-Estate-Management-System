@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 import static services.BrokerService.brokerMenu;
 import static services.PersonService.addNaturalPersons;
-import static services.PersonService.personsLogin;
+import static services.PersonService.personsLoginMenu;
 import static services.PropertyService.addProperties;
 import static utility.MenuFormat.printMenu;
 
@@ -18,7 +18,7 @@ public class Main {
             printMenu(options, "MAIN MENU - Hello dear user, what type of services are you involved?");
             switch (sc.nextLine()) {
                 case "1" -> {
-                    personsLogin();
+                    personsLoginMenu();
                 }
                 case "2" -> {
                     brokerMenu();
