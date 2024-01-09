@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import static application.Main.mainMenu;
-import static services.PropertyService.propertiesMenu;
+import static services.PropertyService.personsMenu;
 import static utility.Attempts.TOTAL_ATTEMPTS;
 import static utility.Attempts.chances;
 import static utility.MenuFormat.printMenu;
@@ -53,16 +53,9 @@ public class PersonService {
         while (true) {
             printMenu(personOptions, "PERSONS MENU - Der user, what kind of person are you?");
             switch (sc.nextLine().toUpperCase()) {
-                case "1" -> {
-                    naturalPersonsMenu();
-                }
-                case "2" -> {
-                    legalPersonsMenu();
-                }
-                case "3" -> {
-                    System.out.println("Returning...");
-                    mainMenu();
-                }
+                case "1" -> naturalPersonsMenu();
+                case "2" -> legalPersonsMenu();
+                case "3" -> {System.out.println("Returning..."); mainMenu();}
             }
         }
     }
@@ -73,15 +66,9 @@ public class PersonService {
         while (true) {
             printMenu(personOptions, "NATURAL PERSONS MENU - Der user, are you already registered?");
             switch (sc.nextLine().toUpperCase()) {
-                case "1" -> {
-                    singInNaturalPersons();
-                }
-                case "2" -> {
-                    personLogin(NaturalPerson.class);
-                }
-                case "3" -> {
-                    System.out.println("Cancelling..."); personsLoginMenu();
-                }
+                case "1" -> singInNaturalPersons();
+                case "2" -> personLogin(NaturalPerson.class);
+                case "3" -> {System.out.println("Cancelling..."); personsLoginMenu();}
                 default -> System.out.println("Invalid option.");
             }
         }
@@ -91,17 +78,11 @@ public class PersonService {
         List<String> personOptions = List.of("I'M ALREADY REGISTERED", "I'M NOT REGISTERED YET", "CANCEL");
 
         while (true) {
-            printMenu(personOptions, "LEAGAL PERSONS MENU - Der user, are you already registered?");
+            printMenu(personOptions, "LEGAL PERSONS MENU - Der user, are you already registered?");
             switch (sc.nextLine().toUpperCase()) {
-                case "1" -> {
-                    singInLegalPersons();
-                }
-                case "2" -> {
-                    personLogin(LegalPerson.class);
-                }
-                case "3" -> {
-                    System.out.println("Cancelling..."); personsLoginMenu();
-                }
+                case "1" -> singInLegalPersons();
+                case "2" -> personLogin(LegalPerson.class);
+                case "3" -> {System.out.println("Cancelling..."); personsLoginMenu();}
                 default -> System.out.println("Invalid option.");
             }
         }
@@ -118,7 +99,6 @@ public class PersonService {
 
             System.out.println(STR."(\{attempts + 1} Attempts) Provide your name:");
             name = sc.nextLine();
-
         } while (name.trim().isEmpty());
 
         attempts = TOTAL_ATTEMPTS;
@@ -127,12 +107,11 @@ public class PersonService {
 
             System.out.println(STR."(\{attempts + 1} Attempts) Provide your passwaord:");
             password = sc.nextLine();
-
         } while (password.trim().isEmpty());
 
         for(NaturalPerson naturalPerson : naturalPersonList) {
             if(naturalPerson.getPersonsName().equals(name) && naturalPerson.getPassword().equals(password)) {
-                propertiesMenu(naturalPerson);
+                personsMenu (naturalPerson);
                 findPerson = true;
             }
         }
@@ -148,41 +127,40 @@ public class PersonService {
 
         int attempts = TOTAL_ATTEMPTS;
         do {
-            if(chances(attempts--)) return;
+            if (chances(attempts--)) return;
 
             System.out.println(STR."(\{attempts + 1} Attempts) Provide your name:");
             name = sc.nextLine();
-
         } while (name.trim().isEmpty());
 
         attempts = TOTAL_ATTEMPTS;
         do {
-            if(chances(attempts--)) return;;
+            if (chances(attempts--)) return;;
 
             System.out.println(STR."(\{attempts + 1} Attempts) Provide your passwaord:");
             password = sc.nextLine();
-
         } while (password.trim().isEmpty());
 
         for(LegalPerson legalPerson : legalPersonList) {
-            if(legalPerson.getPersonsName().equals(name) && legalPerson.getPassword().equals(password)) {
-                propertiesMenu(legalPerson);
+            if (legalPerson.getPersonsName().equals(name) && legalPerson.getPassword().equals(password)) {
+                personsMenu (legalPerson);
                 findPerson = true;
             }
         }
-        if(!findPerson) {
+        if (!findPerson) {
             System.out.println("Invalid name and password combination.");
         }
     }
 
-    private static <T extends Person> void personLogin(Class<T> type) {
-        if(type.equals(NaturalPerson.class)) {
+    private static <T extends Person> void personLogin (Class<T> type) {
+        if (type.equals(NaturalPerson.class)) {
             NaturalPerson naturalPerson = addPerson(NaturalPerson.class);
             naturalPersonList.add(naturalPerson);
+            personsMenu (naturalPerson);
         } else if(type.equals(LegalPerson.class)){
             LegalPerson legalPerson = addPerson(LegalPerson.class);
             legalPersonList.add(legalPerson);
-            propertiesMenu(legalPerson);
+            personsMenu (legalPerson);
         } else {
             System.out.println("Invalid type.");
         }

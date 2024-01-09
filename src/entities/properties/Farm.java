@@ -61,7 +61,8 @@ public class Farm extends Property {
 
             ADDRESS
             \{getAddress()}
-            Description: \{getDesc()}
+            DESCRIPTION:
+            "\{getDesc()}"
             Total area: \{getTotalArea()} m²
             Value: $USD \{getValue()}
             Situation: \{getSituation()}
@@ -71,7 +72,6 @@ public class Farm extends Property {
             Total rooms: \{getNumbRooms()}
             Year built: \{getYearBuilt()}
             Distance od city: \{getDistanceOfCity()} KM
-            -----------------------------------------------
-            """;
+            -----------------------------------------------""";
     }
 }

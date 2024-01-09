@@ -10,7 +10,6 @@ import java.util.Scanner;
 
 import static enumerations.Situation.*;
 import static enumerations.TypeOfApart.*;
-import static services.PropertyService.registerPropertyMenu;
 import static utility.Attempts.TOTAL_ATTEMPTS;
 import static utility.Attempts.chances;
 import static utility.MenuFormat.printMenu;
@@ -20,7 +19,7 @@ public class PropertiesManager {
     private static int attempts;
     private static boolean invalidData;
 
-    public static AddressProperty addAddressProperty() {
+    public static AddressProperty addAddressProperty () {
         System.out.println("\n\t\t* ADD ADDRESS INFO");
         String city;
         String zipCode;
@@ -28,7 +27,7 @@ public class PropertiesManager {
 
         attempts = TOTAL_ATTEMPTS;
         do {
-            if(chances(attempts--)) return null;
+            if (chances(attempts--)) return null;
 
             System.out.println(STR."(\{attempts + 1} Attempts) Enter the name of the city:");
             city = sc.nextLine();
@@ -56,7 +55,7 @@ public class PropertiesManager {
 
         attempts = TOTAL_ATTEMPTS;
         do {
-            if(chances(attempts--)) return null;
+            if (chances(attempts--)) return null;
 
             System.out.println(STR."(\{attempts + 1} Attempts) Provide the neighborhood name:");
             neighborhood = sc.nextLine();
@@ -71,7 +70,7 @@ public class PropertiesManager {
 
         attempts = TOTAL_ATTEMPTS;
         do {
-            if(chances(attempts--)) return null;
+            if (chances(attempts--)) return null;
 
             System.out.println(STR."(\{attempts + 1} Attempts) Provide a description of the property:");
             desc = sc.nextLine();
@@ -106,6 +105,31 @@ public class PropertiesManager {
         return Double.parseDouble(totalArea);
     }
 
+    public static double addBuildingArea() {
+        String buildingArea;
+
+        attempts = TOTAL_ATTEMPTS;
+        do {
+            invalidData = false;
+            if (chances(attempts--)) return 0;
+
+            System.out.println(STR."(\{attempts + 1} Attempts) Provide the building area (m²):");
+            buildingArea = sc.nextLine();
+
+            try {
+                if (Double.parseDouble(buildingArea) <= 0) {
+                    System.out.println("Please, provide a valid number.");
+                    invalidData = true;
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("ERROR: Invalid number format.");
+                invalidData = true;
+            }
+        } while (invalidData);
+
+        return Double.parseDouble(buildingArea);
+    }
+
     public static double addValue() {
         String value;
 
@@ -132,7 +156,7 @@ public class PropertiesManager {
     }
 
     public static Situation addSituation() {
-        List<String> situations = List.of("SELL", "RENT", "RENT OR SALE", "CANCEL");
+        List<String> situations = List.of("SELL", "RENT", "RENT OR SELL", "CANCEL");
 
         while (true) {
             printMenu(situations, "SITUATION - Do you want?");

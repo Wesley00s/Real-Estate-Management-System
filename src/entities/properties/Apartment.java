@@ -95,7 +95,8 @@ public class Apartment extends Property {
 
                 ADDRESS
                 \{getAddress()}
-                Description: \{getDesc()}
+                DESCRIPTION:
+                "\{getDesc()}"
                 Total area: \{getTotalArea()} m²
                 Value: $USD \{getValue()}
                 Situation: \{getSituation()}
@@ -110,7 +111,6 @@ public class Apartment extends Property {
                 ADDTIONAL DETAILS
                 Codominium value: $USD \{getCondominiumValue()}
                 Type of apartment: \{getTypeOfApart()}
-                -----------------------------------------------
-                """;
+                -----------------------------------------------""";
     }
 }

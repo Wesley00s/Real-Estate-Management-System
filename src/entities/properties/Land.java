@@ -41,7 +41,8 @@ public class Land extends Property {
 
                 ADDRESS
                 \{getAddress()}
-                Description: \{getDesc()}
+                DESCRIPTION:
+                "\{getDesc()}"
                 Total area: \{getTotalArea()} m²
                 Value: $USD \{getValue()}
                 Situation: \{getSituation()}
@@ -49,7 +50,6 @@ public class Land extends Property {
                 PROPERTY DETAILS
                 Front dimension: \{getFrontDimension()} m
                 Side diemension: \{getSideDimension()} m
-                -----------------------------------------------
-                """;
+                -----------------------------------------------""";
     }
 }

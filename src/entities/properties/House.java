@@ -71,7 +71,8 @@ public class House extends Property {
 
             ADDRESS
             \{getAddress()}
-            Description: \{getDesc()}
+            DESCRIPTION:
+            "\{getDesc()}"
             Total area: \{getTotalArea()} m²
             Value: $USD \{getValue()}
             Situation: \{getSituation()}
@@ -82,7 +83,6 @@ public class House extends Property {
             Parking spaces: \{getParkingSpaces()}
             Year built: \{getYearBuilt()}
             Total floors: \{getNumbFloors()}
-            -----------------------------------------------
-            """;
+            -----------------------------------------------""";
     }
 }

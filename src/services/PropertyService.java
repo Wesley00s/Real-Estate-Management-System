@@ -91,11 +91,11 @@ public class PropertyService {
         }
     }
 
-    public static void propertiesMenu(Person person) {
+    public static void propertiesMenu (Person person) {
         List<String> propertiesOptions = List.of("REGISTER PROPERTY", "REMOVE PROPERTY", "DISPLAY PROPERTIES", "BACK");
 
         while (true) {
-            printMenu(propertiesOptions, "PROPERTIES MENU - Hello, dear owner, what do you want?");
+            printMenu(propertiesOptions, STR."PROPERTIES MENU - Hello, dear \{person.getPersonsName()}, what do you want?");
 
             switch (sc.nextLine().toUpperCase()) {
                 case "1" -> registerPropertyMenu(person);
@@ -106,7 +106,7 @@ public class PropertyService {
         }
     }
 
-    public static void registerPropertyMenu(Person person) {
+    public static void registerPropertyMenu (Person person) {
         List<String> typePropertyOptions = List.of("APARTMENT", "FARM", "HOUSE", "LAND", "BACK");
         List<Apartment> personApartmentList = new ArrayList<>();
         List<Farm> personFarmList = new ArrayList<>();
@@ -118,7 +118,7 @@ public class PropertyService {
         House house;
         Land land;
 
-        while(true) {
+        while (true) {
             printMenu(typePropertyOptions, "REGISTER PROPERTY MENU - Choose the property type.");
             switch (sc.nextLine().toUpperCase()) {
                 case "1" -> {
@@ -150,7 +150,7 @@ public class PropertyService {
                     System.out.println("Land successfully registered...");
                 }
                 case "5" -> {
-                    propertiesMenu(person);
+                    propertiesMenu (person);
                 }
                 default -> System.out.println("Invalid option.");
             }
@@ -166,12 +166,12 @@ public class PropertyService {
 
     private static Farm addFarm() {
         return new Farm(FARM, ID(), addAddressProperty(), addDescription(), addTotalArea(), addValue(), addSituation())
-                .setBuildingDetails(addTotalArea(), addNumbOfRooms(), addYearBuilt(), addDistanceOfCity());
+                .setBuildingDetails(addBuildingArea(), addNumbOfRooms(), addYearBuilt(), addDistanceOfCity());
     }
 
     private static House addHouse() {
         return new House(HOUSE, ID(), addAddressProperty(), addDescription(), addTotalArea(), addValue(), addSituation())
-                .setBuildingDetails(addTotalArea(), addNumbOfRooms(), addParkingSpaces(), addYearBuilt(), addNumbOfFloors());
+                .setBuildingDetails(addBuildingArea(), addNumbOfRooms(), addParkingSpaces(), addYearBuilt(), addNumbOfFloors());
     }
 
     private static Land addLand() {
