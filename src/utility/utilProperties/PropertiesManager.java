@@ -1,8 +1,10 @@
 package utility.utilProperties;
 
 import entities.properties.AddressProperty;
+import entities.properties.Property;
 import enumerations.Situation;
 import enumerations.TypeOfApart;
+import services.PropertyService;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -10,6 +12,9 @@ import java.util.Scanner;
 
 import static enumerations.Situation.*;
 import static enumerations.TypeOfApart.*;
+import static enumerations.TypeOfProperty.*;
+import static enumerations.TypeOfProperty.LAND;
+import static services.PropertyService.propertyList;
 import static utility.Attempts.TOTAL_ATTEMPTS;
 import static utility.Attempts.chances;
 import static utility.MenuFormat.printMenu;
@@ -454,5 +459,50 @@ public class PropertiesManager {
         } while (invalidData);
 
         return Double.parseDouble(sideDimension);
+    }
+
+    public static void seeProperties(List<Property> propertyList) {
+        System.out.println("\n* APARTMENTS");
+        for(Property apartment : propertyList) {
+            if (apartment.getTypeOfProperty().equals(APARTMENT))
+                System.out.println(apartment);
+        }
+
+        System.out.println("\n* FARMS");
+        for(Property farm : propertyList) {
+            if (farm.getTypeOfProperty().equals(FARM))
+                System.out.println(farm);
+        }
+
+        System.out.println("\n* HOUSES");
+        for(Property house : propertyList) {
+            if (house.getTypeOfProperty().equals(HOUSE))
+                System.out.println(house);
+        }
+
+        System.out.println("\n* LANDS");
+        for(Property land : propertyList) {
+            if (land.getTypeOfProperty().equals(LAND))
+                System.out.println(land);
+        }
+    }
+
+    public static Property searchProperty(List<Property> properties) {
+        String propertyID;
+
+        int attempts = TOTAL_ATTEMPTS;
+        do {
+            if(chances(attempts--)) return null;
+
+            System.out.println(STR."(\{attempts + 1} Attempts)Enter the property ID");
+            propertyID = sc.nextLine();
+        } while (propertyID.trim().isEmpty());
+
+        for (Property property : properties) {
+            if (propertyID.equals(property.getId())) {
+                return property;
+            }
+        }
+        return null;
     }
 }

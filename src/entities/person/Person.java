@@ -1,34 +1,37 @@
 package entities.person;
 
-import entities.properties.Apartment;
-import entities.properties.Farm;
-import entities.properties.House;
-import entities.properties.Land;
+import entities.properties.*;
+import enumerations.PersonType;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import static enumerations.TypeOfProperty.*;
+import static enumerations.TypeOfProperty.LAND;
+import static services.PropertyService.propertyList;
+
 public abstract class Person {
+    private PersonType personType;
     private String personsName;
     private Address personsAddress;
     private Contact personsContact;
     private String password;
-    private List<Apartment> apartmentList;
-    private List<Farm> farmList;
-    private List<House> houseList;
-    private List<Land> landList;
+    private List<Property> propertyList = new ArrayList<>();
 
-    protected Person(String personsName, Address personsAddress, Contact personsContact, String password) {
+    protected Person(PersonType personType, String personsName, Address personsAddress, Contact personsContact, String password) {
+        this.personType = personType;
         this.personsName = personsName;
         this.personsAddress = personsAddress;
         this.personsContact = personsContact;
         this.password = password;
     }
 
-    public void addPropertiesList(List<Apartment> apartmentList, List<Farm> farmList, List<House> houseList, List<Land> landList) {
-        this.apartmentList = apartmentList;
-        this.farmList = farmList;
-        this.houseList = houseList;
-        this.landList = landList;
+    public void addPropertiesList(List<Property> propertyList) {
+        this.propertyList = propertyList;
+    }
+
+    public PersonType getPersonType() {
+        return personType;
     }
 
     public String getPersonsName() {
@@ -42,24 +45,17 @@ public abstract class Person {
     public Contact getPersonsContact() {
         return personsContact;
     }
+
     public String getPassword() {
         return password;
     }
 
-    public List<Apartment> getApartmentList() {
-        return apartmentList;
+    public List<Property> getPropertyList() {
+        return propertyList;
     }
 
-    public List<Farm> getFarmList() {
-        return farmList;
-    }
-
-    public List<House> getHouseList() {
-        return houseList;
-    }
-
-    public List<Land> getLandList() {
-        return landList;
+    public void setPersonType(PersonType personType) {
+        this.personType = personType;
     }
 
     public void setPersonsName(String personsName) {
@@ -78,43 +74,35 @@ public abstract class Person {
         this.password = password;
     }
 
-    public void setApartmentList(List<Apartment> apartmentList) {
-        this.apartmentList = apartmentList;
-    }
-
-    public void setFarmList(List<Farm> farmList) {
-        this.farmList = farmList;
-    }
-
-    public void setHouseList(List<House> houseList) {
-        this.houseList = houseList;
-    }
-
-    public void setLandList(List<Land> landList) {
-        this.landList = landList;
+    public void setPropertyList(List<Property> propertyList) {
+        this.propertyList = propertyList;
     }
 
     public void displayPropertiesList() {
         try
         {
             System.out.println("\n* APARTMENTS");
-            for(Apartment apartment : getApartmentList()) {
-                System.out.println(apartment);
+            for(Property apartment : propertyList) {
+                if (apartment.getTypeOfProperty().equals(APARTMENT))
+                    System.out.println(apartment);
             }
 
             System.out.println("\n* FARMS");
-            for(Farm farm : getFarmList()) {
-                System.out.println(farm);
+            for(Property farm : propertyList) {
+                if (farm.getTypeOfProperty().equals(FARM))
+                    System.out.println(farm);
             }
 
             System.out.println("\n* HOUSES");
-            for(House house : getHouseList()) {
-                System.out.println(house);
+            for(Property house : propertyList) {
+                if (house.getTypeOfProperty().equals(HOUSE))
+                    System.out.println(house);
             }
 
             System.out.println("\n* LANDS");
-            for(Land land : getLandList()) {
-                System.out.println(land);
+            for(Property land : propertyList) {
+                if (land.getTypeOfProperty().equals(LAND))
+                    System.out.println(land);
             }
         } catch (NullPointerException e) {
             System.out.println("No properties yet.");

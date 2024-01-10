@@ -4,9 +4,8 @@ import java.util.List;
 import java.util.Scanner;
 
 import static services.BrokerService.brokerMenu;
-import static services.PersonService.addNaturalPersons;
 import static services.PersonService.personsLoginMenu;
-import static services.PropertyService.addProperties;
+import static services.PropertyService.addPropertiesAndOwners;
 import static utility.MenuFormat.printMenu;
 
 public class Main {
@@ -32,8 +31,7 @@ public class Main {
         }
     }
     public static void main(String[] args) {
-        addNaturalPersons();
-        addProperties();
+        addPropertiesAndOwners();
         mainMenu();
     }
 }

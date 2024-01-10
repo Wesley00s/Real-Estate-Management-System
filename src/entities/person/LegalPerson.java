@@ -1,10 +1,12 @@
 package entities.person;
 
+import enumerations.PersonType;
+
 public class LegalPerson extends Person {
     private long ein;
 
-    public LegalPerson(String personsName, Address personsAddress, Contact personsContact, String password, long ein) {
-        super(personsName, personsAddress, personsContact, password);
+    public LegalPerson(PersonType personType, String personsName, Address personsAddress, Contact personsContact, String password, long ein) {
+        super(personType, personsName, personsAddress, personsContact, password);
         this.ein = ein;
     }
 

@@ -2,11 +2,13 @@ package utility.utilPersons;
 
 import entities.person.Address;
 import entities.person.Contact;
+import entities.properties.Property;
 
 import java.util.Scanner;
 
 import static services.PersonService.naturalPersonsMenu;
 
+import static services.PropertyService.propertyList;
 import static utility.Attempts.*;
 
 public class PersonsManager {
@@ -39,7 +41,7 @@ public class PersonsManager {
 
         attempts = TOTAL_ATTEMPTS;
         do {
-            if(chances(attempts--)) naturalPersonsMenu();
+            if (chances(attempts--)) naturalPersonsMenu();
 
             System.out.println(STR."(\{attempts + 1} Attempts) Enter the name of the city:");
             city = sc.nextLine();

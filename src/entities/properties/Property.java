@@ -5,6 +5,7 @@ import enumerations.Situation;
 import enumerations.TypeOfProperty;
 
 public abstract class Property {
+    private Person owner;
     private TypeOfProperty typeOfProperty;
     private String id;
     private AddressProperty address;
@@ -21,6 +22,10 @@ public abstract class Property {
         this.totalArea = totalArea;
         this.value = value;
         this.situation = situation;
+    }
+
+    public Person getOwner() {
+        return owner;
     }
 
     public TypeOfProperty getTypeOfProperty() {
@@ -49,6 +54,10 @@ public abstract class Property {
 
     public Situation getSituation() {
         return situation;
+    }
+
+    public void setOwner(Person owner) {
+        this.owner = owner;
     }
 
     public void setTypeOfProperty(TypeOfProperty typeOfProperty) {
