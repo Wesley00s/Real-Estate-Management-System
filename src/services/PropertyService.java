@@ -21,6 +21,7 @@ import static utility.utilProperties.PropertiesManager.*;
 public class PropertyService {
     private static final Scanner sc = new Scanner(System.in);
     public static List<Property> propertyList = new ArrayList<>();
+    public static List<Property> historyPropertyList = new ArrayList<>();
     public static List<Person> personsList = new ArrayList<>();
 
     protected static void negotiateMenu(Person person) {
@@ -70,7 +71,11 @@ public class PropertyService {
                     System.out.println("Undefined owner.");
                     return;
                 }
+
+                propertyToBePurchase.setSituation(SOLD);
                 person.getPropertyList().add(propertyToBePurchase);
+                propertyList.remove(propertyToBePurchase);
+                historyPropertyList.add(propertyToBePurchase);
                 System.out.println("Property purchased successfully!");
 
             } else {
