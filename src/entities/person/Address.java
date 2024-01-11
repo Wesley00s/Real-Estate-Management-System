@@ -1,13 +1,15 @@
 package entities.person;
 
 public class Address {
+    private String id;
     private String city;
     private String zipCode;
     private String neighborhood;
     private String street;
     private int number;
 
-    public Address(String city, String zipCode, String neighborhood, String street, int number) {
+    public Address(String id, String city, String zipCode, String neighborhood, String street, int number) {
+        this.id = id;
         this.city = city;
         this.zipCode = zipCode;
         this.neighborhood = neighborhood;
@@ -15,10 +17,15 @@ public class Address {
         this.number = number;
     }
 
-    public Address(String city, String zipCode, String neighborhood) {
+    public Address(String id, String city, String zipCode, String neighborhood) {
+        this.id = id;
         this.city = city;
         this.zipCode = zipCode;
         this.neighborhood = neighborhood;
+    }
+
+    public String getId() {
+        return id;
     }
 
     public String getCity() {
@@ -39,6 +46,10 @@ public class Address {
 
     public int getNumber() {
         return number;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public void setCity(String city) {
@@ -64,6 +75,7 @@ public class Address {
     @Override
     public String toString() {
         return STR."""
+                ID: \{getId()}
                 City: \{getCity()}
                 Zip code: \{getZipCode()}
                 Neighborhoood: \{getNeighborhood()}

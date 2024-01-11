@@ -1,7 +1,7 @@
 package entities.properties;
 
 import entities.person.Person;
-import enumerations.Situation;
+import enumerations.Status;
 import enumerations.TypeOfProperty;
 
 public abstract class Property {
@@ -12,17 +12,19 @@ public abstract class Property {
     private String desc;
     private double totalArea;
     private double value;
-    private Situation situation;
+    private Status situation;
 
-    protected Property(TypeOfProperty typeOfProperty, String id, AddressProperty address, String desc, double totalArea, double value, Situation situation) {
+    protected Property(TypeOfProperty typeOfProperty, String id, AddressProperty address, String desc, double totalArea, double value, Status situation) {
         this.typeOfProperty = typeOfProperty;
-        this.id = STR."P-\{id}Y";
+        this.id = id;
         this.address = address;
         this.desc = desc;
         this.totalArea = totalArea;
         this.value = value;
         this.situation = situation;
     }
+
+    public Property() {}
 
     public Person getOwner() {
         return owner;
@@ -52,7 +54,7 @@ public abstract class Property {
         return value;
     }
 
-    public Situation getSituation() {
+    public Status getSituation() {
         return situation;
     }
 
@@ -84,7 +86,7 @@ public abstract class Property {
         this.value = value;
     }
 
-    public void setSituation(Situation situation) {
+    public void setSituation(Status situation) {
         this.situation = situation;
     }
 

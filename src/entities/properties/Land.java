@@ -1,13 +1,13 @@
 package entities.properties;
 
-import enumerations.Situation;
+import enumerations.Status;
 import enumerations.TypeOfProperty;
 
 public class Land extends Property {
     private double frontDimension;
     private double sideDimension;
-    
-    public Land(TypeOfProperty typeOfProperty, String id, AddressProperty address, String desc, double totalArea, double value, Situation situation) {
+
+    public Land(TypeOfProperty typeOfProperty, String id, AddressProperty address, String desc, double totalArea, double value, Status situation) {
         super(typeOfProperty, id, address, desc, totalArea, value, situation);
     }
 
@@ -16,6 +16,8 @@ public class Land extends Property {
         this.sideDimension = sideDimension;
         return this;
     }
+
+    public Land() {}
 
     public double getFrontDimension() {
         return frontDimension;

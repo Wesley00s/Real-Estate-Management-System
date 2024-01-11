@@ -1,6 +1,6 @@
 package enumerations;
 
-public enum Situation {
+public enum Status {
     FOR_SALE,
     FOR_RENT,
     SALE_OR_RENT,

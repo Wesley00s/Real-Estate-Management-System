@@ -1,6 +1,6 @@
 package entities.properties;
 
-import enumerations.Situation;
+import enumerations.Status;
 import enumerations.TypeOfApart;
 import enumerations.TypeOfProperty;
 
@@ -13,7 +13,7 @@ public class Apartment extends Property {
     private double condominiumValue;
     private TypeOfApart typeOfApart;
 
-    public Apartment(TypeOfProperty typeOfProperty, String id, AddressProperty address, String desc, double totalArea, double value, Situation situation) {
+    public Apartment(TypeOfProperty typeOfProperty, String id, AddressProperty address, String desc, double totalArea, double value, Status situation) {
         super(typeOfProperty, id, address, desc, totalArea, value, situation);
     }
 
@@ -25,6 +25,8 @@ public class Apartment extends Property {
         this.yearBuilt = yearBuilt;
         return this;
     }
+
+    public Apartment() {}
 
     public Apartment setAdditionalDetails(double condominiumValue, TypeOfApart typeOfApart) {
         this.condominiumValue = condominiumValue;

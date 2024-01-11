@@ -2,21 +2,20 @@ package utility.utilProperties;
 
 import entities.properties.AddressProperty;
 import entities.properties.Property;
-import enumerations.Situation;
+import enumerations.Status;
 import enumerations.TypeOfApart;
-import services.PropertyService;
 
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Scanner;
 
-import static enumerations.Situation.*;
+import static enumerations.Status.*;
 import static enumerations.TypeOfApart.*;
 import static enumerations.TypeOfProperty.*;
 import static enumerations.TypeOfProperty.LAND;
-import static services.PropertyService.propertyList;
 import static utility.Attempts.TOTAL_ATTEMPTS;
 import static utility.Attempts.chances;
+import static utility.GenerateID.ID;
 import static utility.MenuFormat.printMenu;
 
 public class PropertiesManager {
@@ -67,7 +66,7 @@ public class PropertiesManager {
 
         } while (neighborhood.trim().isEmpty());
 
-        return new AddressProperty(city, zipCode, neighborhood);
+        return new AddressProperty(STR."SP-\{ID()}S", city, zipCode, neighborhood);
     }
 
     public static String addDescription() {
@@ -160,7 +159,7 @@ public class PropertiesManager {
         return Double.parseDouble(value);
     }
 
-    public static Situation addSituation() {
+    public static Status addSituation() {
         List<String> situations = List.of("SELL", "RENT", "RENT OR SELL", "CANCEL");
 
         while (true) {

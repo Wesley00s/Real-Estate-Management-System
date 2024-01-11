@@ -10,6 +10,7 @@ import static services.PersonService.naturalPersonsMenu;
 
 import static services.PropertyService.propertyList;
 import static utility.Attempts.*;
+import static utility.GenerateID.ID;
 
 public class PersonsManager {
     private static final Scanner sc = new Scanner(System.in);
@@ -104,7 +105,7 @@ public class PersonsManager {
             }
         } while (invalidData);
 
-        return new Address(city, zipCode, neighborhood, street, Integer.parseInt(number));
+        return new Address(STR."A-\{ID()}S", city, zipCode, neighborhood, street, Integer.parseInt(number));
     }
 
     public static Contact addPersonsContact() {
@@ -139,7 +140,7 @@ public class PersonsManager {
             }
         } while (invalidData);
 
-        return new Contact(email, phone);
+        return new Contact(STR."C-\{ID()}T", email, phone);
     }
 
     public static long addSsn() {

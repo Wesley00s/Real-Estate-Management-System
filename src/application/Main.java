@@ -3,6 +3,7 @@ package application;
 import java.util.List;
 import java.util.Scanner;
 
+import static application.Connect.setSqlData;
 import static services.BrokerService.brokerMenu;
 import static services.PersonService.personsLoginMenu;
 import static services.PropertyService.addPropertiesAndOwners;
@@ -31,7 +32,8 @@ public class Main {
         }
     }
     public static void main(String[] args) {
-        addPropertiesAndOwners();
+        setSqlData();
+//        addPropertiesAndOwners();
         mainMenu();
     }
 }

@@ -18,6 +18,12 @@ public abstract class Person {
     private String password;
     private List<Property> propertyList = new ArrayList<>();
 
+    protected Person(PersonType personType, String personsName, String password) {
+        this.personType = personType;
+        this.personsName = personsName;
+        this.password = password;
+    }
+
     protected Person(PersonType personType, String personsName, Address personsAddress, Contact personsContact, String password) {
         this.personType = personType;
         this.personsName = personsName;

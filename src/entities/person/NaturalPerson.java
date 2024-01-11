@@ -5,6 +5,10 @@ import enumerations.PersonType;
 public class NaturalPerson extends Person {
     private long ssn;
 
+    public NaturalPerson(PersonType personType, String personsName, String password, long ssn) {
+        super(personType, personsName, password);
+        this.ssn = ssn;
+    }
     public NaturalPerson(PersonType personType, String personsName, Address personsAddress, Contact personsContact, String password, long ssn) {
         super(personType, personsName, personsAddress, personsContact, password);
         this.ssn = ssn;

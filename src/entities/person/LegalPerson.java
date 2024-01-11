@@ -5,6 +5,11 @@ import enumerations.PersonType;
 public class LegalPerson extends Person {
     private long ein;
 
+    public LegalPerson(PersonType personType, String personsName, String password, long ein) {
+        super(personType, personsName, password);
+        this.ein = ein;
+    }
+
     public LegalPerson(PersonType personType, String personsName, Address personsAddress, Contact personsContact, String password, long ein) {
         super(personType, personsName, personsAddress, personsContact, password);
         this.ein = ein;
