@@ -7,13 +7,13 @@ public class Farm extends Property {
     private double buildingArea;
     private int numbRooms;
     private int yearBuilt;
-    private int distanceOfCity;
+    private double distanceOfCity;
 
     public Farm(TypeOfProperty typeOfProperty, String id, AddressProperty address, String desc, double totalArea, double value, Status situation) {
         super(typeOfProperty, id, address, desc, totalArea, value, situation);
     }
 
-    public Farm setBuildingDetails(double buildingArea, int numbRooms, int yearBuilt, int distanceOfCity) {
+    public Farm setBuildingDetails(double buildingArea, int numbRooms, int yearBuilt, double distanceOfCity) {
         this.buildingArea = buildingArea;
         this.numbRooms = numbRooms;
         this.yearBuilt = yearBuilt;
@@ -35,7 +35,7 @@ public class Farm extends Property {
         return yearBuilt;
     }
 
-    public int getDistanceOfCity() {
+    public double getDistanceOfCity() {
         return distanceOfCity;
     }
 

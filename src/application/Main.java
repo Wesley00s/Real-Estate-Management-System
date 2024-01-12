@@ -3,10 +3,9 @@ package application;
 import java.util.List;
 import java.util.Scanner;
 
-import static application.Connect.setSqlData;
+import static dataBase.connection.Connect.setSqlData;
 import static services.BrokerService.brokerMenu;
 import static services.PersonService.personsLoginMenu;
-import static services.PropertyService.addPropertiesAndOwners;
 import static utility.MenuFormat.printMenu;
 
 public class Main {
@@ -33,7 +32,6 @@ public class Main {
     }
     public static void main(String[] args) {
         setSqlData();
-//        addPropertiesAndOwners();
         mainMenu();
     }
 }
