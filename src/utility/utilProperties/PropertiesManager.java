@@ -12,7 +12,7 @@ import java.util.Scanner;
 import static enumerations.Status.*;
 import static enumerations.TypeOfApart.*;
 import static enumerations.TypeOfProperty.*;
-import static enumerations.TypeOfProperty.LAND;
+import static services.PersonService.personsLoginMenu;
 import static utility.Attempts.TOTAL_ATTEMPTS;
 import static utility.Attempts.chances;
 import static utility.GenerateID.ID;
@@ -27,11 +27,11 @@ public class PropertiesManager {
         System.out.println("\n\t\t* ADD ADDRESS INFO");
         String city;
         String zipCode;
-        String neighborhood;
+        String district;
 
         attempts = TOTAL_ATTEMPTS;
         do {
-            if (chances(attempts--)) return null;
+            if (chances(attempts--)) personsLoginMenu();
 
             System.out.println(STR."(\{attempts + 1} Attempts) Enter the name of the city:");
             city = sc.nextLine();
@@ -41,7 +41,7 @@ public class PropertiesManager {
         attempts = TOTAL_ATTEMPTS;
         do {
             invalidData = false;
-            if (chances(attempts--)) return null;
+            if (chances(attempts--)) personsLoginMenu();
 
             System.out.println(STR."(\{attempts + 1} Attempts) Provide the zip code (5 digits):");
             zipCode = sc.nextLine();
@@ -59,22 +59,23 @@ public class PropertiesManager {
 
         attempts = TOTAL_ATTEMPTS;
         do {
-            if (chances(attempts--)) return null;
+            if (chances(attempts--)) personsLoginMenu();
 
-            System.out.println(STR."(\{attempts + 1} Attempts) Provide the neighborhood name:");
-            neighborhood = sc.nextLine();
+            System.out.println(STR."(\{attempts + 1} Attempts) Provide the district name:");
+            district = sc.nextLine();
 
-        } while (neighborhood.trim().isEmpty());
+        } while (district.trim().isEmpty());
 
-        return new AddressProperty(STR."SP-\{ID()}S", city, zipCode, neighborhood);
+        return new AddressProperty(STR."SP-\{ID()}S", city, zipCode, district);
     }
 
     public static String addDescription() {
+        System.out.println("\n\t\t* ADD PROPERTY INFO");
         String desc;
 
         attempts = TOTAL_ATTEMPTS;
         do {
-            if (chances(attempts--)) return null;
+            if (chances(attempts--)) personsLoginMenu();
 
             System.out.println(STR."(\{attempts + 1} Attempts) Provide a description of the property:");
             desc = sc.nextLine();
@@ -90,7 +91,7 @@ public class PropertiesManager {
         attempts = TOTAL_ATTEMPTS;
         do {
             invalidData = false;
-            if (chances(attempts--)) return 0;
+            if (chances(attempts--)) personsLoginMenu();
 
             System.out.println(STR."(\{attempts + 1} Attempts) Provide the total area (m²):");
             totalArea = sc.nextLine();
@@ -115,7 +116,7 @@ public class PropertiesManager {
         attempts = TOTAL_ATTEMPTS;
         do {
             invalidData = false;
-            if (chances(attempts--)) return 0;
+            if (chances(attempts--)) personsLoginMenu();
 
             System.out.println(STR."(\{attempts + 1} Attempts) Provide the building area (m²):");
             buildingArea = sc.nextLine();
@@ -134,19 +135,19 @@ public class PropertiesManager {
         return Double.parseDouble(buildingArea);
     }
 
-    public static double addValue() {
-        String value;
+    public static double addPrice() {
+        String price;
 
         attempts = TOTAL_ATTEMPTS;
         do {
             invalidData = false;
-            if (chances(attempts--)) return 0;
+            if (chances(attempts--)) personsLoginMenu();
 
-            System.out.println(STR."(\{attempts + 1} Attempts) Provide the proposed value ($USD):");
-            value = sc.nextLine();
+            System.out.println(STR."(\{attempts + 1} Attempts) Provide the proposed price ($USD):");
+            price = sc.nextLine();
 
             try {
-                if (Double.parseDouble(value) <= 0) {
+                if (Double.parseDouble(price) <= 0) {
                     System.out.println("Please, provide a valid number.");
                     invalidData = true;
                 }
@@ -156,7 +157,7 @@ public class PropertiesManager {
             }
         } while (invalidData);
 
-        return Double.parseDouble(value);
+        return Double.parseDouble(price);
     }
 
     public static Status addSituation() {
@@ -181,7 +182,7 @@ public class PropertiesManager {
         attempts = TOTAL_ATTEMPTS;
         do {
             invalidData = false;
-            if(chances(attempts--)) return 0;
+            if (chances(attempts--)) personsLoginMenu();
 
             System.out.println(STR."(\{attempts + 1} Attempts) Provide the floor of the aparment");
             floorApart = sc.nextLine();
@@ -202,18 +203,18 @@ public class PropertiesManager {
     }
 
     public static int addNumber() {
-        String number;
+        String numberOfTheApart;
 
         attempts = TOTAL_ATTEMPTS;
         do {
             invalidData = false;
-            if(chances(attempts--)) return 0;
+            if (chances(attempts--)) personsLoginMenu();
 
             System.out.println(STR."(\{attempts + 1} Attempts) Provide the number of the aparment:");
-            number = sc.nextLine();
+            numberOfTheApart = sc.nextLine();
 
             try {
-                if(Integer.parseInt(number) <= 0) {
+                if(Integer.parseInt(numberOfTheApart) <= 0) {
                     System.out.println("Please, provide a valid number.");
                     invalidData = true;
                 }
@@ -223,7 +224,7 @@ public class PropertiesManager {
             }
         } while (invalidData);
 
-        return Integer.parseInt(number);
+        return Integer.parseInt(numberOfTheApart);
     }
 
     public static String addBuildingName() {
@@ -231,7 +232,7 @@ public class PropertiesManager {
 
         attempts = TOTAL_ATTEMPTS;
         do {
-            if(chances(attempts--)) return null;
+            if (chances(attempts--)) personsLoginMenu();
 
             System.out.println(STR."(\{attempts + 1} Attempts) Provide the building name:");
             buildingName = sc.nextLine();
@@ -247,7 +248,7 @@ public class PropertiesManager {
         attempts = TOTAL_ATTEMPTS;
         do {
             invalidData = false;
-            if(chances(attempts--)) return 0;
+            if (chances(attempts--)) personsLoginMenu();
 
             System.out.println(STR."(\{attempts + 1} Attempts) Enter the number of rooms:");
             numberOfRooms = sc.nextLine();
@@ -272,7 +273,7 @@ public class PropertiesManager {
         attempts = TOTAL_ATTEMPTS;
         do {
             invalidData = false;
-            if (chances(attempts--)) return 0;
+            if (chances(attempts--)) personsLoginMenu();
 
             System.out.println(STR."(\{attempts + 1} Attempts) Provide the parking spaces:");
             spaces = sc.nextLine();
@@ -297,13 +298,13 @@ public class PropertiesManager {
         attempts = TOTAL_ATTEMPTS;
         do {
             invalidData = false;
-            if (chances(attempts--)) return 0;
+            if (chances(attempts--)) personsLoginMenu();
 
             System.out.println(STR."(\{attempts + 1} Attempts) Enter the year it was built:");
             yearWasBuilt = sc.nextLine();
 
             try {
-                if (Integer.parseInt(yearWasBuilt) < 1000 && Integer.parseInt(yearWasBuilt) > LocalDate.now().getYear()) {
+                if (Integer.parseInt(yearWasBuilt) < 1000 || Integer.parseInt(yearWasBuilt) > LocalDate.now().getYear()) {
                     System.out.println("Please, provide a valid year.");
                     invalidData = true;
                 }
@@ -322,7 +323,7 @@ public class PropertiesManager {
         attempts = TOTAL_ATTEMPTS;
         do {
             invalidData = false;
-            if (chances(attempts--)) return 0;
+            if (chances(attempts--)) personsLoginMenu();
 
             System.out.println(STR."(\{attempts + 1} Attempts) Enter the number of floors:");
             numbOfFloors = sc.nextLine();
@@ -347,9 +348,9 @@ public class PropertiesManager {
         attempts = TOTAL_ATTEMPTS;
         do {
             invalidData = false;
-            if (chances(attempts--)) return 0;
+            if (chances(attempts--)) personsLoginMenu();
 
-            System.out.println(STR."(\{attempts + 1} Attempts) Provide the value of the condominium ($USD):");
+            System.out.println(STR."(\{attempts + 1} Attempts) Provide the price of the condominium ($USD):");
             condominiumValue = sc.nextLine();
 
             try {
@@ -379,7 +380,7 @@ public class PropertiesManager {
                 case "5" -> {return DUPLEX;}
                 case "6" -> {return TRIPLEX;}
                 case "7" -> {return COVERAGE;}
-                case "8" -> {System.out.println("Cancelling..."); System.exit(0);}
+                case "8" -> {System.out.println("Cancelling..."); personsLoginMenu();}
                 default -> System.out.println("Invalid option.");
             }
         }
@@ -391,7 +392,7 @@ public class PropertiesManager {
         attempts = TOTAL_ATTEMPTS;
         do {
             invalidData = false;
-            if (chances(attempts--)) return 0;
+            if (chances(attempts--)) personsLoginMenu();
 
             System.out.println(STR."(\{attempts + 1} Attempts) Provide the distance from the city (KM):");
             distance = sc.nextLine();
@@ -416,7 +417,7 @@ public class PropertiesManager {
         attempts = TOTAL_ATTEMPTS;
         do {
             invalidData = false;
-            if (chances(attempts--)) return 0;
+            if (chances(attempts--)) personsLoginMenu();
 
             System.out.println(STR."(\{attempts + 1} Attempts) Provide the front dimension (m)");
             frontDimension = sc.nextLine();
@@ -441,7 +442,7 @@ public class PropertiesManager {
         attempts = TOTAL_ATTEMPTS;
         do {
             invalidData = false;
-            if (chances(attempts--)) return 0;
+            if (chances(attempts--)) personsLoginMenu();
 
             System.out.println(STR."(\{attempts + 1} Attempts) Provide the side dimension (m)");
             sideDimension = sc.nextLine();
@@ -491,9 +492,9 @@ public class PropertiesManager {
 
         int attempts = TOTAL_ATTEMPTS;
         do {
-            if(chances(attempts--)) return null;
+            if (chances(attempts--)) personsLoginMenu();
 
-            System.out.println(STR."(\{attempts + 1} Attempts)Enter the property ID");
+            System.out.println(STR."(\{attempts + 1} Attempts) Enter the property ID");
             propertyID = sc.nextLine();
         } while (propertyID.trim().isEmpty());
 

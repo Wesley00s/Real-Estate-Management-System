@@ -7,8 +7,8 @@ public class Land extends Property {
     private double frontDimension;
     private double sideDimension;
 
-    public Land(TypeOfProperty typeOfProperty, String id, AddressProperty address, String desc, double totalArea, double value, Status situation) {
-        super(typeOfProperty, id, address, desc, totalArea, value, situation);
+    public Land(TypeOfProperty typeOfProperty, String id, AddressProperty address, String desc, double totalArea, double price, Status status) {
+        super(typeOfProperty, id, address, desc, totalArea, price, status);
     }
 
     public Land setPropertyDetails(double frontDimension, double sideDimension) {
@@ -17,8 +17,8 @@ public class Land extends Property {
         return this;
     }
 
-    public Land(TypeOfProperty typeOfProperty, String id, String desc, double totalArea, double value, Status situation) {
-        super(typeOfProperty, id, desc, totalArea, value, situation);
+    public Land(TypeOfProperty typeOfProperty, String id, String desc, double totalArea, double price, Status status) {
+        super(typeOfProperty, id, desc, totalArea, price, status);
     }
     public Land() {}
 
@@ -49,8 +49,8 @@ public class Land extends Property {
                 DESCRIPTION:
                 "\{getDesc()}"
                 Total area: \{getTotalArea()} m²
-                Value: $USD \{getValue()}
-                Situation: \{getSituation()}
+                Price: $USD \{getPrice()}
+                Status: \{getStatus()}
 
                 PROPERTY DETAILS
                 Front dimension: \{getFrontDimension()} m

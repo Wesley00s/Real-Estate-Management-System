@@ -3,7 +3,7 @@ package application;
 import java.util.List;
 import java.util.Scanner;
 
-import static dataBase.connection.Connect.getSqlData;
+import static dataBase.connection.Connect.getSqlPropertyData;
 import static services.BrokerService.brokerMenu;
 import static services.PersonService.personsLoginMenu;
 import static utility.MenuFormat.printMenu;
@@ -27,7 +27,7 @@ public class Main {
         }
     }
     public static void main(String[] args) {
-        getSqlData();
+        getSqlPropertyData();
         mainMenu();
     }
 }

@@ -12,6 +12,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 import static enumerations.PersonType.NATURAL_PERSON;
+import static enumerations.TypeOfProperty.*;
 
 public class SendData {
     public static void sendSqlAddContact(Connection connection, Contact contact, int registrationPersonNumber) {
@@ -35,7 +36,7 @@ public class SendData {
         String addressID = address.getId();
         String city = address.getCity();
         String zipCode = address.getZipCode();
-        String district = address.getNeighborhood();
+        String district = address.getDistrict();
         String street = address.getStreet();
         int number = address.getNumber();
 
@@ -60,7 +61,7 @@ public class SendData {
         String addressID = address.getId();
         String city = address.getCity();
         String zipCode = address.getZipCode();
-        String district = address.getNeighborhood();
+        String district = address.getDistrict();
 
         String sql = "INSERT INTO PropertyAddress VALUES (?, ?, ?, ?, ?)";
 
@@ -108,12 +109,12 @@ public class SendData {
     }
 
     public static void sendAddPropertyOwner(Connection connection, Property property, Person person) {
-        int registrationPeronNumber = -1;
+        int registrationPersonNumber = -1;
 
         if(person.getPersonType().equals(NATURAL_PERSON)) {
-            registrationPeronNumber = ((NaturalPerson) person).getSsn();
+            registrationPersonNumber = ((NaturalPerson) person).getSsn();
         } else {
-            registrationPeronNumber = ((LegalPerson) person).getEin();
+            registrationPersonNumber = ((LegalPerson) person).getEin();
         }
 
         String propertyID = property.getId();
@@ -121,7 +122,7 @@ public class SendData {
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.setString(1, propertyID);
-            preparedStatement.setInt(2, registrationPeronNumber);
+            preparedStatement.setInt(2, registrationPersonNumber);
 
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
@@ -130,15 +131,15 @@ public class SendData {
     }
 
     public static void sendSqlAddProperty(Connection connection, Property property) {
-        Status status = property.getSituation();
+        Status status = property.getStatus();
         String propertyID = property.getId();
         String propertyDesc = property.getDesc();
         double totalArea = property.getTotalArea();
-        double value = property.getValue();
+        double price = property.getPrice();
         TypeOfProperty typeOfProperty = property.getTypeOfProperty();
-        int floorApart = -1;
+        int floorOfTheApart = -1;
         String buildingName = null;
-        int number = -1;
+        int numberOfTheApart = -1;
         double condominiumValue = -1;
         TypeOfApart typeOfApart = null;
         int roomsNumber = -1;
@@ -147,31 +148,31 @@ public class SendData {
         double frontDimension = -1;
         double sideDimension = -1;
         int parkingSpaces = -1;
-        int numbFloors = -1;
+        int totalNumOfFloors = -1;
         double buildingArea = -1;
 
-        if (typeOfProperty.equals(TypeOfProperty.APARTMENT)) {
-             floorApart = ((Apartment) property).getFloorApart();
+        if (typeOfProperty.equals(APARTMENT)) {
+             floorOfTheApart = ((Apartment) property).getFloorOfTheApart();
              buildingName = ((Apartment) property).getBuildingName();
-             number = ((Apartment) property).getNumber();
+             numberOfTheApart = ((Apartment) property).getNumberOfTheApart();
              condominiumValue = ((Apartment) property).getCondominiumValue();
              typeOfApart = ((Apartment) property).getTypeOfApart();
-             roomsNumber = ((Apartment) property).getNumbRooms();
+             roomsNumber = ((Apartment) property).getTotalNumberOfRooms();
              yearBuilt = ((Apartment) property).getYearBuilt();
-        } else if (typeOfProperty.equals(TypeOfProperty.FARM)) {
+        } else if (typeOfProperty.equals(FARM)) {
             distanceOfCity = ((Farm) property).getDistanceOfCity();
-            roomsNumber = ((Farm) property).getNumbRooms();
+            roomsNumber = ((Farm) property).getTotalNumberOfRooms();
             yearBuilt = ((Farm) property).getYearBuilt();
         } else if (property.getTypeOfProperty().equals(TypeOfProperty.LAND)) {
             frontDimension = ((Land) property).getFrontDimension();
             sideDimension = ((Land) property).getSideDimension();
-        } else if (typeOfProperty.equals(TypeOfProperty.HOUSE)) {
+        } else if (typeOfProperty.equals(HOUSE)) {
             parkingSpaces = ((House) property).getParkingSpaces();
-            numbFloors = ((House) property).getNumbFloors();
-            roomsNumber = ((House) property).getNumbRooms();
+            totalNumOfFloors = ((House) property).getNumbFloors();
+            roomsNumber = ((House) property).getTotalNumberOfRooms();
             yearBuilt = ((House) property).getYearBuilt();
         }
-        if (property.getTypeOfProperty().equals(TypeOfProperty.FARM) || property.getTypeOfProperty().equals(TypeOfProperty.HOUSE)) {
+        if (property.getTypeOfProperty().equals(FARM) || property.getTypeOfProperty().equals(HOUSE)) {
             buildingArea = ((House) property).getBuildingArea();
         }
 
@@ -182,18 +183,18 @@ public class SendData {
             preparedStatement.setString(2, String.valueOf(typeOfProperty));
             preparedStatement.setString(3, propertyDesc);
             preparedStatement.setDouble(4, totalArea);
-            preparedStatement.setDouble(5, value);
+            preparedStatement.setDouble(5, price);
             preparedStatement.setString(6, String.valueOf(status));
-            preparedStatement.setInt(7, floorApart);
+            preparedStatement.setInt(7, floorOfTheApart);
             preparedStatement.setDouble(8, frontDimension);
             preparedStatement.setDouble(9, sideDimension);
             preparedStatement.setDouble(10, buildingArea);
-            preparedStatement.setInt(11, number);
+            preparedStatement.setInt(11, numberOfTheApart);
             preparedStatement.setString(12, buildingName);
             preparedStatement.setInt(13, roomsNumber);
             preparedStatement.setInt(14, parkingSpaces);
             preparedStatement.setInt(15, yearBuilt);
-            preparedStatement.setInt(16, numbFloors);
+            preparedStatement.setInt(16, totalNumOfFloors);
             preparedStatement.setDouble(17, condominiumValue);
             preparedStatement.setDouble(18, distanceOfCity);
             preparedStatement.setString(19, String.valueOf(typeOfApart));

@@ -11,26 +11,26 @@ public abstract class Property {
     private AddressProperty address;
     private String desc;
     private double totalArea;
-    private double value;
-    private Status situation;
+    private double price;
+    private Status status;
 
-    protected Property(TypeOfProperty typeOfProperty, String id, AddressProperty address, String desc, double totalArea, double value, Status situation) {
+    protected Property(TypeOfProperty typeOfProperty, String id, AddressProperty address, String desc, double totalArea, double price, Status status) {
         this.typeOfProperty = typeOfProperty;
         this.id = id;
         this.address = address;
         this.desc = desc;
         this.totalArea = totalArea;
-        this.value = value;
-        this.situation = situation;
+        this.price = price;
+        this.status = status;
     }
 
-    protected Property(TypeOfProperty typeOfProperty, String id, String desc, double totalArea, double value, Status situation) {
+    protected Property(TypeOfProperty typeOfProperty, String id, String desc, double totalArea, double price, Status status) {
         this.typeOfProperty = typeOfProperty;
         this.id = id;
         this.desc = desc;
         this.totalArea = totalArea;
-        this.value = value;
-        this.situation = situation;
+        this.price = price;
+        this.status = status;
     }
     public Property() {}
 
@@ -58,12 +58,12 @@ public abstract class Property {
         return totalArea;
     }
 
-    public double getValue() {
-        return value;
+    public double getPrice() {
+        return price;
     }
 
-    public Status getSituation() {
-        return situation;
+    public Status getStatus() {
+        return status;
     }
 
     public void setOwner(Person owner) {
@@ -90,12 +90,12 @@ public abstract class Property {
         this.totalArea = totalArea;
     }
 
-    public void setValue(double value) {
-        this.value = value;
+    public void setPrice(double price) {
+        this.price = price;
     }
 
-    public void setSituation(Status situation) {
-        this.situation = situation;
+    public void setStatus(Status status) {
+        this.status = status;
     }
 
     public abstract String toString();

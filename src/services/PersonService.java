@@ -48,8 +48,8 @@ public class PersonService {
         while (true) {
             printMenu(personOptions, "NATURAL PERSONS MENU - Der user, are you already registered?");
             switch (sc.nextLine().toUpperCase()) {
-                case "1" -> singInNaturalPersons();
-                case "2" -> naturalPersonLogin();
+                case "1" -> naturalPersonsLogin();
+                case "2" -> naturalPersonRegistration();
                 case "3" -> {
                     System.out.println("Cancelling...");
                     personsLoginMenu();
@@ -65,8 +65,8 @@ public class PersonService {
         while (true) {
             printMenu(personOptions, "LEGAL PERSONS MENU - Der user, are you already registered?");
             switch (sc.nextLine().toUpperCase()) {
-                case "1" -> singInLegalPersons();
-                case "2" -> legalPersonLogin();
+                case "1" -> legalPersonsLogin();
+                case "2" -> legalPersonRegistration();
                 case "3" -> {
                     System.out.println("Cancelling...");
                     personsLoginMenu();
@@ -76,7 +76,8 @@ public class PersonService {
         }
     }
 
-    private static void singInNaturalPersons() {
+    private static void naturalPersonsLogin() {
+        System.out.println("\n\t\t* NATURAL PERSON LOGIN");
         String name;
         String password;
         boolean findPerson = false;
@@ -108,7 +109,8 @@ public class PersonService {
         }
     }
 
-    private static void singInLegalPersons() {
+    private static void legalPersonsLogin() {
+        System.out.println("\n\t\t* LEGAL PERSON LOGIN");
         String name;
         String password;
         boolean findPerson = false;
@@ -140,13 +142,15 @@ public class PersonService {
         }
     }
 
-    private static void legalPersonLogin() {
+    private static void legalPersonRegistration() {
+        System.out.println("\n\t\t* LEGAL PERSON REGISTRATION");
         LegalPerson legalPerson = addLegalPerson();
         personsList.add(legalPerson);
         propertiesMenu(legalPerson);
     }
 
-    private static void naturalPersonLogin() {
+    private static void naturalPersonRegistration() {
+        System.out.println("\n\t\t* NATURAL PERSON REGISTRATION");
         NaturalPerson naturalPerson = addNaturalPerson();
         personsList.add(naturalPerson);
         propertiesMenu(naturalPerson);

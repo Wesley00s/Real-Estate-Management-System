@@ -5,24 +5,24 @@ import enumerations.TypeOfProperty;
 
 public class Farm extends Property {
     private double buildingArea;
-    private int numbRooms;
+    private int totalNumberOfRooms;
     private int yearBuilt;
     private double distanceOfCity;
 
-    public Farm(TypeOfProperty typeOfProperty, String id, AddressProperty address, String desc, double totalArea, double value, Status situation) {
-        super(typeOfProperty, id, address, desc, totalArea, value, situation);
+    public Farm(TypeOfProperty typeOfProperty, String id, AddressProperty address, String desc, double totalArea, double price, Status status) {
+        super(typeOfProperty, id, address, desc, totalArea, price, status);
     }
 
-    public Farm setBuildingDetails(double buildingArea, int numbRooms, int yearBuilt, double distanceOfCity) {
+    public Farm setBuildingDetails(double buildingArea, int totalNumberOfRooms, int yearBuilt, double distanceOfCity) {
         this.buildingArea = buildingArea;
-        this.numbRooms = numbRooms;
+        this.totalNumberOfRooms = totalNumberOfRooms;
         this.yearBuilt = yearBuilt;
         this.distanceOfCity = distanceOfCity;
         return this;
     }
 
-    public Farm(TypeOfProperty typeOfProperty, String id, String desc, double totalArea, double value, Status situation) {
-        super(typeOfProperty, id, desc, totalArea, value, situation);
+    public Farm(TypeOfProperty typeOfProperty, String id, String desc, double totalArea, double price, Status status) {
+        super(typeOfProperty, id, desc, totalArea, price, status);
     }
 
     public Farm() {}
@@ -31,8 +31,8 @@ public class Farm extends Property {
         return buildingArea;
     }
 
-    public int getNumbRooms() {
-        return numbRooms;
+    public int getTotalNumberOfRooms() {
+        return totalNumberOfRooms;
     }
 
     public int getYearBuilt() {
@@ -47,8 +47,8 @@ public class Farm extends Property {
         this.buildingArea = buildingArea;
     }
 
-    public void setNumbRooms(int numbRooms) {
-        this.numbRooms = numbRooms;
+    public void setTotalNumberOfRooms(int totalNumberOfRooms) {
+        this.totalNumberOfRooms = totalNumberOfRooms;
     }
 
     public void setYearBuilt(int yearBuilt) {
@@ -70,14 +70,14 @@ public class Farm extends Property {
             DESCRIPTION:
             "\{getDesc()}"
             Total area: \{getTotalArea()} m²
-            Value: $USD \{getValue()}
-            Situation: \{getSituation()}
+            Price: $USD \{getPrice()}
+            Status: \{getStatus()}
 
             BUILDING DETAILS
             Building area: \{getBuildingArea()} m²
-            Total rooms: \{getNumbRooms()}
+            Total number of rooms: \{getTotalNumberOfRooms()}
             Year built: \{getYearBuilt()}
-            Distance od city: \{getDistanceOfCity()} KM
+            Distance of city: \{getDistanceOfCity()} KM
             -----------------------------------------------""";
     }
 }

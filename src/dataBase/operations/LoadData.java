@@ -55,18 +55,19 @@ public class LoadData {
     }
 
     public static void loadSqlPropertyOwner(ResultSet rsPropertyOwner, Property property) throws SQLException {
-
         while (rsPropertyOwner.next()) {
             for (Person personType : personsList) {
                 if (personType.getPersonType().equals(NATURAL_PERSON)) {
                     NaturalPerson naturalPerson = (NaturalPerson) personType;
                     if (naturalPerson.getSsn() == rsPropertyOwner.getInt("RegistrationPersonNumber")) {
                         naturalPerson.getPropertyList().add(property);
+                        property.setOwner(naturalPerson);
                     }
                 } else if (personType.getPersonType().equals(LEGAL_PERSON)) {
                     LegalPerson legalPerson = (LegalPerson) personType;
                     if (legalPerson.getEin() == rsPropertyOwner.getInt("RegistrationPersonNumber")) {
                         legalPerson.getPropertyList().add(property);
+                        property.setOwner(legalPerson);
                     }
                 } else {
                     System.out.println("Something went wrong with the type of person.");
@@ -83,17 +84,17 @@ public class LoadData {
             String propertyID = rsProperty.getString("PropertyID");
             String propertyDesc = rsProperty.getString("Description");
             double totalArea = rsProperty.getDouble("TotalArea");
-            double value = rsProperty.getDouble("Price");
-            int floorApart = rsProperty.getInt("FloorApart");
-            int number = rsProperty.getInt("NumberApart");
+            double price = rsProperty.getDouble("Price");
+            int floorOfTheApart = rsProperty.getInt("FloorApart");
+            int numberOfTheApart = rsProperty.getInt("NumberApart");
             String buildingName = rsProperty.getString("BuildingName");
-            int roomsNumber = rsProperty.getInt("TotalRooms");
+            int totalNumberRooms = rsProperty.getInt("TotalRooms");
             int yearBuilt = rsProperty.getInt("YearBuilt");
             double condominiumValue = rsProperty.getDouble("CondominiumValue");
             double buildingArea = rsProperty.getDouble("BuildingArea");
             double distanceOfCity = rsProperty.getDouble("DistanceOfCity");
             int parkingSpaces = rsProperty.getInt("ParkingSpaces");
-            int numbFloors = rsProperty.getInt("TotalFloors");
+            int totalNumberOfFloors = rsProperty.getInt("TotalFloors");
             double frontDimension = rsProperty.getDouble("FrontDimension");
             double sideDimension = rsProperty.getDouble("SideDimension");
 
@@ -101,20 +102,20 @@ public class LoadData {
             switch (rsProperty.getString("PropertyType")) {
                 case "APARTMENT" -> {
                     TypeOfApart typeOfApart = TypeOfApart.valueOf(rsProperty.getString("ApartmentType"));
-                    property = new Apartment(APARTMENT, propertyID, propertyDesc, totalArea, value, status)
-                            .setBuildingDetails(floorApart, number, buildingName, roomsNumber, yearBuilt)
+                    property = new Apartment(APARTMENT, propertyID, propertyDesc, totalArea, price, status)
+                            .setBuildingDetails(floorOfTheApart, numberOfTheApart, buildingName, totalNumberRooms, yearBuilt)
                             .setAdditionalDetails(condominiumValue, typeOfApart);
                 }
                 case "FARM" -> {
-                    property = new Farm(FARM, propertyID, propertyDesc, totalArea, value, status)
-                            .setBuildingDetails(buildingArea, roomsNumber, yearBuilt, distanceOfCity);
+                    property = new Farm(FARM, propertyID, propertyDesc, totalArea, price, status)
+                            .setBuildingDetails(buildingArea, totalNumberRooms, yearBuilt, distanceOfCity);
                 }
                 case "HOUSE" -> {
-                    property = new House(HOUSE, propertyID, propertyDesc, totalArea, value, status)
-                            .setBuildingDetails(buildingArea, roomsNumber, parkingSpaces, yearBuilt, numbFloors);
+                    property = new House(HOUSE, propertyID, propertyDesc, totalArea, price, status)
+                            .setBuildingDetails(buildingArea, totalNumberRooms, parkingSpaces, yearBuilt, totalNumberOfFloors);
                 }
                 case "LAND" -> {
-                    property = new Land(LAND, propertyID, propertyDesc, totalArea, value, status)
+                    property = new Land(LAND, propertyID, propertyDesc, totalArea, price, status)
                             .setPropertyDetails(frontDimension, sideDimension);
                 }
             }

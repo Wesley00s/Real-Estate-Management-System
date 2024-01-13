@@ -15,16 +15,16 @@ public class Connect {
     private static final String url = "jdbc:postgresql://localhost:5432/jdbcTest";
     private static final String user = "postgres";
     private static final String password = "123456";
-    public static void getSqlData() {
+    public static void getSqlPropertyData() {
         try (Connection connection = DriverManager.getConnection(url, user,  password)) {
             if (connection != null) {
                 loadSqlPerson(connection);
                 loadSqlProperty(connection);
             } else {
-                System.out.println("[getSqlData] Database non-initialized.");
+                System.out.println("[getSqlPropertyData] Database non-initialized.");
             }
         } catch (SQLException e) {
-            System.out.println(STR."[getSqlData] Error initialize database. \{e.getMessage()}");
+            System.out.println(STR."[getSqlPropertyData] Error initialize database. \{e.getMessage()}");
         }
     }
 

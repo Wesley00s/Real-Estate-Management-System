@@ -5,29 +5,29 @@ import enumerations.TypeOfApart;
 import enumerations.TypeOfProperty;
 
 public class Apartment extends Property {
-    private int floorApart;
-    private int number;
+    private int floorOfTheApart;
+    private int numberOfTheApart;
     private String buildingName;
-    private int numbRooms;
+    private int totalNumberOfRooms;
     private int yearBuilt;
     private double condominiumValue;
     private TypeOfApart typeOfApart;
 
-    public Apartment(TypeOfProperty typeOfProperty, String id, AddressProperty address, String desc, double totalArea, double value, Status situation) {
-        super(typeOfProperty, id, address, desc, totalArea, value, situation);
+    public Apartment(TypeOfProperty typeOfProperty, String id, AddressProperty address, String desc, double totalArea, double price, Status status) {
+        super(typeOfProperty, id, address, desc, totalArea, price, status);
     }
 
-    public Apartment setBuildingDetails(int floorApart, int number, String buildingName, int roomsNumber, int yearBuilt) {
-        this.floorApart = floorApart;
-        this.number = number;
+    public Apartment setBuildingDetails(int floorOfTheApart, int numberOfTheApart, String buildingName, int totalNumberOfRooms, int yearBuilt) {
+        this.floorOfTheApart = floorOfTheApart;
+        this.numberOfTheApart = numberOfTheApart;
         this.buildingName = buildingName;
-        this.numbRooms = roomsNumber;
+        this.totalNumberOfRooms = totalNumberOfRooms;
         this.yearBuilt = yearBuilt;
         return this;
     }
 
-    public Apartment(TypeOfProperty typeOfProperty, String id, String desc, double totalArea, double value, Status situation) {
-        super(typeOfProperty, id, desc, totalArea, value, situation);
+    public Apartment(TypeOfProperty typeOfProperty, String id, String desc, double totalArea, double price, Status status) {
+        super(typeOfProperty, id, desc, totalArea, price, status);
     }
 
     public Apartment() {}
@@ -38,20 +38,20 @@ public class Apartment extends Property {
         return this;
     }
 
-    public int getFloorApart() {
-        return floorApart;
+    public int getFloorOfTheApart() {
+        return floorOfTheApart;
     }
 
-    public int getNumber() {
-        return number;
+    public int getNumberOfTheApart() {
+        return numberOfTheApart;
     }
 
     public String getBuildingName() {
         return buildingName;
     }
 
-    public int getNumbRooms() {
-        return numbRooms;
+    public int getTotalNumberOfRooms() {
+        return totalNumberOfRooms;
     }
 
     public int getYearBuilt() {
@@ -66,20 +66,20 @@ public class Apartment extends Property {
         return typeOfApart;
     }
 
-    public void setFloorApart(int floorApart) {
-        this.floorApart = floorApart;
+    public void setFloorOfTheApart(int floorOfTheApart) {
+        this.floorOfTheApart = floorOfTheApart;
     }
 
-    public void setNumber(int number) {
-        this.number = number;
+    public void setNumberOfTheApart(int numberOfTheApart) {
+        this.numberOfTheApart = numberOfTheApart;
     }
 
     public void setBuildingName(String buildingName) {
         this.buildingName = buildingName;
     }
 
-    public void setNumbRooms(int numbRooms) {
-        this.numbRooms = numbRooms;
+    public void setTotalNumberOfRooms(int totalNumberOfRooms) {
+        this.totalNumberOfRooms = totalNumberOfRooms;
     }
 
     public void setYearBuilt(int yearBuilt) {
@@ -104,18 +104,18 @@ public class Apartment extends Property {
                 DESCRIPTION:
                 "\{getDesc()}"
                 Total area: \{getTotalArea()} m²
-                Value: $USD \{getValue()}
-                Situation: \{getSituation()}
+                Value: $USD \{getPrice()}
+                Status: \{getStatus()}
 
                 BUILDING DETAILS
-                Floor of the apartment: \{getFloorApart()}
-                Number: \{getNumber()}
+                Floor of the apartment: \{getFloorOfTheApart()}
+                Number of the apartment: \{getNumberOfTheApart()}
                 Building name: \{getBuildingName()}
-                Rooms number: \{getNumbRooms()}
+                Total number of rooms: \{getTotalNumberOfRooms()}
                 Year it was built: \{getYearBuilt()}
 
                 ADDTIONAL DETAILS
-                Codominium value: $USD \{getCondominiumValue()}
+                Codominium price: $USD \{getCondominiumValue()}
                 Type of apartment: \{getTypeOfApart()}
                 -----------------------------------------------""";
     }

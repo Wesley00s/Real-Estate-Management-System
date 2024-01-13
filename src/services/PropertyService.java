@@ -10,10 +10,7 @@ import java.util.Scanner;
 
 import static dataBase.connection.Connect.removeSqlPropertyData;
 import static dataBase.connection.Connect.setSqlPropertyData;
-import static enumerations.PersonType.LEGAL_PERSON;
-import static enumerations.PersonType.NATURAL_PERSON;
 import static enumerations.Status.*;
-import static enumerations.TypeOfApart.*;
 import static enumerations.TypeOfProperty.*;
 import static services.PersonService.personsLoginMenu;
 
@@ -41,7 +38,7 @@ public class PropertyService {
                 case "3" ->
 //                        rentProperty();
                 {}
-                case "4" -> {System.out.println("Returning..."); personsLoginMenu();}
+                case "4" -> {System.out.println("Returning..."); personsMenu(person);}
                 default -> System.out.println("\nInvalid option!\n");
             }
         }
@@ -61,21 +58,21 @@ public class PropertyService {
         } else {
             propertyToBePurchase = searchProperty(propertyList);
         }
-            if (propertyToBePurchase != null) {
-                if (!propertyToBePurchase.getSituation().equals(FOR_SALE) && !propertyToBePurchase.getSituation().equals(SALE_OR_RENT)) {
-                    System.out.println("Operation not permitted, check if the property is for sale.");
-                    return;
-                }
+        if (propertyToBePurchase != null) {
+            if (!propertyToBePurchase.getStatus().equals(FOR_SALE) && !propertyToBePurchase.getStatus().equals(SALE_OR_RENT)) {
+                System.out.println("Operation not permitted, check if the property is for sale.");
+                return;
+            }
 
-                Person oldOwner = propertyToBePurchase.getOwner();
-                if (oldOwner != null) {
-                    oldOwner.getPropertyList().remove(propertyToBePurchase);
-                } else {
-                    System.out.println("Undefined owner.");
-                    return;
-                }
+            Person oldOwner = propertyToBePurchase.getOwner();
+            if (oldOwner != null) {
+                oldOwner.getPropertyList().remove(propertyToBePurchase);
+            } else {
+                System.out.println("Undefined owner.");
+                return;
+            }
 
-            propertyToBePurchase.setSituation(SOLD);
+            propertyToBePurchase.setStatus(SOLD);
             person.getPropertyList().add(propertyToBePurchase);
             propertyList.remove(propertyToBePurchase);
             historyPropertyList.add(propertyToBePurchase);
@@ -251,7 +248,7 @@ public class PropertyService {
                 case "2" ->  property = addFarm();
                 case "3" -> property = addHouse();
                 case "4" -> property = addLand();
-                case "5" -> propertiesMenu (person);
+                case "5" -> propertiesMenu(person);
                 default -> System.out.println("Invalid option.");
             }
             AddressProperty addressProperty = addAddressProperty();
@@ -262,27 +259,28 @@ public class PropertyService {
             property.setOwner(person);
             person.getPropertyList().add(property);
             setSqlPropertyData(person, property, addressProperty);
+            propertiesMenu(person);
         }
     }
 
     private static Apartment addApartment() {
-        return new Apartment(APARTMENT, STR."P-\{ID()}Y", addDescription(), addTotalArea(), addValue(), addSituation())
+        return new Apartment(APARTMENT, STR."P-\{ID()}Y", addDescription(), addTotalArea(), addPrice(), addSituation())
                 .setBuildingDetails(addFloorApart(), addNumber(), addBuildingName(), addNumbOfRooms(), addYearBuilt())
                 .setAdditionalDetails(addCondominiumValue(), addTypeOfApart());
     }
 
     private static Farm addFarm() {
-        return new Farm(FARM, STR."P-\{ID()}Y", addDescription(), addTotalArea(), addValue(), addSituation())
+        return new Farm(FARM, STR."P-\{ID()}Y", addDescription(), addTotalArea(), addPrice(), addSituation())
                 .setBuildingDetails(addBuildingArea(), addNumbOfRooms(), addYearBuilt(), addDistanceOfCity());
     }
 
     private static House addHouse() {
-        return new House(HOUSE, STR."P-\{ID()}Y", addDescription(), addTotalArea(), addValue(), addSituation())
+        return new House(HOUSE, STR."P-\{ID()}Y", addDescription(), addTotalArea(), addPrice(), addSituation())
                 .setBuildingDetails(addBuildingArea(), addNumbOfRooms(), addParkingSpaces(), addYearBuilt(), addNumbOfFloors());
     }
 
     private static Land addLand() {
-        return new Land(LAND, STR."P-\{ID()}Y", addDescription(), addTotalArea(), addValue(), addSituation())
+        return new Land(LAND, STR."P-\{ID()}Y", addDescription(), addTotalArea(), addPrice(), addSituation())
                 .setPropertyDetails(addFrontDimension(), addSideDimension());
     }
 }

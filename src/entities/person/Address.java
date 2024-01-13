@@ -4,24 +4,24 @@ public class Address {
     private String id;
     private String city;
     private String zipCode;
-    private String neighborhood;
+    private String district;
     private String street;
     private int number;
 
-    public Address(String id, String city, String zipCode, String neighborhood, String street, int number) {
+    public Address(String id, String city, String zipCode, String district, String street, int number) {
         this.id = id;
         this.city = city;
         this.zipCode = zipCode;
-        this.neighborhood = neighborhood;
+        this.district = district;
         this.street = street;
         this.number = number;
     }
 
-    public Address(String id, String city, String zipCode, String neighborhood) {
+    public Address(String id, String city, String zipCode, String district) {
         this.id = id;
         this.city = city;
         this.zipCode = zipCode;
-        this.neighborhood = neighborhood;
+        this.district = district;
     }
 
     public String getId() {
@@ -36,8 +36,8 @@ public class Address {
         return zipCode;
     }
 
-    public String getNeighborhood() {
-        return neighborhood;
+    public String getDistrict() {
+        return district;
     }
 
     public String getStreet() {
@@ -60,8 +60,8 @@ public class Address {
         this.zipCode = zipCode;
     }
 
-    public void setNeighborhood(String neighborhood) {
-        this.neighborhood = neighborhood;
+    public void setDistrict(String district) {
+        this.district = district;
     }
 
     public void setStreet(String street) {
@@ -78,7 +78,7 @@ public class Address {
                 ID: \{getId()}
                 City: \{getCity()}
                 Zip code: \{getZipCode()}
-                Neighborhoood: \{getNeighborhood()}
+                District: \{getDistrict()}
                 Street: \{getStreet()}
                 Number: \{getNumber()}""";
     }

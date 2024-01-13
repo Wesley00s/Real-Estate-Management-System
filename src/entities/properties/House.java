@@ -5,26 +5,26 @@ import enumerations.TypeOfProperty;
 
 public class House extends Property {
     private double buildingArea;
-    private int numbRooms;
+    private int totalNumberOfRooms;
     private int parkingSpaces;
     private int yearBuilt;
     private int numbFloors;
 
-    public House(TypeOfProperty typeOfProperty, String id, AddressProperty address, String desc, double totalArea, double value, Status situation) {
-        super(typeOfProperty, id, address, desc, totalArea, value, situation);
+    public House(TypeOfProperty typeOfProperty, String id, AddressProperty address, String desc, double totalArea, double price, Status status) {
+        super(typeOfProperty, id, address, desc, totalArea, price, status);
     }
 
-    public House setBuildingDetails(double buildingArea, int numbRooms, int parkingSpaces, int yearBuilt, int numbFloors) {
+    public House setBuildingDetails(double buildingArea, int totalNumberOfRooms, int parkingSpaces, int yearBuilt, int numbFloors) {
         this.buildingArea = buildingArea;
-        this.numbRooms = numbRooms;
+        this.totalNumberOfRooms = totalNumberOfRooms;
         this.parkingSpaces = parkingSpaces;
         this.yearBuilt = yearBuilt;
         this.numbFloors = numbFloors;
         return this;
     }
 
-    public House(TypeOfProperty typeOfProperty, String id, String desc, double totalArea, double value, Status situation) {
-        super(typeOfProperty, id, desc, totalArea, value, situation);
+    public House(TypeOfProperty typeOfProperty, String id, String desc, double totalArea, double price, Status status) {
+        super(typeOfProperty, id, desc, totalArea, price, status);
     }
     public House() {}
 
@@ -32,8 +32,8 @@ public class House extends Property {
         return buildingArea;
     }
 
-    public int getNumbRooms() {
-        return numbRooms;
+    public int getTotalNumberOfRooms() {
+        return totalNumberOfRooms;
     }
 
     public int getParkingSpaces() {
@@ -52,8 +52,8 @@ public class House extends Property {
         this.buildingArea = buildingArea;
     }
 
-    public void setNumbRooms(int numbRooms) {
-        this.numbRooms = numbRooms;
+    public void setTotalNumberOfRooms(int totalNumberOfRooms) {
+        this.totalNumberOfRooms = totalNumberOfRooms;
     }
 
     public void setParkingSpaces(Integer parkingSpaces) {
@@ -79,12 +79,12 @@ public class House extends Property {
             DESCRIPTION:
             "\{getDesc()}"
             Total area: \{getTotalArea()} m²
-            Value: $USD \{getValue()}
-            Situation: \{getSituation()}
+            Price: $USD \{getPrice()}
+            Status: \{getStatus()}
 
             BUILDING DETAILS
             Building area: \{getBuildingArea()} m²
-            Total rooms: \{getNumbRooms()}
+            Total number of rooms: \{getTotalNumberOfRooms()}
             Parking spaces: \{getParkingSpaces()}
             Year built: \{getYearBuilt()}
             Total floors: \{getNumbFloors()}

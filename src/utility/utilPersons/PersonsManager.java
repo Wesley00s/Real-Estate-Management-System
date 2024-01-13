@@ -4,8 +4,7 @@ import entities.person.*;
 
 import java.util.Scanner;
 
-import static services.PersonService.naturalPersonsMenu;
-
+import static services.PersonService.personsLoginMenu;
 import static services.PropertyService.personsList;
 import static utility.Attempts.*;
 import static utility.GenerateID.ID;
@@ -20,7 +19,7 @@ public class PersonsManager {
 
         attempts = TOTAL_ATTEMPTS;
         do {
-            if(chances(attempts--)) naturalPersonsMenu();
+            if(chances(attempts--)) personsLoginMenu();
 
             System.out.println(STR."(\{attempts + 1} Attempts) Enter the person name:");
             personName = sc.nextLine();
@@ -34,13 +33,13 @@ public class PersonsManager {
         System.out.println("\n\t\t* ADD ADDRESS INFO");
         String city;
         String zipCode;
-        String neighborhood;
+        String district;
         String street;
         String number;
 
         attempts = TOTAL_ATTEMPTS;
         do {
-            if (chances(attempts--)) naturalPersonsMenu();
+            if (chances(attempts--)) personsLoginMenu();
 
             System.out.println(STR."(\{attempts + 1} Attempts) Enter the name of the city:");
             city = sc.nextLine();
@@ -50,7 +49,7 @@ public class PersonsManager {
         attempts = TOTAL_ATTEMPTS;
         do {
             invalidData = false;
-            if (chances(attempts--)) naturalPersonsMenu();
+            if (chances(attempts--)) personsLoginMenu();
 
             System.out.println(STR."(\{attempts + 1} Attempts) Provide the zip code (5 digits):");
             zipCode = sc.nextLine();
@@ -68,16 +67,16 @@ public class PersonsManager {
 
         attempts = TOTAL_ATTEMPTS;
         do {
-            if(chances(attempts--)) naturalPersonsMenu();
+            if(chances(attempts--)) personsLoginMenu();
 
-            System.out.println(STR."(\{attempts + 1} Attempts) Provide the neighborhood name:");
-            neighborhood = sc.nextLine();
+            System.out.println(STR."(\{attempts + 1} Attempts) Provide the district name:");
+            district = sc.nextLine();
 
-        } while (neighborhood.trim().isEmpty());
+        } while (district.trim().isEmpty());
 
         attempts = TOTAL_ATTEMPTS;
         do {
-            if(chances(attempts--)) naturalPersonsMenu();
+            if(chances(attempts--)) personsLoginMenu();
 
             System.out.println(STR."(\{attempts + 1} Attempts) Provide the street name:");
             street = sc.nextLine();
@@ -87,7 +86,7 @@ public class PersonsManager {
         attempts = TOTAL_ATTEMPTS;
         do {
             invalidData = false;
-            if (chances(attempts--)) naturalPersonsMenu();
+            if (chances(attempts--)) personsLoginMenu();
 
             System.out.println(STR."(\{attempts + 1} Attempts) Provide the number:");
             number = sc.nextLine();
@@ -103,7 +102,7 @@ public class PersonsManager {
             }
         } while (invalidData);
 
-        return new Address(STR."A-\{ID()}S", city, zipCode, neighborhood, street, Integer.parseInt(number));
+        return new Address(STR."A-\{ID()}S", city, zipCode, district, street, Integer.parseInt(number));
     }
 
     public static Contact addPersonsContact() {
@@ -113,7 +112,7 @@ public class PersonsManager {
 
         attempts = TOTAL_ATTEMPTS;
         do {
-            if(chances(attempts--)) naturalPersonsMenu();
+            if(chances(attempts--)) personsLoginMenu();
 
             System.out.println(STR."(\{attempts + 1} Attempts) Provide the email:");
             email = sc.nextLine();
@@ -123,7 +122,7 @@ public class PersonsManager {
         attempts = TOTAL_ATTEMPTS;
         do {
             invalidData = false;
-            if (chances(attempts--)) naturalPersonsMenu();
+            if (chances(attempts--)) personsLoginMenu();
 
             System.out.println(STR."(\{attempts + 1} Attempts) Provide the phone:");
             phone = sc.nextLine();
@@ -142,40 +141,51 @@ public class PersonsManager {
         return new Contact(STR."C-\{ID()}T", email, Integer.parseInt(phone));
     }
 
+    public static boolean isRegisterNumberDuplicate(int registerNumber) {
+        if (personsList == null || personsList.isEmpty()) return false;
+
+        boolean find = false;
+
+        for (Person person : personsList) {
+            switch (person.getPersonType()) {
+                case NATURAL_PERSON -> {
+                    NaturalPerson naturalPerson = (NaturalPerson) person;
+                    if (naturalPerson.getSsn() == registerNumber) {
+                        find = true;
+                    }
+                }
+                case LEGAL_PERSON -> {
+                    LegalPerson legalPerson = (LegalPerson) person;
+                    if (legalPerson.getEin() == registerNumber) {
+                        find = true;
+                    }
+                }
+            }
+        }
+        if (find) {
+            System.out.println("Already registered identifier.\n");
+            return true;
+        }
+        return false;
+    }
+
     public static int addSsn() {
         String ssn;
 
         attempts = TOTAL_ATTEMPTS;
         do {
             invalidData = false;
-            if (chances(attempts--)) naturalPersonsMenu();
+            if (chances(attempts--)) personsLoginMenu();
 
-            System.out.println(STR."(\{attempts + 1} Attempts) Provide the Social Security Number (SSN):");
+            System.out.println(STR."(\{attempts + 1} Attempts) Provide the Social Security Number (SSN - 9 digits):");
             ssn = sc.nextLine();
 
             try {
                 if(Integer.parseInt(ssn) <= 100000000 || Integer.parseInt(ssn) > 999999999) {
                     System.out.println("Please, provide a valid number.");
                     invalidData = true;
-                } else {
-                    for (Person person : personsList) {
-                        switch (person.getPersonType()) {
-                            case NATURAL_PERSON -> {
-                                NaturalPerson naturalPerson = (NaturalPerson) person;
-                                if (naturalPerson.getSsn() == Integer.parseInt(ssn)) {
-                                    System.out.println("Already registered identifier.\n");
-                                    invalidData = true;
-                                }
-                            }
-                            case LEGAL_PERSON -> {
-                                LegalPerson legalPerson = (LegalPerson) person;
-                                if (legalPerson.getEin() == Integer.parseInt(ssn)) {
-                                    System.out.println("Already registered identifier.\n");
-                                    invalidData = true;
-                                }
-                            }
-                        }
-                    }
+                } else if (isRegisterNumberDuplicate(Integer.parseInt(ssn))){
+                    invalidData = true;
                 }
             } catch (NumberFormatException e) {
                 System.out.println("ERROR: Invalid number format.");
@@ -192,35 +202,17 @@ public class PersonsManager {
         attempts = TOTAL_ATTEMPTS;
         do {
             invalidData = false;
-            if (chances(attempts--)) naturalPersonsMenu();
+            if (chances(attempts--)) personsLoginMenu();
 
-            System.out.println(STR."(\{attempts + 1} Attempts) Provide the Employer Identification Number (EIN):");
+            System.out.println(STR."(\{attempts + 1} Attempts) Provide the Employer Identification Number (EIN - 9 digits):");
             ein = sc.nextLine();
-
 
             try {
                 if(Integer.parseInt(ein) <= 100000000 || Integer.parseInt(ein) > 999999999) {
                     System.out.println("Please, provide a valid number.");
                     invalidData = true;
-                } else {
-                    for (Person person : personsList) {
-                        switch (person.getPersonType()) {
-                            case NATURAL_PERSON -> {
-                                NaturalPerson naturalPerson = (NaturalPerson) person;
-                                if (naturalPerson.getSsn() == Integer.parseInt(ein)) {
-                                    System.out.println("Already registered identifier.\n");
-                                    invalidData = true;
-                                }
-                            }
-                            case LEGAL_PERSON -> {
-                                LegalPerson legalPerson = (LegalPerson) person;
-                                if (legalPerson.getEin() == Integer.parseInt(ein)) {
-                                    System.out.println("Already registered identifier.\n");
-                                    invalidData = true;
-                                }
-                            }
-                        }
-                    }
+                } else if (isRegisterNumberDuplicate(Integer.parseInt(ein))){
+                    invalidData = true;
                 }
             } catch (NumberFormatException e) {
                 System.out.println("ERROR: Invalid number format.");
@@ -236,7 +228,7 @@ public class PersonsManager {
 
         attempts = TOTAL_ATTEMPTS;
         do {
-            if(chances(attempts--)) naturalPersonsMenu();
+            if(chances(attempts--)) personsLoginMenu();
 
             System.out.println(STR."(\{attempts + 1} Attempts) Create an password:");
             password = sc.nextLine();
