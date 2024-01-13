@@ -3,23 +3,23 @@ package entities.person;
 import enumerations.PersonType;
 
 public class LegalPerson extends Person {
-    private long ein;
+    private int ein;
 
-    public LegalPerson(PersonType personType, String personsName, String password, long ein) {
+    public LegalPerson(PersonType personType, String personsName, String password, int ein) {
         super(personType, personsName, password);
         this.ein = ein;
     }
 
-    public LegalPerson(PersonType personType, String personsName, Address personsAddress, Contact personsContact, String password, long ein) {
+    public LegalPerson(PersonType personType, String personsName, Address personsAddress, Contact personsContact, String password, int ein) {
         super(personType, personsName, personsAddress, personsContact, password);
         this.ein = ein;
     }
 
-    public long getEin() {
+    public int getEin() {
         return ein;
     }
 
-    public void setEin(long ein) {
+    public void setEin(int ein) {
         this.ein = ein;
     }
 

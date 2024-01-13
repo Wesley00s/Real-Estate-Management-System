@@ -24,6 +24,14 @@ public abstract class Property {
         this.situation = situation;
     }
 
+    protected Property(TypeOfProperty typeOfProperty, String id, String desc, double totalArea, double value, Status situation) {
+        this.typeOfProperty = typeOfProperty;
+        this.id = id;
+        this.desc = desc;
+        this.totalArea = totalArea;
+        this.value = value;
+        this.situation = situation;
+    }
     public Property() {}
 
     public Person getOwner() {

@@ -23,6 +23,9 @@ public class House extends Property {
         return this;
     }
 
+    public House(TypeOfProperty typeOfProperty, String id, String desc, double totalArea, double value, Status situation) {
+        super(typeOfProperty, id, desc, totalArea, value, situation);
+    }
     public House() {}
 
     public double getBuildingArea() {

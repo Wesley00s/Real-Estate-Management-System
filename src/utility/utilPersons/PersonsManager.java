@@ -1,14 +1,12 @@
 package utility.utilPersons;
 
-import entities.person.Address;
-import entities.person.Contact;
-import entities.properties.Property;
+import entities.person.*;
 
 import java.util.Scanner;
 
 import static services.PersonService.naturalPersonsMenu;
 
-import static services.PropertyService.propertyList;
+import static services.PropertyService.personsList;
 import static utility.Attempts.*;
 import static utility.GenerateID.ID;
 
@@ -109,6 +107,7 @@ public class PersonsManager {
     }
 
     public static Contact addPersonsContact() {
+        System.out.println("\n\t\t* ADD CONTACT INFO");
         String email;
         String phone;
 
@@ -140,11 +139,11 @@ public class PersonsManager {
             }
         } while (invalidData);
 
-        return new Contact(STR."C-\{ID()}T", email, phone);
+        return new Contact(STR."C-\{ID()}T", email, Integer.parseInt(phone));
     }
 
-    public static long addSsn() {
-        String snn;
+    public static int addSsn() {
+        String ssn;
 
         attempts = TOTAL_ATTEMPTS;
         do {
@@ -152,12 +151,31 @@ public class PersonsManager {
             if (chances(attempts--)) naturalPersonsMenu();
 
             System.out.println(STR."(\{attempts + 1} Attempts) Provide the Social Security Number (SSN):");
-            snn = sc.nextLine();
+            ssn = sc.nextLine();
 
             try {
-                if(Long.parseLong(snn) <= 100000000 || Long.parseLong(snn) > 999999999) {
+                if(Integer.parseInt(ssn) <= 100000000 || Integer.parseInt(ssn) > 999999999) {
                     System.out.println("Please, provide a valid number.");
                     invalidData = true;
+                } else {
+                    for (Person person : personsList) {
+                        switch (person.getPersonType()) {
+                            case NATURAL_PERSON -> {
+                                NaturalPerson naturalPerson = (NaturalPerson) person;
+                                if (naturalPerson.getSsn() == Integer.parseInt(ssn)) {
+                                    System.out.println("Already registered identifier.\n");
+                                    invalidData = true;
+                                }
+                            }
+                            case LEGAL_PERSON -> {
+                                LegalPerson legalPerson = (LegalPerson) person;
+                                if (legalPerson.getEin() == Integer.parseInt(ssn)) {
+                                    System.out.println("Already registered identifier.\n");
+                                    invalidData = true;
+                                }
+                            }
+                        }
+                    }
                 }
             } catch (NumberFormatException e) {
                 System.out.println("ERROR: Invalid number format.");
@@ -165,10 +183,10 @@ public class PersonsManager {
             }
         } while (invalidData);
 
-        return Long.parseLong(snn);
+        return Integer.parseInt(ssn);
     }
 
-    public static long addEin() {
+    public static int addEin() {
         String ein;
 
         attempts = TOTAL_ATTEMPTS;
@@ -179,10 +197,30 @@ public class PersonsManager {
             System.out.println(STR."(\{attempts + 1} Attempts) Provide the Employer Identification Number (EIN):");
             ein = sc.nextLine();
 
+
             try {
-                if(Long.parseLong(ein) <= 100000000 || Long.parseLong(ein) > 999999999) {
+                if(Integer.parseInt(ein) <= 100000000 || Integer.parseInt(ein) > 999999999) {
                     System.out.println("Please, provide a valid number.");
                     invalidData = true;
+                } else {
+                    for (Person person : personsList) {
+                        switch (person.getPersonType()) {
+                            case NATURAL_PERSON -> {
+                                NaturalPerson naturalPerson = (NaturalPerson) person;
+                                if (naturalPerson.getSsn() == Integer.parseInt(ein)) {
+                                    System.out.println("Already registered identifier.\n");
+                                    invalidData = true;
+                                }
+                            }
+                            case LEGAL_PERSON -> {
+                                LegalPerson legalPerson = (LegalPerson) person;
+                                if (legalPerson.getEin() == Integer.parseInt(ein)) {
+                                    System.out.println("Already registered identifier.\n");
+                                    invalidData = true;
+                                }
+                            }
+                        }
+                    }
                 }
             } catch (NumberFormatException e) {
                 System.out.println("ERROR: Invalid number format.");
@@ -190,7 +228,7 @@ public class PersonsManager {
             }
         } while (invalidData);
 
-        return Long.parseLong(ein);
+        return Integer.parseInt(ein);
     }
 
     public static String addPassword() {

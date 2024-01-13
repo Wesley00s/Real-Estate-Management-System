@@ -3,7 +3,7 @@ package application;
 import java.util.List;
 import java.util.Scanner;
 
-import static dataBase.connection.Connect.setSqlData;
+import static dataBase.connection.Connect.getSqlData;
 import static services.BrokerService.brokerMenu;
 import static services.PersonService.personsLoginMenu;
 import static utility.MenuFormat.printMenu;
@@ -16,22 +16,18 @@ public class Main {
         while (true) {
             printMenu(options, "MAIN MENU - Hello dear user, what type of services are you involved?");
             switch (sc.nextLine()) {
-                case "1" -> {
-                    personsLoginMenu();
-                }
-                case "2" -> {
-                    brokerMenu();
-                }
+                case "1" -> personsLoginMenu();
+                case "2" -> brokerMenu();
                 case "3" -> {
                     System.out.println("Exiting...");
                     System.exit(0);
                 }
-                default -> System.out.println("Ivalid option.");
+                default -> System.out.println("Invalid option.");
             }
         }
     }
     public static void main(String[] args) {
-        setSqlData();
+        getSqlData();
         mainMenu();
     }
 }

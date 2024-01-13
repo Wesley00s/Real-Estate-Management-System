@@ -274,7 +274,7 @@ public class PropertiesManager {
             invalidData = false;
             if (chances(attempts--)) return 0;
 
-            System.out.println(STR."(\{attempts + 1} Attempts) Provide the distance from the city (KM):");
+            System.out.println(STR."(\{attempts + 1} Attempts) Provide the parking spaces:");
             spaces = sc.nextLine();
 
             try {

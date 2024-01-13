@@ -8,7 +8,7 @@ public class Apartment extends Property {
     private int floorApart;
     private int number;
     private String buildingName;
-    private int roomsNumber;
+    private int numbRooms;
     private int yearBuilt;
     private double condominiumValue;
     private TypeOfApart typeOfApart;
@@ -21,9 +21,13 @@ public class Apartment extends Property {
         this.floorApart = floorApart;
         this.number = number;
         this.buildingName = buildingName;
-        this.roomsNumber = roomsNumber;
+        this.numbRooms = roomsNumber;
         this.yearBuilt = yearBuilt;
         return this;
+    }
+
+    public Apartment(TypeOfProperty typeOfProperty, String id, String desc, double totalArea, double value, Status situation) {
+        super(typeOfProperty, id, desc, totalArea, value, situation);
     }
 
     public Apartment() {}
@@ -46,8 +50,8 @@ public class Apartment extends Property {
         return buildingName;
     }
 
-    public int getRoomsNumber() {
-        return roomsNumber;
+    public int getNumbRooms() {
+        return numbRooms;
     }
 
     public int getYearBuilt() {
@@ -74,8 +78,8 @@ public class Apartment extends Property {
         this.buildingName = buildingName;
     }
 
-    public void setRoomsNumber(int roomsNumber) {
-        this.roomsNumber = roomsNumber;
+    public void setNumbRooms(int numbRooms) {
+        this.numbRooms = numbRooms;
     }
 
     public void setYearBuilt(int yearBuilt) {
@@ -107,7 +111,7 @@ public class Apartment extends Property {
                 Floor of the apartment: \{getFloorApart()}
                 Number: \{getNumber()}
                 Building name: \{getBuildingName()}
-                Rooms number: \{getRoomsNumber()}
+                Rooms number: \{getNumbRooms()}
                 Year it was built: \{getYearBuilt()}
 
                 ADDTIONAL DETAILS

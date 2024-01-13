@@ -9,10 +9,8 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import static enumerations.PersonType.LEGAL_PERSON;
-import static enumerations.PersonType.NATURAL_PERSON;
+import static enumerations.PersonType.*;
 import static enumerations.TypeOfProperty.*;
-import static enumerations.TypeOfProperty.LAND;
 import static services.PropertyService.personsList;
 import static services.PropertyService.propertyList;
 
@@ -22,7 +20,7 @@ public class LoadData {
         while (rsContact.next()) {
             String contactID = rsContact.getString("ContactID");
             String email = rsContact.getString("Email");
-            String phone = rsContact.getString("PhoneNumber");
+            int phone = rsContact.getInt("PhoneNumber");
             contact = new Contact(contactID, email, phone);
         }
         return contact;
@@ -77,7 +75,8 @@ public class LoadData {
         }
     }
 
-    public static void loadSqlProperty(ResultSet rsProperty, Connection connection) throws SQLException {
+    public static void loadSqlProperty(Connection connection) throws SQLException {
+        ResultSet rsProperty = connection.createStatement().executeQuery("SELECT * FROM Property");
         Property property;
         while (rsProperty.next()) {
             Status status = Status.valueOf(rsProperty.getString("Status"));
@@ -102,20 +101,20 @@ public class LoadData {
             switch (rsProperty.getString("PropertyType")) {
                 case "APARTMENT" -> {
                     TypeOfApart typeOfApart = TypeOfApart.valueOf(rsProperty.getString("ApartmentType"));
-                    property = new Apartment(APARTMENT, propertyID, null, propertyDesc, totalArea, value, status)
+                    property = new Apartment(APARTMENT, propertyID, propertyDesc, totalArea, value, status)
                             .setBuildingDetails(floorApart, number, buildingName, roomsNumber, yearBuilt)
                             .setAdditionalDetails(condominiumValue, typeOfApart);
                 }
                 case "FARM" -> {
-                    property = new Farm(FARM, propertyID, null, propertyDesc, totalArea, value, status)
+                    property = new Farm(FARM, propertyID, propertyDesc, totalArea, value, status)
                             .setBuildingDetails(buildingArea, roomsNumber, yearBuilt, distanceOfCity);
                 }
                 case "HOUSE" -> {
-                    property = new House(HOUSE, propertyID, null, propertyDesc, totalArea, value, status)
+                    property = new House(HOUSE, propertyID, propertyDesc, totalArea, value, status)
                             .setBuildingDetails(buildingArea, roomsNumber, parkingSpaces, yearBuilt, numbFloors);
                 }
                 case "LAND" -> {
-                    property = new Land(LAND, propertyID, null, propertyDesc, totalArea, value, status)
+                    property = new Land(LAND, propertyID, propertyDesc, totalArea, value, status)
                             .setPropertyDetails(frontDimension, sideDimension);
                 }
             }
@@ -132,11 +131,12 @@ public class LoadData {
         }
     }
 
-    public static void loadSqlPerson(ResultSet rsPerson, Connection connection) throws SQLException {
+    public static void loadSqlPerson(Connection connection) throws SQLException {
+        ResultSet rsPerson = connection.createStatement().executeQuery("SELECT * FROM Person");
         Person person;
         while (rsPerson.next()) {
             String name = rsPerson.getString("Name");
-            String registrationNumber = rsPerson.getString("RegistrationNumber");
+            int registrationNumber = rsPerson.getInt("RegistrationNumber");
             String password = rsPerson.getString("Password");
             int rn = rsPerson.getInt("RegistrationNumber");
 

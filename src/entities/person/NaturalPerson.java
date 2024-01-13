@@ -3,22 +3,22 @@ package entities.person;
 import enumerations.PersonType;
 
 public class NaturalPerson extends Person {
-    private long ssn;
+    private int ssn;
 
-    public NaturalPerson(PersonType personType, String personsName, String password, long ssn) {
+    public NaturalPerson(PersonType personType, String personsName, String password, int ssn) {
         super(personType, personsName, password);
         this.ssn = ssn;
     }
-    public NaturalPerson(PersonType personType, String personsName, Address personsAddress, Contact personsContact, String password, long ssn) {
+    public NaturalPerson(PersonType personType, String personsName, Address personsAddress, Contact personsContact, String password, int ssn) {
         super(personType, personsName, personsAddress, personsContact, password);
         this.ssn = ssn;
     }
 
-    public long getSsn() {
+    public int getSsn() {
         return ssn;
     }
 
-    public void setSsn(long ssn) {
+    public void setSsn(int ssn) {
         this.ssn = ssn;
     }
 

@@ -21,6 +21,10 @@ public class Farm extends Property {
         return this;
     }
 
+    public Farm(TypeOfProperty typeOfProperty, String id, String desc, double totalArea, double value, Status situation) {
+        super(typeOfProperty, id, desc, totalArea, value, situation);
+    }
+
     public Farm() {}
 
     public double getBuildingArea() {

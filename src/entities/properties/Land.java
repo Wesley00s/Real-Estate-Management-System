@@ -17,6 +17,9 @@ public class Land extends Property {
         return this;
     }
 
+    public Land(TypeOfProperty typeOfProperty, String id, String desc, double totalArea, double value, Status situation) {
+        super(typeOfProperty, id, desc, totalArea, value, situation);
+    }
     public Land() {}
 
     public double getFrontDimension() {
