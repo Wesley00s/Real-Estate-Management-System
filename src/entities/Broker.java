@@ -6,19 +6,21 @@ import entities.person.Contact;
 import java.time.LocalTime;
 
 public class Broker {
-    private Long ssn;
+    private int ssn;
     private String name;
     private Address address;
     private Contact contact;
+    private String password;
 
-    public Broker(Long ssn, String name, Address address, Contact contact) {
+    public Broker(int ssn, String name, Address address, Contact contact, String password) {
         this.ssn = ssn;
         this.name = name;
         this.address = address;
         this.contact = contact;
+        this.password = password;
     }
 
-    public Long getSsn() {
+    public int getSsn() {
         return ssn;
     }
 
@@ -34,7 +36,7 @@ public class Broker {
         return contact;
     }
 
-    public void setSsn(Long ssn) {
+    public void setSsn(int ssn) {
         this.ssn = ssn;
     }
 
@@ -61,5 +63,13 @@ public class Broker {
                 CONTACT
                 \{getContact()}
                 """;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

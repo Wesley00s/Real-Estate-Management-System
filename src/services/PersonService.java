@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import static application.Main.mainMenu;
-import static dataBase.connection.Connect.setSqlPersonalData;
+import static database.connection.Connect.setSqlPersonalData;
 import static enumerations.PersonType.LEGAL_PERSON;
 import static enumerations.PersonType.NATURAL_PERSON;
 import static services.PropertyService.*;

@@ -3,8 +3,8 @@ package application;
 import java.util.List;
 import java.util.Scanner;
 
-import static dataBase.connection.Connect.getSqlPropertyData;
-import static services.BrokerService.brokerMenu;
+import static database.connection.Connect.getSqlPropertyData;
+import static services.BrokerService.*;
 import static services.PersonService.personsLoginMenu;
 import static utility.MenuFormat.printMenu;
 
@@ -17,7 +17,7 @@ public class Main {
             printMenu(options, "MAIN MENU - Hello dear user, what type of services are you involved?");
             switch (sc.nextLine()) {
                 case "1" -> personsLoginMenu();
-                case "2" -> brokerMenu();
+                case "2" -> brokerLogin();
                 case "3" -> {
                     System.out.println("Exiting...");
                     System.exit(0);
@@ -27,6 +27,7 @@ public class Main {
         }
     }
     public static void main(String[] args) {
+        addMainBroker();
         getSqlPropertyData();
         mainMenu();
     }

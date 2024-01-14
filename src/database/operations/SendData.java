@@ -1,4 +1,4 @@
-package dataBase.operations;
+package database.operations;
 
 import entities.person.*;
 import entities.properties.*;

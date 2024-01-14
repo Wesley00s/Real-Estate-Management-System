@@ -4,11 +4,16 @@ import enumerations.Status;
 import enumerations.TypeOfProperty;
 
 public class Land extends Property {
+    private double totalArea;
     private double frontDimension;
     private double sideDimension;
 
-    public Land(TypeOfProperty typeOfProperty, String id, AddressProperty address, String desc, double totalArea, double price, Status status) {
-        super(typeOfProperty, id, address, desc, totalArea, price, status);
+    public Land(TypeOfProperty typeOfProperty, String id, AddressProperty address, String desc, double price, Status status) {
+        super(typeOfProperty, id, address, desc, price, status);
+    }
+
+    public Land(TypeOfProperty typeOfProperty, String id, String desc, double price, Status status) {
+        super(typeOfProperty, id, desc, price, status);
     }
 
     public Land setPropertyDetails(double frontDimension, double sideDimension) {
@@ -17,9 +22,6 @@ public class Land extends Property {
         return this;
     }
 
-    public Land(TypeOfProperty typeOfProperty, String id, String desc, double totalArea, double price, Status status) {
-        super(typeOfProperty, id, desc, totalArea, price, status);
-    }
     public Land() {}
 
     public double getFrontDimension() {
@@ -28,6 +30,10 @@ public class Land extends Property {
 
     public double getSideDimension() {
         return sideDimension;
+    }
+
+    public double getTotalArea() {
+        return getFrontDimension() * getSideDimension();
     }
 
     public void setFrontDimension(double frontDimension) {

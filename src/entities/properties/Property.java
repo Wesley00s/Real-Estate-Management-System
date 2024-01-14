@@ -24,11 +24,26 @@ public abstract class Property {
         this.status = status;
     }
 
+    protected Property(TypeOfProperty typeOfProperty, String id, AddressProperty address, String desc, double price, Status status) {
+        this.typeOfProperty = typeOfProperty;
+        this.id = id;
+        this.address = address;
+        this.desc = desc;
+        this.price = price;
+        this.status = status;
+    }
     protected Property(TypeOfProperty typeOfProperty, String id, String desc, double totalArea, double price, Status status) {
         this.typeOfProperty = typeOfProperty;
         this.id = id;
         this.desc = desc;
         this.totalArea = totalArea;
+        this.price = price;
+        this.status = status;
+    }
+    protected Property(TypeOfProperty typeOfProperty, String id, String desc, double price, Status status) {
+        this.typeOfProperty = typeOfProperty;
+        this.id = id;
+        this.desc = desc;
         this.price = price;
         this.status = status;
     }

@@ -1,5 +1,6 @@
 package services;
 
+import entities.Request;
 import entities.person.*;
 import entities.properties.*;
 
@@ -8,8 +9,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 
-import static dataBase.connection.Connect.removeSqlPropertyData;
-import static dataBase.connection.Connect.setSqlPropertyData;
+import static database.connection.Connect.*;
 import static enumerations.Status.*;
 import static enumerations.TypeOfProperty.*;
 import static services.PersonService.personsLoginMenu;
@@ -23,6 +23,7 @@ public class PropertyService {
     public static List<Property> propertyList = new ArrayList<>();
     public static List<Property> historyPropertyList = new ArrayList<>();
     public static List<Person> personsList = new ArrayList<>();
+    public static List<Request> requestList = new ArrayList<>();
 
     protected static void negotiateMenu(Person person) {
         List<String> personsOptions = List.of("SEE PROPERTIES", "BUY PROPERTY", "RENT PROPERTY", "BACK");
@@ -35,23 +36,59 @@ public class PropertyService {
             switch (sc.nextLine()) {
                 case "1" -> seeProperties(propertyListOfNonLoggedPersons);
                 case "2" -> buyProperty(person);
-                case "3" ->
-//                        rentProperty();
-                {}
+                case "3" -> rentProperty(person);
                 case "4" -> {System.out.println("Returning..."); personsMenu(person);}
                 default -> System.out.println("\nInvalid option!\n");
             }
         }
     }
 
-    private static void buyProperty(Person person) {
+    private static void rentProperty(Person person) {
+        System.out.println("\n\t\t* RENT PROPERTY");
         if (propertyList.isEmpty()) {
             System.out.println("The properties list is empty.");
             return;
         }
 
         List<Property> propertyListOfNonLoggedPersons = propertyList;
-        Property propertyToBePurchase = null;
+        Property propertyToBeRent;
+        if (person.getPropertyList() != null) {
+            propertyListOfNonLoggedPersons.removeAll(person.getPropertyList());
+            propertyToBeRent = searchProperty(propertyListOfNonLoggedPersons);
+        } else {
+            propertyToBeRent = searchProperty(propertyList);
+        }
+        if (propertyToBeRent != null) {
+            if (!propertyToBeRent.getStatus().equals(FOR_RENT) && !propertyToBeRent.getStatus().equals(SALE_OR_RENT)) {
+                System.out.println("Operation not permitted, check if the property is for rent");
+                return;
+            }
+
+            Person oldOwner = propertyToBeRent.getOwner();
+            if (oldOwner != null) {
+                oldOwner.getPropertyList().remove(propertyToBeRent);
+            } else {
+                System.out.println("Undefined owner.");
+                return;
+            }
+
+            propertyToBeRent.setStatus(RENTED);
+            historyPropertyList.add(propertyToBeRent);
+            System.out.println("Property rented successfully!");
+        } else {
+            System.out.println("No available properties for purchase.");
+        }
+    }
+
+    private static void buyProperty(Person person) {
+        System.out.println("\n\t\t* BUY PROPERTY");
+        if (propertyList.isEmpty()) {
+            System.out.println("The properties list is empty.");
+            return;
+        }
+
+        List<Property> propertyListOfNonLoggedPersons = propertyList;
+        Property propertyToBePurchase;
         if (person.getPropertyList() != null) {
             propertyListOfNonLoggedPersons.removeAll(person.getPropertyList());
             propertyToBePurchase = searchProperty(propertyListOfNonLoggedPersons);
@@ -71,12 +108,14 @@ public class PropertyService {
                 System.out.println("Undefined owner.");
                 return;
             }
-
-            propertyToBePurchase.setStatus(SOLD);
-            person.getPropertyList().add(propertyToBePurchase);
-            propertyList.remove(propertyToBePurchase);
-            historyPropertyList.add(propertyToBePurchase);
-            System.out.println("Property purchased successfully!");
+            requestList.add(new Request(STR."S-\{ID()}N", propertyToBePurchase, person, oldOwner));
+            System.out.println("The request has been sent.");
+//            propertyToBePurchase.setStatus(SOLD);
+//            person.getPropertyList().add(propertyToBePurchase);
+//            oldOwner.getPropertyList().remove(propertyToBePurchase);
+//            historyPropertyList.add(propertyToBePurchase);
+//            updateSqlProperty(person, oldOwner, propertyToBePurchase);
+//            System.out.println("Property purchased successfully!");
 
         } else {
             System.out.println("No available properties for purchase.");
@@ -205,6 +244,7 @@ public class PropertyService {
                 case "2" -> removeProperty(person);
                 case "3" -> person.displayPropertiesList();
                 case "4" -> {System.out.println("Returning...\n"); personsMenu(person);}
+                default -> System.out.println("Invalid option");
             }
         }
     }
@@ -280,7 +320,7 @@ public class PropertyService {
     }
 
     private static Land addLand() {
-        return new Land(LAND, STR."P-\{ID()}Y", addDescription(), addTotalArea(), addPrice(), addSituation())
+        return new Land(LAND, STR."P-\{ID()}Y", addDescription(), addPrice(), addSituation())
                 .setPropertyDetails(addFrontDimension(), addSideDimension());
     }
 }

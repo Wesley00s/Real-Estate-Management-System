@@ -3,14 +3,19 @@ package entities;
 public class Tax {
     private String taxDescription;
     private double taxValue;
+    private boolean isRegistered;
 
     public Tax(String taxDescription, double taxValue) {
         this.taxDescription = taxDescription;
         this.taxValue = taxValue;
     }
 
-    public int registerTax() {
-        return 0;
+    public boolean idRegisteredTax() {
+        return isRegistered;
+    }
+
+    public void register() {
+        this.isRegistered = true;
     }
 
     public String getTaxDescription() {
@@ -31,9 +36,8 @@ public class Tax {
 
     public String toString() {
         return STR."""
-                TAX
                 Tax Description: \{getTaxDescription()}
                 Tax Value: \{getTaxValue()}
-                """;
+                Was regitered: \{isRegistered ? "Yes" : "No"}""";
     }
 }

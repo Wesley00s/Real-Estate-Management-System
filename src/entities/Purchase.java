@@ -1,22 +1,50 @@
 package entities;
 
+import entities.properties.Property;
+
 import java.time.LocalDate;
+import java.util.List;
 
 public class Purchase {
+    private String purchaseID;
+    private Broker broker;
+    private Property property;
     private LocalDate purchaseDate;
     private double purchaseValue;
     private double realEstatePercent;
     private double brokerCommission;
+    private List<Tax> taxList;
 
-    public Purchase(LocalDate purchaseDate, double purchaseValue, double realEstatePercent, double brokerCommission) {
+    public Purchase(String purchaseID, Broker broker, Property property, LocalDate purchaseDate, double purchaseValue, double realEstatePercent, double brokerCommission, List<Tax> taxList) {
+        this.purchaseID = purchaseID;
+        this.broker = broker;
+        this.property = property;
         this.purchaseDate = purchaseDate;
         this.purchaseValue = purchaseValue;
         this.realEstatePercent = realEstatePercent;
         this.brokerCommission = brokerCommission;
+        this.taxList = taxList;
     }
 
-    public int registerPurchase() {
-        return 0;
+    public void registerPurchase() {
+        System.out.println(STR."""
+                \t* PURCHASE
+                PurchaseID: \{getPurchaseID()}
+                Purchase Date: \{getPurchaseDate()}
+                Purchase Value: $USD \{getPurchaseValue()}
+                Property ID: \{getProperty().getId()}
+                Broker ID: \{getBroker().getSsn()}
+
+                TAX AND DISCOUNTS
+                \{getTaxList()}
+
+                TOTAL: $USD \{getPurchaseValue() - (purchaseValue * (getRealEstatePercent() / 100) + getBrokerCommission())}
+                ----------------------------------------------
+                """);
+    }
+
+    public String getPurchaseID() {
+        return purchaseID;
     }
 
     public LocalDate getPurchaseDate() {
@@ -35,6 +63,10 @@ public class Purchase {
         return brokerCommission;
     }
 
+    public void setPurchaseID(String purchaseID) {
+        this.purchaseID = purchaseID;
+    }
+
     public void setPurchaseDate(LocalDate purchaseDate) {
         this.purchaseDate = purchaseDate;
     }
@@ -51,14 +83,27 @@ public class Purchase {
         this.brokerCommission = brokerCommission;
     }
 
-    @Override
-    public String toString() {
-        return STR."""
-                PURCHASE
-                Purchase Date: \{getPurchaseDate()}
-                Purchase Value: $USD \{getPurchaseValue()}
-                RealEstate Percentage: $USD \{getRealEstatePercent()}
-                Broker Commission: $USD \{getBrokerCommission()}
-                """;
+    public Broker getBroker() {
+        return broker;
+    }
+
+    public void setBroker(Broker broker) {
+        this.broker = broker;
+    }
+
+    public Property getProperty() {
+        return property;
+    }
+
+    public void setProperty(Property property) {
+        this.property = property;
+    }
+
+    public List<Tax> getTaxList() {
+        return taxList;
+    }
+
+    public void setTaxList(List<Tax> taxList) {
+        this.taxList = taxList;
     }
 }

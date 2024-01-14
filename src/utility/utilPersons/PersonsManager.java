@@ -21,7 +21,7 @@ public class PersonsManager {
         do {
             if(chances(attempts--)) personsLoginMenu();
 
-            System.out.println(STR."(\{attempts + 1} Attempts) Enter the person name:");
+            System.out.println(STR."(\{attempts + 1} Attempts) Enter the newOwner name:");
             personName = sc.nextLine();
 
         } while (personName.trim().isEmpty());
@@ -146,16 +146,16 @@ public class PersonsManager {
 
         boolean find = false;
 
-        for (Person person : personsList) {
-            switch (person.getPersonType()) {
+        for (Person newOwner : personsList) {
+            switch (newOwner.getPersonType()) {
                 case NATURAL_PERSON -> {
-                    NaturalPerson naturalPerson = (NaturalPerson) person;
+                    NaturalPerson naturalPerson = (NaturalPerson) newOwner;
                     if (naturalPerson.getSsn() == registerNumber) {
                         find = true;
                     }
                 }
                 case LEGAL_PERSON -> {
-                    LegalPerson legalPerson = (LegalPerson) person;
+                    LegalPerson legalPerson = (LegalPerson) newOwner;
                     if (legalPerson.getEin() == registerNumber) {
                         find = true;
                     }

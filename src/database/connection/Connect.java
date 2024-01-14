@@ -1,4 +1,4 @@
-package dataBase.connection;
+package database.connection;
 
 import entities.person.*;
 import entities.properties.Property;
@@ -7,8 +7,9 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-import static dataBase.operations.LoadData.*;
-import static dataBase.operations.SendData.*;
+import static database.operations.LoadData.*;
+import static database.operations.SendData.*;
+import static database.operations.TransactionData.salesSqlTransaction;
 import static enumerations.PersonType.LEGAL_PERSON;
 
 public class Connect {
@@ -73,6 +74,18 @@ public class Connect {
             }
         } catch (SQLException e) {
             System.out.println(STR."[removeSqlPropertyData] Error initialize database. \{e.getMessage()}");
+        }
+    }
+
+    public static void updateSqlProperty(Person newOwner, Person oldOwner, Property property) {
+        try (Connection connection = DriverManager.getConnection(url, user, password)) {
+            if (connection != null) {
+                salesSqlTransaction(connection, newOwner, oldOwner, property);
+            } else {
+                System.out.println("[updateSqlProperty] Database non-initialized.");
+            }
+        } catch (SQLException e) {
+            System.out.println(STR."[updateSqlProperty] Error initialize database. \{e.getMessage()}");
         }
     }
 }

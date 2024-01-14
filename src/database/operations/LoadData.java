@@ -1,4 +1,4 @@
-package dataBase.operations;
+package database.operations;
 
 import entities.person.*;
 import entities.properties.*;
@@ -115,7 +115,7 @@ public class LoadData {
                             .setBuildingDetails(buildingArea, totalNumberRooms, parkingSpaces, yearBuilt, totalNumberOfFloors);
                 }
                 case "LAND" -> {
-                    property = new Land(LAND, propertyID, propertyDesc, totalArea, price, status)
+                    property = new Land(LAND, propertyID, propertyDesc, price, status)
                             .setPropertyDetails(frontDimension, sideDimension);
                 }
             }
