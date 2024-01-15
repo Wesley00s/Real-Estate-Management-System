@@ -1,5 +1,7 @@
 package database.operations;
 
+import entities.Broker;
+import entities.Purchase;
 import entities.person.*;
 import entities.properties.*;
 import enumerations.Status;
@@ -8,9 +10,12 @@ import enumerations.TypeOfApart;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 
 import static enumerations.PersonType.*;
 import static enumerations.TypeOfProperty.*;
+import static services.BrokerService.brokerList;
+import static services.Negotiation.purchaseList;
 import static services.PropertyService.personsList;
 import static services.PropertyService.propertyList;
 
@@ -140,12 +145,11 @@ public class LoadData {
             String name = rsPerson.getString("Name");
             int registrationNumber = rsPerson.getInt("RegistrationNumber");
             String password = rsPerson.getString("Password");
-            int rn = rsPerson.getInt("RegistrationNumber");
 
             if (rsPerson.getString("PersonType").equals("NATURAL_PERSON")) {
-                person = new NaturalPerson(NATURAL_PERSON, name, password, rn);
+                person = new NaturalPerson(NATURAL_PERSON, name, password, registrationNumber);
             } else {
-                person = new LegalPerson(LEGAL_PERSON, name, password, rn);
+                person = new LegalPerson(LEGAL_PERSON, name, password, registrationNumber);
             }
 
             ResultSet rsPersonAddress = connection.createStatement().executeQuery(STR."SELECT * FROM PersonAddress WHERE RegistrationPersonNumber = '\{registrationNumber}'");
@@ -157,6 +161,80 @@ public class LoadData {
             rsContact.close();
 
             personsList.add(person);
+        }
+    }
+
+    public static Contact loadSqlBrokerContact(ResultSet rsBrokerContact) throws SQLException {
+        Contact contact = null;
+        while (rsBrokerContact.next()) {
+            String contactID = rsBrokerContact.getString("ContactID");
+            String email = rsBrokerContact.getString("Email");
+            int phone = rsBrokerContact.getInt("PhoneNumber");
+            contact = new Contact(contactID, email, phone);
+        }
+        return contact;
+    }
+
+    public static Address loadSqlBrokerAddress(ResultSet rsBrokerAddress) throws SQLException {
+        Address address = null;
+        while (rsBrokerAddress.next()) {
+            String addressID = rsBrokerAddress.getString("AddressID");
+            String city = rsBrokerAddress.getString("City");
+            String zipCode = rsBrokerAddress.getString("ZipCode");
+            String district = rsBrokerAddress.getString("District");
+            String street = rsBrokerAddress.getString("Street");
+            int number = rsBrokerAddress.getInt("Number");
+
+            address = new Address(addressID, city, zipCode, district, street, number);
+        }
+        return address;
+    }
+
+    public static void loadSqlBroker(Connection connection) throws SQLException {
+        ResultSet rsBroker = connection.createStatement().executeQuery("SELECT * FROM Broker");
+        Broker broker;
+        while (rsBroker.next()) {
+            String name = rsBroker.getString("Name");
+            int ssn = rsBroker.getInt("Ssn");
+            String password = rsBroker.getString("Password");
+
+            broker = new Broker(ssn, name, password);
+
+            ResultSet rsPersonAddress = connection.createStatement().executeQuery(STR."SELECT * FROM BrokerAddress WHERE Ssn = '\{ssn}'");
+            broker.setAddress(loadSqlBrokerAddress(rsPersonAddress));
+            rsPersonAddress.close();
+
+            ResultSet rsContact = connection.createStatement().executeQuery(STR."SELECT * FROM BrokerContact WHERE Ssn = '\{ssn}'");
+            broker.setContact(loadSqlBrokerContact(rsContact));
+            rsContact.close();
+
+            brokerList.add(broker);
+        }
+    }
+
+    public static void loadSqlPurchase(Connection connection) throws SQLException {
+        ResultSet rsPurchase = connection.createStatement().executeQuery("SELECT * FROM Purchase");
+        Purchase purchase;
+        while (rsPurchase.next()) {
+            String purchaseID = rsPurchase.getString("PurchaseID");
+            int brokerSSN = rsPurchase.getInt("BrokerSSN");
+            Broker broker = null;
+            for (Broker b : brokerList) {
+                if(b.getSsn() == brokerSSN) broker = b;
+            }
+            Property property = null;
+            String propertyID = rsPurchase.getString("PropertyID");
+            for (Property p : propertyList) {
+                if (p.getId().equals(propertyID)) property = p;
+            }
+
+            LocalDate purchaseDate = LocalDate.parse(rsPurchase.getString("PurchaseDate"));
+            double purchaseValue = rsPurchase.getDouble("PurchaseValue");
+            double realEstatePercent = rsPurchase.getDouble("RealEstatePercent");
+            double brokerCommission = rsPurchase.getInt("BrokerCommission");
+
+            purchase = new Purchase(purchaseID, broker, property, purchaseDate, purchaseValue, brokerCommission, realEstatePercent);
+            purchaseList.add(purchase);
         }
     }
 }

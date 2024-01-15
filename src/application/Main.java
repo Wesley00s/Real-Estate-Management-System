@@ -3,6 +3,7 @@ package application;
 import java.util.List;
 import java.util.Scanner;
 
+import static database.connection.Connect.getSqlBroker;
 import static database.connection.Connect.getSqlPropertyData;
 import static services.BrokerService.*;
 import static services.PersonService.personsLoginMenu;
@@ -29,6 +30,7 @@ public class Main {
     public static void main(String[] args) {
         addMainBroker();
         getSqlPropertyData();
+        getSqlBroker();
         mainMenu();
     }
 }

@@ -1,12 +1,12 @@
 package entities.person;
 
 public class Contact {
-    private String rentID;
+    private String contactID;
     private String email;
     private int phone;
 
-    public Contact(String rentID, String email, int phone) {
-        this.rentID = rentID;
+    public Contact(String contactID, String email, int phone) {
+        this.contactID = contactID;
         this.email = email;
         this.phone = phone;
     }
@@ -36,10 +36,10 @@ public class Contact {
     }
 
     public String getId() {
-        return rentID;
+        return contactID;
     }
 
     public void setId(String rentID) {
-        this.rentID = rentID;
+        this.contactID = rentID;
     }
 }

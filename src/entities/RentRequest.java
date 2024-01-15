@@ -18,15 +18,6 @@ public class RentRequest extends Request{
         super(rentID, propertyToBePurchase, renter, owner, typeRequest);
     }
 
-//    public String payRent(double value) {
-//        if (this.isApprovedRequest) {
-//            Rent rent = new Rent()
-//            return STR."""
-//
-//                    """;
-//        }
-//    }
-
     public void approveRequest(Broker broker, boolean condition) {
         if (condition) {
             makePropertyRent(getProperty(), broker, getNewOwner(), getOldOwner());

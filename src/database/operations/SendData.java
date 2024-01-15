@@ -1,5 +1,6 @@
 package database.operations;
 
+import entities.Broker;
 import entities.person.*;
 import entities.properties.*;
 import enumerations.PersonType;
@@ -108,7 +109,7 @@ public class SendData {
         }
     }
 
-    public static void sendAddPropertyOwner(Connection connection, Property property, Person person) {
+    public static void sendAddProperty(Connection connection, Property property, Person person) {
         int registrationPersonNumber = -1;
 
         if(person.getPersonType().equals(NATURAL_PERSON)) {
@@ -207,15 +208,6 @@ public class SendData {
         }
     }
 
-    public static void sendSqlRemoveContact(Connection connection, String propertyID) {
-        String sql = STR."DELETE FROM Contact WHERE RegistrationPersonNumber = \{propertyID}";
-        try {
-            connection.createStatement().executeUpdate(sql);
-        } catch (SQLException e) {
-            System.out.println(STR."[sendSqlRemoveContact]: \{e.getMessage()}");
-        }
-    }
-
     public static void sendSqlRemovePropertyAddress(Connection connection, String propertyID) {
         String sql = STR."DELETE FROM PropertyAddress WHERE PropertyID = '\{propertyID}'";
         try {
@@ -240,6 +232,94 @@ public class SendData {
             connection.createStatement().executeUpdate(sql);
         } catch (SQLException e) {
             System.out.println(STR."[sendSqlRemoveProperty]: \{e.getMessage()}");
+        }
+    }
+
+    public static void sendSqlAddBrokerContact(Connection connection, Contact contact, int ssn) {
+        String contactID = contact.getId();
+        String email = contact.getEmail();
+        int phone = contact.getPhone();
+
+        String sql = "INSERT INTO BrokerContact VALUES (?, ?, ?, ?)";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatement.setString(1, contactID);
+            preparedStatement.setInt(2, ssn);
+            preparedStatement.setString(3, email);
+            preparedStatement.setInt(4, phone);
+
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(STR."[sendSqlAddBrokerContact]: \{e.getMessage()}");
+        }
+    }
+
+    public static void sendSqlBrokerAddAddress(Connection connection, Address address, int ssn) {
+        String addressID = address.getId();
+        String city = address.getCity();
+        String zipCode = address.getZipCode();
+        String district = address.getDistrict();
+        String street = address.getStreet();
+        int number = address.getNumber();
+
+        String sql = "INSERT INTO BrokerAddress VALUES (?, ?, ?, ?, ?, ?, ?)";
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatement.setString(1, addressID);
+            preparedStatement.setInt(2, ssn);
+            preparedStatement.setString(3, city);
+            preparedStatement.setString(4, zipCode);
+            preparedStatement.setString(5, district);
+            preparedStatement.setString(6, street);
+            preparedStatement.setInt(7, number);
+
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(STR."[sendSqlBrokerAddAddress]: \{e.getMessage()}");
+        }
+    }
+
+    public static void sendSqlAddBroker(Connection connection, Broker broker) {
+        String name = broker.getName();
+        String password = broker.getPassword();
+        int ssn = broker.getSsn();
+
+        String sql = "INSERT INTO Broker VALUES (?, ?, ?)";
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatement.setInt(1, ssn);
+            preparedStatement.setString(2, name);
+            preparedStatement.setString(3, password);
+
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(STR."[sendSqlAddBroker]: \{e.getMessage()}");
+        }
+    }
+
+    public static void sendSqlRemoveBrokerContact(Connection connection, int Ssn) {
+        String sql = STR."DELETE FROM BrokerContact WHERE Ssn = \{Ssn}";
+        try {
+            connection.createStatement().executeUpdate(sql);
+        } catch (SQLException e) {
+            System.out.println(STR."[sendSqlRemoveBrokerContact]: \{e.getMessage()}");
+        }
+    }
+
+    public static void sendSqlRemoveBrokerAddress(Connection connection, int ssn) {
+        String sql = STR."DELETE FROM BrokerAddress WHERE Ssn = '\{ssn}'";
+        try {
+            connection.createStatement().executeUpdate(sql);
+        } catch (SQLException e) {
+            System.out.println(STR."[sendSqlRemoveBrokerAddress]: \{e.getMessage()}");
+        }
+    }
+
+    public static void sendSqlRemoveBroker(Connection connection, int ssn) {
+        String sql = STR."DELETE FROM Broker WHERE Ssn = '\{ssn}'";
+        try {
+            connection.createStatement().executeUpdate(sql);
+        } catch (SQLException e) {
+            System.out.println(STR."[sendSqlRemoveBroker]: \{e.getMessage()}");
         }
     }
 }

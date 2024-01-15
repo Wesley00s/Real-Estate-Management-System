@@ -19,6 +19,11 @@ public class Broker {
         this.contact = contact;
         this.password = password;
     }
+    public Broker(int ssn, String name, String password) {
+        this.ssn = ssn;
+        this.name = name;
+        this.password = password;
+    }
 
     public int getSsn() {
         return ssn;
@@ -62,6 +67,7 @@ public class Broker {
 
                 CONTACT
                 \{getContact()}
+                -----------------------------------------
                 """;
     }
 

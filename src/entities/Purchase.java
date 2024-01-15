@@ -27,6 +27,16 @@ public class Purchase {
         this.taxList = taxList;
     }
 
+    public Purchase(String purchaseID, Broker broker, Property property, LocalDate purchaseDate, double purchaseValue, double brokerCommission, double realEstatePercent) {
+        this.purchaseID = purchaseID;
+        this.broker = broker;
+        this.property = property;
+        this.purchaseDate = purchaseDate;
+        this.purchaseValue = purchaseValue;
+        this.realEstatePercent = realEstatePercent;
+        this.brokerCommission = brokerCommission;
+    }
+
     public void registerPurchase() {
         System.out.println(STR."""
                 \t* PURCHASE

@@ -1,5 +1,6 @@
 package database.connection;
 
+import entities.Broker;
 import entities.person.*;
 import entities.properties.Property;
 
@@ -53,7 +54,7 @@ public class Connect {
         try (Connection connection = DriverManager.getConnection(url, user, password)) {
             if (connection != null) {
                 sendSqlAddProperty(connection, property);
-                sendAddPropertyOwner(connection, property, person);
+                sendAddProperty(connection, property, person);
                 sendSqlAddPropertyAddress(connection, address, property.getId());
             } else {
                 System.out.println("[setSqlPropertyData] Database non-initialized.");
@@ -86,6 +87,46 @@ public class Connect {
             }
         } catch (SQLException e) {
             System.out.println(STR."[updateSqlProperty] Error initialize database. \{e.getMessage()}");
+        }
+    }
+
+    public static void getSqlBroker() {
+        try (Connection connection = DriverManager.getConnection(url, user, password)) {
+            if (connection != null) {
+                loadSqlBroker(connection);
+            } else {
+                System.out.println("[setSqlBroker] Database non-initialized.");
+            }
+        } catch (SQLException e) {
+            System.out.println(STR."[getSqlBroker] Error initialize database. \{e.getMessage()}");
+        }
+    }
+
+    public static void setSqlBrokerData(Broker broker, Address address, Contact contact, int ssn) {
+        try (Connection connection = DriverManager.getConnection(url, user, password)) {
+            if (connection != null) {
+                sendSqlAddBroker(connection, broker);
+                sendSqlBrokerAddAddress(connection, address, ssn);
+                sendSqlAddBrokerContact(connection, contact, ssn);
+            } else {
+                System.out.println("[setSqlBrokerData] Database non-initialized.");
+            }
+        } catch (SQLException e) {
+            System.out.println(STR."[setSqlBrokerData] Error initialize database. \{e.getMessage()}");
+        }
+    }
+
+    public static void removeSqlBrokerData(int ssn) {
+        try (Connection connection = DriverManager.getConnection(url, user, password)) {
+            if (connection != null) {
+                sendSqlRemoveBrokerContact(connection, ssn);
+                sendSqlRemoveBrokerAddress(connection, ssn);
+                sendSqlRemoveBroker(connection, ssn);
+            } else {
+                System.out.println("[removeSqlBrokerData] Database non-initialized.");
+            }
+        } catch (SQLException e) {
+            System.out.println(STR."[removeSqlBrokerData] Error initialize database. \{e.getMessage()}");
         }
     }
 }

@@ -1,9 +1,6 @@
 package services;
 
-import entities.Broker;
-import entities.Purchase;
-import entities.Rent;
-import entities.Tax;
+import entities.*;
 import entities.person.Person;
 import entities.properties.Property;
 
@@ -17,6 +14,7 @@ import java.util.Scanner;
 
 import static application.Main.mainMenu;
 import static database.connection.Connect.updateSqlProperty;
+import static enumerations.TypeOfContract.*;
 import static services.PropertyService.historyBuyPropertyList;
 import static services.PropertyService.historyRentPropertyList;
 import static utility.Attempts.TOTAL_ATTEMPTS;
@@ -150,17 +148,18 @@ public class Negotiation {
         double propertyPrice = propertyToBePurchase.getPrice();
         double realEstatePercentageAmount = propertyPrice * realEstatePercentage / 100;
 
-        Tax taxBrokerCommission = new Tax("Broker commission $USD", brokerCommission);
-        Tax taxRealEstatePercentage = new Tax(STR."Real Estate percentage \{realEstatePercentage}%", realEstatePercentageAmount);
+        Tax taxBrokerCommission = new Tax(STR."T-\{ID()}X", "Broker commission $USD", brokerCommission);
+        Tax taxRealEstatePercentage = new Tax(STR."T-\{ID()}X", STR."Real Estate percentage \{realEstatePercentage}%", realEstatePercentageAmount);
         taxList.add(taxBrokerCommission);
         taxList.add(taxRealEstatePercentage);
-        propertyToBePurchase.setFinalPrice(propertyPrice, (brokerCommission + realEstatePercentage));
+        propertyToBePurchase.setFinalPrice(propertyPrice, (brokerCommission + realEstatePercentageAmount));
         Purchase purchase = new Purchase(STR."N-\{ID()}N", broker, propertyToBePurchase, LocalDate.now(), propertyPrice, brokerCommission, realEstatePercentage, taxList);
 
         historyBuyPropertyList.add(propertyToBePurchase);
         updateSqlProperty(newOwner, oldOwner, propertyToBePurchase);
         System.out.println("Property purchase was approved!");
         purchaseList.add(purchase);
+        Contract contract = new Contract(LocalDate.now(), "../contract/contract.pdf", SELL);
     }
 
     public static void makePropertyRent(Property propertyToBeRent, Broker broker, Person renter, Person owner) {
@@ -173,13 +172,14 @@ public class Negotiation {
         double rentValue = propertyToBeRent.getRentValue();
         double realEstatePercentageAmount = rentValue * realEstatePercentage / 100;
 
-        Tax taxBrokerCommission = new Tax("Broker commission $USD", brokerCommission);
-        Tax taxRealEstatePercentage = new Tax(STR."Real Estate percentage \{realEstatePercentage}%", realEstatePercentageAmount);
+        Tax taxBrokerCommission = new Tax(STR."T-\{ID()}X", "Broker commission $USD", brokerCommission);
+        Tax taxRealEstatePercentage = new Tax(STR."T-\{ID()}X", STR."Real Estate percentage \{realEstatePercentage}%", realEstatePercentageAmount);
         taxList.add(taxBrokerCommission);
         taxList.add(taxRealEstatePercentage);
-        propertyToBeRent.setFinalPrice(rentValue, (brokerCommission + realEstatePercentage));
+        propertyToBeRent.setFinalPrice(rentValue, (brokerCommission + realEstatePercentageAmount));
         Rent rent = new Rent(STR."N-\{ID()}N", broker, propertyToBeRent, LocalDate.now(), rentValue, securityDeposit, endOfRent, brokerCommission, realEstatePercentage, taxList);
         historyRentPropertyList.add(propertyToBeRent);
         rentList.add(rent);
+        Contract contract = new Contract(LocalDate.now(), "../contract/contract.pdf", RENT);
     }
 }

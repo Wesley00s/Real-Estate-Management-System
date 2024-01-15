@@ -19,7 +19,7 @@ import static services.PropertyService.*;
 import static utility.Attempts.TOTAL_ATTEMPTS;
 import static utility.Attempts.chances;
 import static utility.MenuFormat.printMenu;
-import static utility.utilBroker.BrokerManager.seeListOfOwners;
+import static utility.utilBroker.BrokerManager.*;
 import static utility.utilProperties.PropertiesManager.seeProperties;
 
 public class BrokerService {
@@ -29,10 +29,10 @@ public class BrokerService {
     public static List<RentRequest> rentRequestHistory = new ArrayList<>();
 
     public static void addMainBroker() {
-        Address brokerAddress = new Address("B-996030057R", "Lumièreville", "98741", "Quartier Lumière", "Avenue Éclatante", 584);
-        Contact brokerContact = new Contact("C-102911534T", "brokeEmail@gamil.com", 655874895);
-        Broker mainBroker = new Broker(179348625, "Visionnaire de I'immobilier\n", brokerAddress, brokerContact, "immo123");
-        brokerList.add(mainBroker);
+//        Address brokerAddress = new Address("B-996030057R", "Lumièreville", "98741", "Quartier Lumière", "Avenue Éclatante", 584);
+//        Contact brokerContact = new Contact("C-102911534T", "brokeEmail@gamil.com", 655874895);
+//        Broker mainBroker = new Broker(302154878, "a", brokerAddress, brokerContact, "1");
+//        brokerList.add(mainBroker);
     }
 
     public static void brokerLogin() {
@@ -69,12 +69,15 @@ public class BrokerService {
     }
 
     public static void brokerMenu(Broker broker) {
-        List<String> brokerOptions = List.of("REQUESTS",
+        List<String> brokerOptions = List.of(
+                "REQUESTS",
                 "SEE PROPERTIES",
                 "SEE PROPERTIES TRANSACTIONS HISTORY",
                 "SEE LIST OF OWNERS",
                 "SEE PURCHASE HISTORY",
-                "SEE RENTED HISTORY", "BACK");
+                "SEE RENTED HISTORY",
+                "BROKER MANAGER",
+                "LOG OUT");
 
         while (true) {
             printMenu(brokerOptions, STR."BROKER MENU - Hello fellow \{broker.getName()}, what you want today?");
@@ -85,7 +88,8 @@ public class BrokerService {
                 case "4" -> seeListOfOwners();
                 case "5" -> seePurchaseHistory();
                 case "6" -> seeRentedHistory();
-                case "7" -> {
+                case "7" -> brokerManagerMenu(broker);
+                case "8" -> {
                     System.out.println("Returning...");
                     mainMenu();
                 }
@@ -115,7 +119,8 @@ public class BrokerService {
     }
 
     public static void requestMenu(Broker broker) {
-        List<String> requestOptions = List.of("SEE BUY REQUEST",
+        List<String> requestOptions = List.of(
+                "SEE BUY REQUEST",
                 "SEE RENT REQUEST",
                 "APPROVE BUY REQUEST",
                 "DISAPPROVE BUY REQUEST",

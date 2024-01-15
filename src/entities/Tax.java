@@ -1,11 +1,13 @@
 package entities;
 
 public class Tax {
+    private String taxID;
     private String taxDescription;
     private double taxValue;
     private boolean isRegistered;
 
-    public Tax(String taxDescription, double taxValue) {
+    public Tax(String taxID, String taxDescription, double taxValue) {
+        this.taxID = taxID;
         this.taxDescription = taxDescription;
         this.taxValue = taxValue;
     }
@@ -36,8 +38,17 @@ public class Tax {
 
     public String toString() {
         return STR."""
+                Tax ID: \{getTaxID()}
                 Tax Description: \{getTaxDescription()}
                 Tax Value: $USD \{getTaxValue()}
                 Was regitered: \{isRegistered ? "Yes" : "No"}""";
+    }
+
+    public String getTaxID() {
+        return taxID;
+    }
+
+    public void setTaxID(String taxID) {
+        this.taxID = taxID;
     }
 }
