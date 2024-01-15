@@ -13,8 +13,8 @@ public class Apartment extends Property {
     private double condominiumValue;
     private TypeOfApart typeOfApart;
 
-    public Apartment(TypeOfProperty typeOfProperty, String id, AddressProperty address, String desc, double totalArea, double price, Status status) {
-        super(typeOfProperty, id, address, desc, totalArea, price, status);
+    public Apartment(TypeOfProperty typeOfProperty, String rentID, AddressProperty address, String desc, double totalArea, double price, double rentValue, Status status) {
+        super(typeOfProperty, rentID, address, desc, totalArea, price, rentValue, status);
     }
 
     public Apartment setBuildingDetails(int floorOfTheApart, int numberOfTheApart, String buildingName, int totalNumberOfRooms, int yearBuilt) {
@@ -26,8 +26,8 @@ public class Apartment extends Property {
         return this;
     }
 
-    public Apartment(TypeOfProperty typeOfProperty, String id, String desc, double totalArea, double price, Status status) {
-        super(typeOfProperty, id, desc, totalArea, price, status);
+    public Apartment(TypeOfProperty typeOfProperty, String rentID, String desc, double totalArea, double price, double rentValue, Status status) {
+        super(typeOfProperty, rentID, desc, totalArea, price, rentValue, status);
     }
 
     public Apartment() {}
@@ -105,6 +105,7 @@ public class Apartment extends Property {
                 "\{getDesc()}"
                 Total area: \{getTotalArea()} m²
                 Value: $USD \{getPrice()}
+                Rent value: $USD \{getRentValue()}
                 Status: \{getStatus()}
 
                 BUILDING DETAILS

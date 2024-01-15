@@ -1,15 +1,15 @@
 package entities.person;
 
 public class Address {
-    private String id;
+    private String rentID;
     private String city;
     private String zipCode;
     private String district;
     private String street;
     private int number;
 
-    public Address(String id, String city, String zipCode, String district, String street, int number) {
-        this.id = id;
+    public Address(String rentID, String city, String zipCode, String district, String street, int number) {
+        this.rentID = rentID;
         this.city = city;
         this.zipCode = zipCode;
         this.district = district;
@@ -17,15 +17,15 @@ public class Address {
         this.number = number;
     }
 
-    public Address(String id, String city, String zipCode, String district) {
-        this.id = id;
+    public Address(String rentID, String city, String zipCode, String district) {
+        this.rentID = rentID;
         this.city = city;
         this.zipCode = zipCode;
         this.district = district;
     }
 
     public String getId() {
-        return id;
+        return rentID;
     }
 
     public String getCity() {
@@ -48,8 +48,8 @@ public class Address {
         return number;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setId(String rentID) {
+        this.rentID = rentID;
     }
 
     public void setCity(String city) {

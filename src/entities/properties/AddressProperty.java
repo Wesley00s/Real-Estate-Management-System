@@ -3,8 +3,8 @@ package entities.properties;
 import entities.person.Address;
 
 public class AddressProperty extends Address {
-    public AddressProperty(String id, String city, String zipCode, String district) {
-        super(id, city, zipCode, district);
+    public AddressProperty(String rentID, String city, String zipCode, String district) {
+        super(rentID, city, zipCode, district);
     }
 
     @Override

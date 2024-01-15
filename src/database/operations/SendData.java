@@ -136,6 +136,7 @@ public class SendData {
         String propertyDesc = property.getDesc();
         double totalArea = property.getTotalArea();
         double price = property.getPrice();
+        double rentValue = property.getRentValue();
         TypeOfProperty typeOfProperty = property.getTypeOfProperty();
         int floorOfTheApart = -1;
         String buildingName = null;
@@ -176,7 +177,7 @@ public class SendData {
             buildingArea = ((House) property).getBuildingArea();
         }
 
-        String sql = "INSERT INTO Property VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO Property VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.setString(1, propertyID);
@@ -184,20 +185,21 @@ public class SendData {
             preparedStatement.setString(3, propertyDesc);
             preparedStatement.setDouble(4, totalArea);
             preparedStatement.setDouble(5, price);
-            preparedStatement.setString(6, String.valueOf(status));
-            preparedStatement.setInt(7, floorOfTheApart);
-            preparedStatement.setDouble(8, frontDimension);
-            preparedStatement.setDouble(9, sideDimension);
-            preparedStatement.setDouble(10, buildingArea);
-            preparedStatement.setInt(11, numberOfTheApart);
-            preparedStatement.setString(12, buildingName);
-            preparedStatement.setInt(13, roomsNumber);
-            preparedStatement.setInt(14, parkingSpaces);
-            preparedStatement.setInt(15, yearBuilt);
-            preparedStatement.setInt(16, totalNumOfFloors);
-            preparedStatement.setDouble(17, condominiumValue);
-            preparedStatement.setDouble(18, distanceOfCity);
-            preparedStatement.setString(19, String.valueOf(typeOfApart));
+            preparedStatement.setDouble(6, rentValue);
+            preparedStatement.setString(7, String.valueOf(status));
+            preparedStatement.setInt(8, floorOfTheApart);
+            preparedStatement.setDouble(9, frontDimension);
+            preparedStatement.setDouble(10, sideDimension);
+            preparedStatement.setDouble(11, buildingArea);
+            preparedStatement.setInt(12, numberOfTheApart);
+            preparedStatement.setString(13, buildingName);
+            preparedStatement.setInt(14, roomsNumber);
+            preparedStatement.setInt(15, parkingSpaces);
+            preparedStatement.setInt(16, yearBuilt);
+            preparedStatement.setInt(17, totalNumOfFloors);
+            preparedStatement.setDouble(18, condominiumValue);
+            preparedStatement.setDouble(19, distanceOfCity);
+            preparedStatement.setString(20, String.valueOf(typeOfApart));
 
             preparedStatement.executeUpdate();
         } catch (SQLException e) {

@@ -7,6 +7,7 @@ import java.util.List;
 
 public class Purchase {
     private String purchaseID;
+
     private Broker broker;
     private Property property;
     private LocalDate purchaseDate;
@@ -15,7 +16,7 @@ public class Purchase {
     private double brokerCommission;
     private List<Tax> taxList;
 
-    public Purchase(String purchaseID, Broker broker, Property property, LocalDate purchaseDate, double purchaseValue, double realEstatePercent, double brokerCommission, List<Tax> taxList) {
+    public Purchase(String purchaseID, Broker broker, Property property, LocalDate purchaseDate, double purchaseValue, double brokerCommission, double realEstatePercent, List<Tax> taxList) {
         this.purchaseID = purchaseID;
         this.broker = broker;
         this.property = property;
@@ -33,12 +34,12 @@ public class Purchase {
                 Purchase Date: \{getPurchaseDate()}
                 Purchase Value: $USD \{getPurchaseValue()}
                 Property ID: \{getProperty().getId()}
-                Broker ID: \{getBroker().getSsn()}
+                Broker SSN: \{getBroker().getSsn()}
 
                 TAX AND DISCOUNTS
                 \{getTaxList()}
 
-                TOTAL: $USD \{getPurchaseValue() - (purchaseValue * (getRealEstatePercent() / 100) + getBrokerCommission())}
+                FINAL VALUE: $USD \{getProperty().getFinalPrice()}
                 ----------------------------------------------
                 """);
     }

@@ -23,9 +23,19 @@ import static utility.utilPersons.PersonsManager.addPersonsAddress;
 
 public class PersonService {
     private static final Scanner sc = new Scanner(System.in);
-    private static final List<NaturalPerson> naturalPersonList = new ArrayList<>();
-    private static final List<LegalPerson> legalPersonList = new ArrayList<>();
 
+    public static void personsMenu(Person person) {
+        List<String> personsOptions = List.of("NEGOTIATE", "PROPERTIES", "LOG OUT");
+        while (true) {
+            printMenu(personsOptions, STR."PERSONS MENU - Dear \{person.getPersonsName()}, please choose an option");
+            switch (sc.nextLine()) {
+                case "1" -> negotiateMenu(person);
+                case "2" -> propertiesMenu(person);
+                case "3" -> {System.out.println("Returning..."); personsLoginMenu();}
+                default -> System.out.println("\nInvalid option!\n");
+            }
+        }
+    }
     public static void personsLoginMenu() {
         List<String> personOptions = List.of("NATURAL PERSON", "LEGAL PERSON", "BACK");
 

@@ -8,7 +8,6 @@ import java.util.List;
 
 import static enumerations.TypeOfProperty.*;
 import static enumerations.TypeOfProperty.LAND;
-import static services.PropertyService.propertyList;
 
 public abstract class Person {
     private PersonType personType;
@@ -17,6 +16,7 @@ public abstract class Person {
     private Contact personsContact;
     private String password;
     private List<Property> propertyList = new ArrayList<>();
+    private List<Property> rentedList = new ArrayList<>();
 
     protected Person(PersonType personType, String personsName, String password) {
         this.personType = personType;
@@ -32,7 +32,7 @@ public abstract class Person {
         this.password = password;
     }
 
-    public void addPropertiesList(List<Property> propertyList) {
+    public void setPropertiesList(List<Property> propertyList) {
         this.propertyList = propertyList;
     }
 
@@ -84,6 +84,37 @@ public abstract class Person {
         this.propertyList = propertyList;
     }
 
+    public void displayPropertiesRentList() {
+        try
+        {
+            System.out.println("\n* APARTMENTS");
+            for(Property apartment : rentedList) {
+                if (apartment.getTypeOfProperty().equals(APARTMENT))
+                    System.out.println(apartment);
+            }
+
+            System.out.println("\n* FARMS");
+            for(Property farm : rentedList) {
+                if (farm.getTypeOfProperty().equals(FARM))
+                    System.out.println(farm);
+            }
+
+            System.out.println("\n* HOUSES");
+            for(Property house : rentedList) {
+                if (house.getTypeOfProperty().equals(HOUSE))
+                    System.out.println(house);
+            }
+
+            System.out.println("\n* LANDS");
+            for(Property land : rentedList) {
+                if (land.getTypeOfProperty().equals(LAND))
+                    System.out.println(land);
+            }
+        } catch (NullPointerException e) {
+            System.out.println("You haven't rented any property yet.");
+        }
+    }
+
     public void displayPropertiesList() {
         try
         {
@@ -111,9 +142,17 @@ public abstract class Person {
                     System.out.println(land);
             }
         } catch (NullPointerException e) {
-            System.out.println("No properties yet.");
+            System.out.println("You haven't purchase any property yet.");
         }
     }
 
     public abstract String toString();
+
+    public List<Property> getRentedList() {
+        return rentedList;
+    }
+
+    public void setRentedList(List<Property> rentedList) {
+        this.rentedList = rentedList;
+    }
 }

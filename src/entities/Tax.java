@@ -10,7 +10,7 @@ public class Tax {
         this.taxValue = taxValue;
     }
 
-    public boolean idRegisteredTax() {
+    public boolean isRegisteredTax() {
         return isRegistered;
     }
 
@@ -37,7 +37,7 @@ public class Tax {
     public String toString() {
         return STR."""
                 Tax Description: \{getTaxDescription()}
-                Tax Value: \{getTaxValue()}
+                Tax Value: $USD \{getTaxValue()}
                 Was regitered: \{isRegistered ? "Yes" : "No"}""";
     }
 }

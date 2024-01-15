@@ -9,8 +9,8 @@ public class Farm extends Property {
     private int yearBuilt;
     private double distanceOfCity;
 
-    public Farm(TypeOfProperty typeOfProperty, String id, AddressProperty address, String desc, double totalArea, double price, Status status) {
-        super(typeOfProperty, id, address, desc, totalArea, price, status);
+    public Farm(TypeOfProperty typeOfProperty, String rentID, AddressProperty address, String desc, double totalArea, double price, double rentValue, Status status) {
+        super(typeOfProperty, rentID, address, desc, totalArea, price, rentValue, status);
     }
 
     public Farm setBuildingDetails(double buildingArea, int totalNumberOfRooms, int yearBuilt, double distanceOfCity) {
@@ -21,8 +21,8 @@ public class Farm extends Property {
         return this;
     }
 
-    public Farm(TypeOfProperty typeOfProperty, String id, String desc, double totalArea, double price, Status status) {
-        super(typeOfProperty, id, desc, totalArea, price, status);
+    public Farm(TypeOfProperty typeOfProperty, String rentID, String desc, double totalArea, double price, double rentValue, Status status) {
+        super(typeOfProperty, rentID, desc, totalArea, price, rentValue, status);
     }
 
     public Farm() {}
@@ -71,6 +71,8 @@ public class Farm extends Property {
             "\{getDesc()}"
             Total area: \{getTotalArea()} m²
             Price: $USD \{getPrice()}
+            Rent value: $USD\{getRentValue()}
+            Rent value: $USD \{getRentValue()}
             Status: \{getStatus()}
 
             BUILDING DETAILS

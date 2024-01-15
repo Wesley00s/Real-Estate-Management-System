@@ -12,42 +12,53 @@ public abstract class Property {
     private String desc;
     private double totalArea;
     private double price;
+    private double rentValue;
     private Status status;
+    private double finalPrice;
 
-    protected Property(TypeOfProperty typeOfProperty, String id, AddressProperty address, String desc, double totalArea, double price, Status status) {
+    protected Property(TypeOfProperty typeOfProperty, String id, AddressProperty address, String desc, double totalArea, double price, double rentValue, Status status) {
         this.typeOfProperty = typeOfProperty;
         this.id = id;
         this.address = address;
         this.desc = desc;
         this.totalArea = totalArea;
         this.price = price;
+        this.rentValue = rentValue;
         this.status = status;
     }
 
-    protected Property(TypeOfProperty typeOfProperty, String id, AddressProperty address, String desc, double price, Status status) {
+    protected Property(TypeOfProperty typeOfProperty, String id, AddressProperty address, String desc, double price, double rentValue, Status status) {
         this.typeOfProperty = typeOfProperty;
         this.id = id;
         this.address = address;
         this.desc = desc;
         this.price = price;
+        this.rentValue = rentValue;
         this.status = status;
     }
-    protected Property(TypeOfProperty typeOfProperty, String id, String desc, double totalArea, double price, Status status) {
+    protected Property(TypeOfProperty typeOfProperty, String id, String desc, double totalArea, double price, double rentValue, Status status) {
         this.typeOfProperty = typeOfProperty;
         this.id = id;
         this.desc = desc;
         this.totalArea = totalArea;
         this.price = price;
+        this.rentValue = rentValue;
         this.status = status;
     }
-    protected Property(TypeOfProperty typeOfProperty, String id, String desc, double price, Status status) {
+    protected Property(TypeOfProperty typeOfProperty, String id, String desc, double price, double rentValue, Status status) {
         this.typeOfProperty = typeOfProperty;
         this.id = id;
         this.desc = desc;
         this.price = price;
+        this.rentValue = rentValue;
         this.status = status;
     }
-    public Property() {}
+    public Property() {
+    }
+
+    public void setFinalPrice(double total, double taxes) {
+        this.finalPrice = total - taxes;
+    }
 
     public Person getOwner() {
         return owner;
@@ -114,4 +125,16 @@ public abstract class Property {
     }
 
     public abstract String toString();
+
+    public double getRentValue() {
+        return rentValue;
+    }
+
+    public void setRentValue(double rentValue) {
+        this.rentValue = rentValue;
+    }
+
+    public double getFinalPrice() {
+        return finalPrice;
+    }
 }

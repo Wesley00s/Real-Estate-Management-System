@@ -25,6 +25,7 @@ public class MenuFormat {
             listOptions.append(STR."""
                             \t>>      ( \{cont++} ) \{option}
                             """);
+
         }
         listOptions.append(STR."\t---\{replace}---\n>> ");
         System.out.print(listOptions);

@@ -10,8 +10,8 @@ public class House extends Property {
     private int yearBuilt;
     private int numbFloors;
 
-    public House(TypeOfProperty typeOfProperty, String id, AddressProperty address, String desc, double totalArea, double price, Status status) {
-        super(typeOfProperty, id, address, desc, totalArea, price, status);
+    public House(TypeOfProperty typeOfProperty, String rentID, AddressProperty address, String desc, double totalArea, double price, double rentValue, Status status) {
+        super(typeOfProperty, rentID, address, desc, totalArea, price, rentValue, status);
     }
 
     public House setBuildingDetails(double buildingArea, int totalNumberOfRooms, int parkingSpaces, int yearBuilt, int numbFloors) {
@@ -23,8 +23,8 @@ public class House extends Property {
         return this;
     }
 
-    public House(TypeOfProperty typeOfProperty, String id, String desc, double totalArea, double price, Status status) {
-        super(typeOfProperty, id, desc, totalArea, price, status);
+    public House(TypeOfProperty typeOfProperty, String rentID, String desc, double totalArea, double price, double rentValue, Status status) {
+        super(typeOfProperty, rentID, desc, totalArea, price, rentValue, status);
     }
     public House() {}
 
@@ -80,6 +80,7 @@ public class House extends Property {
             "\{getDesc()}"
             Total area: \{getTotalArea()} m²
             Price: $USD \{getPrice()}
+            Rent value: \{getRentValue()}
             Status: \{getStatus()}
 
             BUILDING DETAILS

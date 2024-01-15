@@ -85,6 +85,7 @@ public class LoadData {
             String propertyDesc = rsProperty.getString("Description");
             double totalArea = rsProperty.getDouble("TotalArea");
             double price = rsProperty.getDouble("Price");
+            double rentValue = rsProperty.getDouble("RentValue");
             int floorOfTheApart = rsProperty.getInt("FloorApart");
             int numberOfTheApart = rsProperty.getInt("NumberApart");
             String buildingName = rsProperty.getString("BuildingName");
@@ -102,20 +103,20 @@ public class LoadData {
             switch (rsProperty.getString("PropertyType")) {
                 case "APARTMENT" -> {
                     TypeOfApart typeOfApart = TypeOfApart.valueOf(rsProperty.getString("ApartmentType"));
-                    property = new Apartment(APARTMENT, propertyID, propertyDesc, totalArea, price, status)
+                    property = new Apartment(APARTMENT, propertyID, propertyDesc, totalArea, price, rentValue, status)
                             .setBuildingDetails(floorOfTheApart, numberOfTheApart, buildingName, totalNumberRooms, yearBuilt)
                             .setAdditionalDetails(condominiumValue, typeOfApart);
                 }
                 case "FARM" -> {
-                    property = new Farm(FARM, propertyID, propertyDesc, totalArea, price, status)
+                    property = new Farm(FARM, propertyID, propertyDesc, totalArea, price, rentValue, status)
                             .setBuildingDetails(buildingArea, totalNumberRooms, yearBuilt, distanceOfCity);
                 }
                 case "HOUSE" -> {
-                    property = new House(HOUSE, propertyID, propertyDesc, totalArea, price, status)
+                    property = new House(HOUSE, propertyID, propertyDesc, totalArea, price, rentValue, status)
                             .setBuildingDetails(buildingArea, totalNumberRooms, parkingSpaces, yearBuilt, totalNumberOfFloors);
                 }
                 case "LAND" -> {
-                    property = new Land(LAND, propertyID, propertyDesc, price, status)
+                    property = new Land(LAND, propertyID, propertyDesc, price, rentValue, status)
                             .setPropertyDetails(frontDimension, sideDimension);
                 }
             }

@@ -143,7 +143,7 @@ public class PropertiesManager {
             invalidData = false;
             if (chances(attempts--)) personsLoginMenu();
 
-            System.out.println(STR."(\{attempts + 1} Attempts) Provide the proposed price ($USD):");
+            System.out.println(STR."(\{attempts + 1} Attempts) Provide the property price ($USD):");
             price = sc.nextLine();
 
             try {
@@ -159,9 +159,33 @@ public class PropertiesManager {
 
         return Double.parseDouble(price);
     }
+    public static double addRentValue() {
+        String rentValue;
+
+        attempts = TOTAL_ATTEMPTS;
+        do {
+            invalidData = false;
+            if (chances(attempts--)) personsLoginMenu();
+
+            System.out.println(STR."(\{attempts + 1} Attempts) Provide the rent value ($USD):");
+            rentValue = sc.nextLine();
+
+            try {
+                if (Double.parseDouble(rentValue) <= 0) {
+                    System.out.println("Please, provide a valid number.");
+                    invalidData = true;
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("ERROR: Invalid number format.");
+                invalidData = true;
+            }
+        } while (invalidData);
+
+        return Double.parseDouble(rentValue);
+    }
 
     public static Status addSituation() {
-        List<String> situations = List.of("SELL", "RENT", "RENT OR SELL", "CANCEL");
+        List<String> situations = List.of("SELL", "RENT", "RENT OR SALE", "CANCEL");
 
         while (true) {
             printMenu(situations, "SITUATION - Do you want?");
