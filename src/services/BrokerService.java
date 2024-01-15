@@ -28,13 +28,6 @@ public class BrokerService {
     public static List<BuyRequest> buyRequestHistory = new ArrayList<>();
     public static List<RentRequest> rentRequestHistory = new ArrayList<>();
 
-    public static void addMainBroker() {
-//        Address brokerAddress = new Address("B-996030057R", "Lumièreville", "98741", "Quartier Lumière", "Avenue Éclatante", 584);
-//        Contact brokerContact = new Contact("C-102911534T", "brokeEmail@gamil.com", 655874895);
-//        Broker mainBroker = new Broker(302154878, "a", brokerAddress, brokerContact, "1");
-//        brokerList.add(mainBroker);
-    }
-
     public static void brokerLogin() {
         System.out.println("\n\t\t* BROKER LOGIN");
         String name;
