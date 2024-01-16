@@ -14,7 +14,7 @@ import static database.operations.TransactionData.salesSqlTransaction;
 import static enumerations.PersonType.LEGAL_PERSON;
 
 public class Connect {
-    private static final String url = "jdbc:postgresql://localhost:5432/jdbcTest";
+    private static final String url = "jdbc:postgresql://localhost:5432/RealEstate";
     private static final String user = "postgres";
     private static final String password = "123456";
     public static void getSqlPropertyData() {
